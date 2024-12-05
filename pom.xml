@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.6</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.hotdog.saas</groupId>
+    <artifactId>hotdog-saas</artifactId>
+    <version>${revision}</version>
+    <name>hotdog-saas</name>
+    <description>saas版多租户小程序</description>
+    <packaging>pom</packaging>
+
+    <licenses>
+        <license/>
+    </licenses>
+
+    <modules>
+        <module>hotdog-saas-start</module>
+        <module>hotdog-saas-web</module>
+        <module>hotdog-saas-domain</module>
+        <module>hotdog-saas-application</module>
+        <module>hotdog-saas-infra</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <revision>1.0.0-RELEASE</revision>
+        <lombok.version>1.18.36</lombok.version>
+        <spring.version>3.3.6</spring.version>
+        <alibaba.cloud.version>2023.0.3.2</alibaba.cloud.version>
+        <mybatis-plus.version>3.5.9</mybatis-plus.version>
+        <mysql.version>8.0.22</mysql.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-bootstrap</artifactId>
+                <version>4.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${alibaba.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${alibaba.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.2.7</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,21 @@
+server:
+  port: 12306
+
+spring:
+  application:
+    name: hotdog-saas
+  cloud:
+    nacos:
+      server-addr: 124.221.85.208:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://124.221.85.208:3306/hotdog-saas?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: cyfe67373
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    use-generated-keys: true
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.hotdog.saas.domain.repository.entity.po
