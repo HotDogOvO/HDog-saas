@@ -1,4 +1,4 @@
-package com.hotdog.saas.domain.repository.entity.po;
+package com.hotdog.saas.infra.entity.po;
 
 import lombok.Data;
 

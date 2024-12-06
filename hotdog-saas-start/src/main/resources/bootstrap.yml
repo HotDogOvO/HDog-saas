@@ -12,6 +12,19 @@ spring:
     url: jdbc:mysql://124.221.85.208:3306/hotdog-saas?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: cyfe67373
+  data:
+    redis:
+      host: 124.221.85.208
+      port: 6379
+      password: cyfe67373
+      database: 0
+      timeout: 1000
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 1
+          max-wait: -1
 
 mybatis-plus:
   configuration:
