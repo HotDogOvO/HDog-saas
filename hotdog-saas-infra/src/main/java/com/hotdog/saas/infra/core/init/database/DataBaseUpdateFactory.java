@@ -14,10 +14,16 @@ public class DataBaseUpdateFactory {
     @Value("${project.database}")
     private String DATABASE_TYPE;
 
+    private final MysqlUpdate mysqlUpdate;
+
+    public DataBaseUpdateFactory(MysqlUpdate mysqlUpdate) {
+        this.mysqlUpdate = mysqlUpdate;
+    }
+
     public AbstractDataBaseUpdateExecute getDataBaseUpdate() {
         DataBaseEnum dataBaseEnum = DataBaseEnum.descToEnum(StringUtils.lowerCase(DATABASE_TYPE));
         return switch (dataBaseEnum) {
-            case MYSQL -> new MysqlUpdate();
+            case MYSQL -> mysqlUpdate;
             case UNKNOWN -> throw new BusinessException(ResultCodeEnum.DATABASE_UPDATE_FAIL, "Unknown animal type: " + dataBaseEnum);
         };
     }

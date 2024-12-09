@@ -1,5 +1,7 @@
 package com.hotdog.saas.infra.core.init.database;
 
+import com.hotdog.saas.domain.constant.Constants;
+import com.hotdog.saas.domain.model.SystemProperties;
 import com.hotdog.saas.domain.repository.SystemPropertiesRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,12 @@ public abstract class AbstractDataBaseUpdateExecute {
     public abstract void checkVersion();
 
     /**
+     * <p>抽象方法，具体执行升级的SQL</p>
+     * @param dbVersion 数据库存储的版本号
+     */
+    public abstract void executeUpdateSql(String dbVersion);
+
+    /**
      * <p>版本号对比</p>
      *
      * @param projectVersion pom中的版本号
@@ -27,8 +35,7 @@ public abstract class AbstractDataBaseUpdateExecute {
      * <li>等于0：版本号一致，不更新</li>
      * <li>小于0：数据库版本号小，需要sql更新</li>
      */
-    protected static int compareVersions(final String projectVersion,
-                                         final String dbVersion) {
+    protected static int compareVersions(final String projectVersion, final String dbVersion) {
         String[] v1Parts = projectVersion.split("\\.");
         String[] v2Parts = dbVersion.split("\\.");
 
@@ -43,5 +50,14 @@ public abstract class AbstractDataBaseUpdateExecute {
             }
         }
         return 0;
+    }
+
+    protected void updateDbVersion(String projectVersion) {
+        SystemProperties update = SystemProperties.builder()
+                .name(Constants.DB_COLUMN_VERSION)
+                .value(projectVersion)
+                .operator(Constants.SYSTEM_OPERATOR)
+                .build();
+        systemPropertiesRepository.edit(update);
     }
 }

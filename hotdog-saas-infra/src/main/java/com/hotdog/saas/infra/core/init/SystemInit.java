@@ -15,7 +15,6 @@ public class SystemInit implements CommandLineRunner {
         this.dataBaseUpdateFactory = dataBaseUpdateFactory;
     }
 
-
     @Override
     public void run(String[] args) {
         this.dataBaseUpdate();

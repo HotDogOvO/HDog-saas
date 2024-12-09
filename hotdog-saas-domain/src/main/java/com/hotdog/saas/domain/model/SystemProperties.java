@@ -1,6 +1,8 @@
 package com.hotdog.saas.domain.model;
 
 
+import java.time.LocalDateTime;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -29,5 +31,10 @@ public class SystemProperties {
      * 是否删除（0 正常 1 删除）
      */
     private Boolean deleted;
+
+    /**
+     * 更新人
+     */
+    private String operator;
 
 }

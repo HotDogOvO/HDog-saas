@@ -34,6 +34,7 @@
         <revision>1.0.0</revision>
         <lombok.version>1.18.36</lombok.version>
         <spring.version>3.3.6</spring.version>
+        <bootstrap.version>4.2.0</bootstrap.version>
         <alibaba.cloud.version>2023.0.3.2</alibaba.cloud.version>
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <mysql.version>8.0.22</mysql.version>
@@ -41,6 +42,7 @@
         <redis.version>3.40.0</redis.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <apache.version>3.17.0</apache.version>
+        <knife4j.version>4.5.0</knife4j.version>
     </properties>
 
     <dependencyManagement>
@@ -61,7 +63,13 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
-                <version>4.2.0</version>
+                <version>${bootstrap.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
 
             <dependency>
@@ -100,7 +108,6 @@
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
             </dependency>
-
 
             <dependency>
                 <groupId>mysql</groupId>
