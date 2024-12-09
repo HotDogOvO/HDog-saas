@@ -3,17 +3,22 @@ package com.hotdog.saas.infra.core.init.database;
 import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.model.SystemProperties;
 import com.hotdog.saas.domain.repository.SystemPropertiesRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.hotdog.saas.infra.dao.DataBaseUpdateMapper;
 import org.springframework.beans.factory.annotation.Value;
 
 public abstract class AbstractDataBaseUpdateExecute {
 
-    @Autowired
-    protected SystemPropertiesRepository systemPropertiesRepository;
-
     @Value("${project.version}")
     protected String projectVersion;
+
+    protected final SystemPropertiesRepository systemPropertiesRepository;
+
+    protected final DataBaseUpdateMapper dataBaseUpdateMapper;
+
+    protected AbstractDataBaseUpdateExecute(SystemPropertiesRepository systemPropertiesRepository, DataBaseUpdateMapper dataBaseUpdateMapper) {
+        this.systemPropertiesRepository = systemPropertiesRepository;
+        this.dataBaseUpdateMapper = dataBaseUpdateMapper;
+    }
 
     /**
      * <p>抽象方法，检测系统版本号，对应多种DB处理</p>

@@ -9,6 +9,8 @@ import lombok.Data;
 @Builder
 public class Tenant {
 
+    private Integer id;
+
     /**
      * 租户名
      */

@@ -2,6 +2,7 @@ package com.hotdog.saas.application.facade.impl;
 
 import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.TenantPageRequest;
+import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.tenate.TenantDTO;
 import com.hotdog.saas.application.facade.TenantFacade;
 import com.hotdog.saas.application.processor.tenant.TenantCreateProcess;
@@ -30,7 +31,7 @@ public class TenantFacadeImpl extends BaseProcess implements TenantFacade {
     }
 
     @Override
-    public BaseResponse<List<TenantDTO>> getTenantList(TenantPageRequest tenantPageRequest) {
+    public BaseResponse<PageResponseDTO<TenantDTO>> getTenantList(TenantPageRequest tenantPageRequest) {
         return this.doBiz(tenantPageRequest, tenantListProcess, false, () -> "");
     }
 

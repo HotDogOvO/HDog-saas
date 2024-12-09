@@ -1,6 +1,12 @@
 package com.hotdog.saas.infra.repository;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hotdog.saas.domain.model.Tenant;
+import com.hotdog.saas.domain.model.page.PageRequest;
+import com.hotdog.saas.domain.model.page.PageResponse;
 import com.hotdog.saas.domain.repository.TenantRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.TenantConverter;
@@ -13,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class TenantRepositoryImpl implements TenantRepository {
+public class TenantRepositoryImpl extends AbstractBaseRepository implements TenantRepository {
 
     private final TenantMapper tenantMapper;
 
@@ -31,9 +37,14 @@ public class TenantRepositoryImpl implements TenantRepository {
     }
 
     @Override
-    public List<Tenant> findList() {
-        List<TenantPO> tenantPOList = tenantMapper.selectList(null);
-        List<Tenant> tenants = tenantPOList.stream().map(TenantConverter.INSTANCE::convert).toList();
-        return tenants;
+    public PageResponse<List<Tenant>> listPage(Tenant tenant, PageRequest pageRequest) {
+        Page<TenantPO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
+        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
+        Page<TenantPO> pageResult = tenantMapper.selectPage(page, queryWrapper);
+        PageResponse<List<Tenant>> listPageResponse = pageConverter(pageResult);
+        List<Tenant> list = pageResult.getRecords().stream().map(TenantConverter.INSTANCE::convert).toList();
+        listPageResponse.setData(list);
+        return listPageResponse;
     }
+
 }

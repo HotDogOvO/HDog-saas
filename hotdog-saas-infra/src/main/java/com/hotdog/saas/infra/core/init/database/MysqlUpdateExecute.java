@@ -4,6 +4,7 @@ import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.SystemProperties;
+import com.hotdog.saas.domain.repository.SystemPropertiesRepository;
 import com.hotdog.saas.infra.dao.DataBaseUpdateMapper;
 
 import org.springframework.stereotype.Component;
@@ -12,12 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class MysqlUpdate extends AbstractDataBaseUpdateExecute {
+public class MysqlUpdateExecute extends AbstractDataBaseUpdateExecute {
 
-    private final DataBaseUpdateMapper dataBaseUpdateMapper;
-
-    public MysqlUpdate(DataBaseUpdateMapper dataBaseUpdateMapper) {
-        this.dataBaseUpdateMapper = dataBaseUpdateMapper;
+    protected MysqlUpdateExecute(SystemPropertiesRepository systemPropertiesRepository, DataBaseUpdateMapper dataBaseUpdateMapper) {
+        super(systemPropertiesRepository, dataBaseUpdateMapper);
     }
 
     @Override

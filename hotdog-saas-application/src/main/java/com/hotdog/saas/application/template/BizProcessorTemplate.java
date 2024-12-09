@@ -1,7 +1,9 @@
 package com.hotdog.saas.application.template;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
+import com.hotdog.saas.application.entity.request.PageRequestParam;
 import com.hotdog.saas.application.entity.response.BaseResponse;
+import com.hotdog.saas.domain.model.page.PageRequest;
 
 public interface BizProcessorTemplate<Req extends BaseRequestParam, Resp extends BaseResponse<?>> {
 
@@ -34,5 +36,12 @@ public interface BizProcessorTemplate<Req extends BaseRequestParam, Resp extends
         this.beforeExecute(request, response);
         this.doExecute(request, response);
         this.afterExecute(request, response);
+    }
+
+    default PageRequest reqToPage(Req request) {
+        if (request instanceof PageRequestParam pageRequestParam) {
+            return new PageRequest(pageRequestParam.getPageIndex(), pageRequestParam.getPageSize());
+        }
+        return null;
     }
 }
