@@ -1,4 +1,6 @@
-package com.hotdog.saas.application.entity.response.common;
+package com.hotdog.saas.application.entity.response;
+
+import com.hotdog.saas.domain.enums.ResultCodeEnum;
 
 import java.io.Serial;
 import java.io.Serializable;

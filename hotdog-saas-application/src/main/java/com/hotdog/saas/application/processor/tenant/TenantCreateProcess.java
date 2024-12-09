@@ -2,8 +2,8 @@ package com.hotdog.saas.application.processor.tenant;
 
 import com.hotdog.saas.application.assembler.TenantAssembler;
 import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
-import com.hotdog.saas.application.entity.response.common.BaseResponse;
-import com.hotdog.saas.application.entity.response.common.ResultCodeEnum;
+import com.hotdog.saas.application.entity.response.BaseResponse;
+import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.Tenant;
 import com.hotdog.saas.domain.utils.SignUtils;
 

@@ -1,3 +1,7 @@
+project:
+  version: @project.version@
+  database: mysql
+
 server:
   port: 12306
 

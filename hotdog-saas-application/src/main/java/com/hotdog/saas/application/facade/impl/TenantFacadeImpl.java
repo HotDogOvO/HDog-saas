@@ -7,7 +7,7 @@ import com.hotdog.saas.application.facade.TenantFacade;
 import com.hotdog.saas.application.processor.tenant.TenantCreateProcess;
 import com.hotdog.saas.application.processor.tenant.TenantListProcess;
 import com.hotdog.saas.application.template.BaseProcess;
-import com.hotdog.saas.application.entity.response.common.BaseResponse;
+import com.hotdog.saas.application.entity.response.BaseResponse;
 
 import org.springframework.stereotype.Component;
 

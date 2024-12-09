@@ -20,4 +20,5 @@ public interface EnumInterface {
      * @return 枚举详情
      */
     String getDesc();
+
 }

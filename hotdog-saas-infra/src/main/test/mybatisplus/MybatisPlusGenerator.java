@@ -1,9 +1,7 @@
 package mybatisplus;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.nio.file.Paths;
 
@@ -29,7 +27,7 @@ public class MybatisPlusGenerator {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addInclude("tenant")
+                        .addInclude("system_properties")
                         .entityBuilder().enableLombok().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel).formatFileName("%sPO")
                         .serviceBuilder().disable()
                         .controllerBuilder().disable()

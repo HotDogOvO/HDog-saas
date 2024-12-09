@@ -31,7 +31,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <revision>1.0.0-RELEASE</revision>
+        <revision>1.0.0</revision>
         <lombok.version>1.18.36</lombok.version>
         <spring.version>3.3.6</spring.version>
         <alibaba.cloud.version>2023.0.3.2</alibaba.cloud.version>
@@ -40,6 +40,7 @@
         <velocity.version>2.3</velocity.version>
         <redis.version>3.40.0</redis.version>
         <mapstruct.version>1.6.3</mapstruct.version>
+        <apache.version>3.17.0</apache.version>
     </properties>
 
     <dependencyManagement>
@@ -124,6 +125,13 @@
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -150,6 +158,14 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
     </build>
 
 </project>

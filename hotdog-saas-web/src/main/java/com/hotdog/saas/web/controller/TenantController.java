@@ -4,7 +4,7 @@ import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.TenantPageRequest;
 import com.hotdog.saas.application.entity.response.tenate.TenantDTO;
 import com.hotdog.saas.application.facade.TenantFacade;
-import com.hotdog.saas.application.entity.response.common.BaseResponse;
+import com.hotdog.saas.application.entity.response.BaseResponse;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

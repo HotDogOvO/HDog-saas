@@ -1,8 +1,6 @@
 package com.hotdog.saas.application.entity.response.tenate;
 
 
-import com.hotdog.saas.application.entity.response.common.BaseResponse;
-
 import java.time.LocalDateTime;
 
 import lombok.Builder;

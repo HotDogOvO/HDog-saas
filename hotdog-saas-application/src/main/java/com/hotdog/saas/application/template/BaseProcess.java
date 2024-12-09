@@ -2,8 +2,8 @@ package com.hotdog.saas.application.template;
 
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
-import com.hotdog.saas.application.entity.response.common.BaseResponse;
-import com.hotdog.saas.application.entity.response.common.ResultCodeEnum;
+import com.hotdog.saas.application.entity.response.BaseResponse;
+import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.constant.Constants;
 
 import org.redisson.api.RLock;
