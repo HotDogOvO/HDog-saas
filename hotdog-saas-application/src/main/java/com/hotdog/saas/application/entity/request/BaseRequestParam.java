@@ -14,8 +14,6 @@ public abstract class BaseRequestParam implements Serializable {
 
     private String operator;
 
-    private String sign;
-
     private Long timestamp;
 
     public abstract void validate();

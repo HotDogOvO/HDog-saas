@@ -36,6 +36,11 @@ public class SignUtils {
         }
     }
 
+    public static String sign(String param, String appSecret) {
+        String signStr = appSecret + param + appSecret;
+        return sha256(signStr);
+    }
+
     public static void main(String[] args) {
         String str = "493647a3daae421e9397e125e17cb942";
         System.out.println(sha256(str));

@@ -1,6 +1,9 @@
 project:
   version: @project.version@
   database: mysql
+  secret: 1234567890abcdef
+  valid:
+    sign: true
 
 server:
   port: 12306

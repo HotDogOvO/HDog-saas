@@ -7,6 +7,8 @@ public class Constants {
 
     public static final String SYSTEM_OPERATOR = "system";
 
+    public static final String HTTP_POST = "POST";
+
     // ======================= SYSTEM PATH =======================
     // 工作目录
     public static final String PROJECT_WORK_PATH = System.getProperty("user.dir");
