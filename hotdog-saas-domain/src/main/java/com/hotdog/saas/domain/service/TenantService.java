@@ -1,4 +1,4 @@
-package com.hotdog.saas.application.service;
+package com.hotdog.saas.domain.service;
 
 import com.hotdog.saas.domain.model.Tenant;
 import com.hotdog.saas.domain.model.page.PageRequest;

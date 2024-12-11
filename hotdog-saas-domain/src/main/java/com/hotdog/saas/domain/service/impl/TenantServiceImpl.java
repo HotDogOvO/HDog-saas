@@ -1,6 +1,6 @@
-package com.hotdog.saas.application.service.impl;
+package com.hotdog.saas.domain.service.impl;
 
-import com.hotdog.saas.application.service.TenantService;
+import com.hotdog.saas.domain.service.TenantService;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.Tenant;

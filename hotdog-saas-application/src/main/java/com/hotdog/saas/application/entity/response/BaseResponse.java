@@ -5,37 +5,29 @@ import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import java.io.Serial;
 import java.io.Serializable;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema(name = "全局统一返回值", description = "全局统一返回值")
 public class BaseResponse<T> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 错误码
-     */
+    @Schema(description = "状态码")
     private String code;
 
-    /**
-     * 返回数据
-     */
+    @Schema(description = "返回数据")
     private T data;
 
-    /**
-     * 错误信息
-     */
+    @Schema(description = "请求信息")
     private String message;
 
-    /**
-     * 时间戳
-     */
+    @Schema(description = "相应时间戳")
     private Long timestamp;
 
-    /**
-     * 请求url
-     */
+    @Schema(description = "请求url")
     private String path;
 
     public BaseResponse() {

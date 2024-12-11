@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "租户管理")
@@ -29,12 +27,8 @@ public class TenantController {
     }
 
     @Operation(summary = "查询租户分页列表")
-    @Parameters({
-            @Parameter(name = "pageIndex", description = "页数", required = true),
-            @Parameter(name = "pageSize", description = "单页条数", required = true),
-    })
     @PostMapping("/list/page")
-    public BaseResponse<PageResponseDTO<TenantDTO>> tenantListPage(@RequestBody TenantPageRequest tenantPageRequest) {
+    public BaseResponse<PageResponseDTO<TenantDTO>> tenantListPage(@RequestBody @Validated TenantPageRequest tenantPageRequest) {
         return tenantFacade.getTenantList(tenantPageRequest);
     }
 

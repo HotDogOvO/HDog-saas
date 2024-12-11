@@ -8,7 +8,6 @@ import com.hotdog.saas.domain.utils.HttpUtils;
 import com.hotdog.saas.domain.utils.SignUtils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.BufferedReader;

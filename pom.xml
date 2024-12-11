@@ -43,6 +43,8 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <apache.version>3.17.0</apache.version>
         <knife4j.version>4.5.0</knife4j.version>
+        <slf4j.version>2.0.16</slf4j.version>
+        <logback.version>1.5.12</logback.version>
     </properties>
 
     <dependencyManagement>
@@ -139,6 +141,17 @@
                 <version>${apache.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
