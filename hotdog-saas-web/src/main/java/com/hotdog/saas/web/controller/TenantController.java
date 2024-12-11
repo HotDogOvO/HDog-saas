@@ -1,7 +1,9 @@
 package com.hotdog.saas.web.controller;
 
 import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
+import com.hotdog.saas.application.entity.request.tenate.DeleteTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.TenantPageRequest;
+import com.hotdog.saas.application.entity.request.tenate.UpdateTenantRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.tenate.TenantDTO;
 import com.hotdog.saas.application.facade.TenantFacade;
@@ -26,16 +28,28 @@ public class TenantController {
         this.tenantFacade = tenantFacade;
     }
 
+    @Operation(summary = "创建租户")
+    @PostMapping("/create")
+    public BaseResponse<Boolean> createTenant(@RequestBody @Validated CreateTenantRequest createTenantRequest) {
+        return tenantFacade.createTenant(createTenantRequest);
+    }
+
     @Operation(summary = "查询租户分页列表")
     @PostMapping("/list/page")
     public BaseResponse<PageResponseDTO<TenantDTO>> tenantListPage(@RequestBody @Validated TenantPageRequest tenantPageRequest) {
         return tenantFacade.getTenantList(tenantPageRequest);
     }
 
-    @Operation(summary = "创建租户")
-    @PostMapping("/create")
-    public BaseResponse<Boolean> createTenant(@RequestBody @Validated CreateTenantRequest createTenantRequest) {
-        return tenantFacade.createTenant(createTenantRequest);
+    @Operation(summary = "更新租户")
+    @PostMapping("/update")
+    public BaseResponse<Boolean> updateTenant(@RequestBody @Validated UpdateTenantRequest updateTenantRequest) {
+        return tenantFacade.updateTenant(updateTenantRequest);
+    }
+
+    @Operation(summary = "删除租户")
+    @PostMapping("/delete")
+    public BaseResponse<Boolean> deleteTenant(@RequestBody @Validated DeleteTenantRequest deleteTenantRequest) {
+        return tenantFacade.deleteTenant(deleteTenantRequest);
     }
 
 }

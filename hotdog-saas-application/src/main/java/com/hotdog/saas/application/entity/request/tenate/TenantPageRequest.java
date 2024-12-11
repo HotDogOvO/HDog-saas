@@ -14,8 +14,4 @@ import lombok.Data;
 @Schema(name = "租户分页请求DTO", description = "租户分页请求DTO")
 public class TenantPageRequest extends PageRequestParam {
 
-    @Override
-    public void validate() {
-        super.validate();
-    }
 }

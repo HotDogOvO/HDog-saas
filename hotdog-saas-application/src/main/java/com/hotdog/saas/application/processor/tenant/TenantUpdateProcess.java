@@ -2,21 +2,20 @@ package com.hotdog.saas.application.processor.tenant;
 
 import com.hotdog.saas.application.assembler.TenantAssembler;
 import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
+import com.hotdog.saas.application.entity.request.tenate.UpdateTenantRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.config.ProjectConfig;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.Tenant;
 import com.hotdog.saas.domain.utils.SignUtils;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
 @Component
-public class TenantCreateProcess extends AbstractTenantProcessor<CreateTenantRequest, BaseResponse<Boolean>> {
+public class TenantUpdateProcess extends AbstractTenantProcessor<UpdateTenantRequest, BaseResponse<Boolean>> {
 
     @Override
     public BaseResponse<Boolean> initResult() {
@@ -28,25 +27,13 @@ public class TenantCreateProcess extends AbstractTenantProcessor<CreateTenantReq
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void doExecute(CreateTenantRequest request, BaseResponse<Boolean> response) {
+    public void doExecute(UpdateTenantRequest request, BaseResponse<Boolean> response) {
         // 校验租户名是否存在
         tenantService.existsByName(request.getName());
-        // 校验AppId是否存在
-        tenantService.existsByAppId(request.getAppId());
-        // 保存
-        Boolean createFlag = tenantService.createTenant(buildTenant(request));
-        response.setData(createFlag);
-    }
 
-    private Tenant buildTenant(CreateTenantRequest createTenantRequest) {
-        Tenant tenant = TenantAssembler.INSTANCE.convert(createTenantRequest);
-        try {
-            tenant.setAppSecret(SignUtils.generatorAppSecret(ProjectConfig.appSecret));
-        } catch (Exception e) {
-            log.error("创建租户失败，生成appSecret异常，{}", e.getMessage(), e);
-            throw new BusinessException(ResultCodeEnum.FAIL);
-        }
-        return tenant;
+        Tenant tenant = TenantAssembler.INSTANCE.convert(request);
+        Boolean createFlag = tenantService.updateTenant(tenant);
+        response.setData(createFlag);
     }
 
 }

@@ -13,4 +13,8 @@ public interface TenantRepository {
     PageResponse<List<Tenant>> listPage(Tenant tenant, PageRequest pageRequest);
 
     Long count(Tenant tenant);
+
+    Integer modify(Tenant tenant);
+
+    Integer remove(Long id);
 }

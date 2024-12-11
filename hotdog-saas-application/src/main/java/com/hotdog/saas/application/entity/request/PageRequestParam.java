@@ -25,8 +25,4 @@ public class PageRequestParam extends BaseRequestParam {
             this.pageSize = 20;
         }
     }
-
-    @Override
-    public void validate() {
-    }
 }

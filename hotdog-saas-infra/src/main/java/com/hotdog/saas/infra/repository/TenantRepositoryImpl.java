@@ -1,6 +1,7 @@
 package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.Tenant;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class TenantRepositoryImpl extends AbstractBaseRepository implements TenantRepository {
@@ -54,6 +56,26 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
                 .eq(StringUtils.isNotEmpty(tenant.getName()), TenantPO::getName, tenant.getName())
                 .eq(StringUtils.isNotEmpty(tenant.getAppId()), TenantPO::getAppId, tenant.getAppId());
         return tenantMapper.selectCount(queryWrapper);
+    }
+
+    @Override
+    public Integer modify(Tenant tenant) {
+        LambdaUpdateWrapper<TenantPO> updateWrapper = new LambdaUpdateWrapper<>();
+//        updateWrapper.eq(StringUtils.isNotEmpty(tenant.getName()),TenantPO::getName, tenant.getName())
+//                .eq(StringUtils.isNotEmpty(tenant.getContactName()),TenantPO::getContactName, tenant.getContactName())
+//                .eq(StringUtils.isNotEmpty(tenant.getContractPhone()),TenantPO::getContractPhone, tenant.getContractPhone())
+//                .eq(StringUtils.isNotEmpty(tenant.getContractEmail()),TenantPO::getContractEmail, tenant.getContractEmail())
+//                .eq(Objects.nonNull(tenant.getExpireTime()),TenantPO::getExpireTime, tenant.getExpireTime())
+//                .eq(Objects.nonNull(tenant.getStatus()),TenantPO::getStatus, tenant.getStatus())
+//                .eq(TenantPO::getUpdater, tenant.getOperator())
+//                .eq(TenantPO::getUpdateTime, DateUtils.now());
+//        return tenantMapper.updateById(updateWrapper);
+        return 0;
+    }
+
+    @Override
+    public Integer remove(Long id) {
+        return 0;
     }
 
 }

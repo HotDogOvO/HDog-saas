@@ -26,11 +26,17 @@ public interface TenantService {
     PageResponse<List<Tenant>> getTenantList(Tenant tenant, PageRequest pageRequest);
 
     /**
-     * 判断租户是否存在
+     * 判断租户名是否存在
      *
      * @param name  租户名
-     * @param appId 租户appId
      */
-    void existTenant(String name, String appId);
+    void existsByName(String name);
 
+    void existsByAppId(String appId);
+
+    void exists(Long id);
+
+    Boolean updateTenant(Tenant tenant);
+
+    Boolean deleteTenant(Long id);
 }

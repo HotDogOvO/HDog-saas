@@ -18,5 +18,4 @@ public abstract class BaseRequestParam implements Serializable {
     @Schema(description = "操作人")
     private String operator;
 
-    public abstract void validate();
 }
