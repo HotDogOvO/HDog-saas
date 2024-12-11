@@ -48,4 +48,9 @@ public class BaseResponse<T> implements Serializable {
         this.message = resultCodeEnum.getMessage();
     }
 
+    public BaseResponse(ResultCodeEnum resultCodeEnum, String message) {
+        this.code = resultCodeEnum.getCode();
+        this.message = message;
+    }
+
 }

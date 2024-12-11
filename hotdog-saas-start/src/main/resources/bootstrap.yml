@@ -3,7 +3,7 @@ project:
   database: mysql
   secret: 1234567890abcdef
   valid:
-    sign: true
+    sign: false
 
 server:
   port: 12306

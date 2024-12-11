@@ -1,14 +1,39 @@
 package com.hotdog.saas.domain.utils;
 
+
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.UUID;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 public class SignUtils {
 
-    public static String generatorAppSecret() {
+    /**
+     * 生成租户secret，aes+base64加密
+     *
+     * @param appSecret 系统秘钥
+     * @return 租户secret
+     */
+    public static String generatorAppSecret(String appSecret) throws Exception {
         String uuid = UUID.randomUUID().toString().replace("-", "");
-        return sha256(uuid);
+        return aesEncrypt(uuid, appSecret);
+    }
+
+    /**
+     * 签名算法
+     * （appSecret + param + appSecret）进行sha256加密
+     *
+     * @param param     待加密的串
+     * @param appSecret 秘钥
+     * @return 签名
+     */
+    public static String sign(String param, String appSecret) {
+        String signStr = appSecret + param + appSecret;
+        return sha256(signStr);
     }
 
     private static String sha256(String str) {
@@ -36,14 +61,49 @@ public class SignUtils {
         }
     }
 
-    public static String sign(String param, String appSecret) {
-        String signStr = appSecret + param + appSecret;
-        return sha256(signStr);
+    /**
+     * 使用AES对字符串加密
+     *
+     * @param str    utf8编码的字符串
+     * @param secret 密钥（16字节）
+     * @return 加密结果（base64）
+     * @throws Exception
+     */
+    public static String aesEncrypt(String str, String secret) throws Exception {
+        if (str == null || secret == null) {
+            return null;
+        }
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "AES"));
+        byte[] bytes = cipher.doFinal(str.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(bytes);
     }
 
-    public static void main(String[] args) {
+    /**
+     * 使用AES对数据解密
+     *
+     * @param str    base64加密串
+     * @param secret 密钥（16字节）
+     * @return 解密结果
+     * @throws Exception
+     */
+    public static String aesDecrypt(String str, String secret) throws Exception {
+        SecretKeySpec keySpec = new SecretKeySpec(secret.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, keySpec);
+
+        // 从 Base64 解码并解密
+        byte[] decoded = Base64.getDecoder().decode(str);
+        byte[] decrypted = cipher.doFinal(decoded);
+        return new String(decrypted);
+    }
+
+    public static void main(String[] args) throws Exception {
         String str = "493647a3daae421e9397e125e17cb942";
-        System.out.println(sha256(str));
+        String key = "1234567890abcdef";
+        String enc = aesEncrypt(str, key);
+        System.out.println(enc);
+        System.out.println(aesDecrypt(enc, key));
     }
 
 }

@@ -7,10 +7,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResultCodeEnum {
 
+    // 成功
     SUCCESS("0", "请求成功"),
-    DATABASE_UPDATE_FAIL("2", "数据库升级异常"),
 
 
+
+    // 系统异常
+    DATABASE_UPDATE_FAIL("99995", "数据库升级异常"),
     TIMESTAMP_INVALID("99996", "时间戳非法"),
     TIMESTAMP_EMPTY("99996", "时间戳为空"),
     HTTP_METHOD_INVALID("99997", "HTTP请求非法"),

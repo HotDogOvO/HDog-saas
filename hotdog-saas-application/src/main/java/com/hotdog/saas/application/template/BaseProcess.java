@@ -3,7 +3,6 @@ package com.hotdog.saas.application.template;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.constant.Constants;
 
 import org.redisson.api.RLock;
@@ -38,19 +37,11 @@ public class BaseProcess {
                 lock.lock(Constants.LOCK_TIME_SECONDS, TimeUnit.SECONDS);
             }
             processor.execute(req, result);
-        } catch (Exception e) {
-            log.error("Service occurs exception", e);
-            setExceptionResult(result);
         } finally {
             if (Objects.nonNull(lock) && lock.isHeldByCurrentThread()) {
                 lock.unlock();
             }
         }
         return result;
-    }
-
-    protected void setExceptionResult(BaseResponse<?> result) {
-        result.setCode(ResultCodeEnum.FAIL.getCode());
-        result.setMessage(ResultCodeEnum.FAIL.getMessage());
     }
 }

@@ -17,12 +17,13 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestControllerAdvice(annotations = RestController.class)
-public class ExceptionHandlerAdvice {
+public class ControllerHandlerAdvice {
 
     @ExceptionHandler(BusinessException.class)
     public BaseResponse<Object> handleBusinessException(BusinessException ex) {
-        log.error("请求异常, code: {}, message: {}", ex.getResultCode().getCode(), ex.getResultCode().getMessage(), ex);
-        return new BaseResponse<>(ex.getResultCode());
+        String errorMessage = ex.getResultCode().getMessage();
+        log.error("请求异常, code: {}, message: {}", ex.getResultCode().getCode(), errorMessage, ex);
+        return new BaseResponse<>(ex.getResultCode(), errorMessage);
     }
 
     @ExceptionHandler(Exception.class)

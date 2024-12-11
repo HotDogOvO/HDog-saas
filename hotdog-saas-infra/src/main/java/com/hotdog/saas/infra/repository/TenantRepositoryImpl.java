@@ -1,9 +1,8 @@
 package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.Tenant;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
@@ -13,6 +12,7 @@ import com.hotdog.saas.infra.converter.TenantConverter;
 import com.hotdog.saas.infra.dao.TenantMapper;
 import com.hotdog.saas.infra.entity.po.TenantPO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -28,7 +28,7 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
     }
 
     @Override
-    public int save(Tenant tenant) {
+    public Integer save(Tenant tenant) {
         TenantPO tenantPO = TenantConverter.INSTANCE.convert2PO(tenant);
         LocalDateTime now = DateUtils.now();
         tenantPO.setCreator(tenant.getOperator()).setCreateTime(now)
@@ -45,6 +45,15 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
         List<Tenant> list = pageResult.getRecords().stream().map(TenantConverter.INSTANCE::convert).toList();
         listPageResponse.setData(list);
         return listPageResponse;
+    }
+
+    @Override
+    public Long count(Tenant tenant) {
+        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TenantPO::getDeleted, DeleteEnum.NO.getCode())
+                .eq(StringUtils.isNotEmpty(tenant.getName()), TenantPO::getName, tenant.getName())
+                .eq(StringUtils.isNotEmpty(tenant.getAppId()), TenantPO::getAppId, tenant.getAppId());
+        return tenantMapper.selectCount(queryWrapper);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.hotdog.saas.web.config;
 
+import com.hotdog.saas.domain.config.ProjectConfig;
 import com.hotdog.saas.web.interceptor.SignInterceptor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${project.secret}")
-    private String secret;
-
     @Value("${project.valid.sign}")
     private Boolean needValidSign;
 
@@ -28,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SignInterceptor(secret, needValidSign))
+        registry.addInterceptor(new SignInterceptor(ProjectConfig.appSecret, needValidSign))
                 .addPathPatterns("/**")
                 .excludePathPatterns(EXCLUDE_PATTERN_URL);
     }

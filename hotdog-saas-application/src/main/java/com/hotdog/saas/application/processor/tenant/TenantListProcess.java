@@ -34,7 +34,7 @@ public class TenantListProcess extends AbstractTenantProcessor<TenantPageRequest
         Tenant tenant = TenantAssembler.INSTANCE.convert(tenantPageRequest);
         PageRequest pageRequest = reqToPage(tenantPageRequest);
 
-        PageResponse<List<Tenant>> listPageResponse = tenantRepository.listPage(tenant, pageRequest);
+        PageResponse<List<Tenant>> listPageResponse = tenantService.getTenantList(tenant, pageRequest);
 
         PageResponseDTO<TenantDTO> tenantPageResponseDTO = TenantAssembler.INSTANCE.convertPage(listPageResponse);
         response.setData(tenantPageResponseDTO);

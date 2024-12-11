@@ -7,17 +7,16 @@ import lombok.Getter;
 @Getter
 public class BusinessException extends RuntimeException {
 
-    private ResultCodeEnum resultCode;
+    private final ResultCodeEnum resultCode;
     private String message;
 
-    private BusinessException() {
-    }
-
     public BusinessException(ResultCodeEnum resultCodeEnum) {
+        super(resultCodeEnum.getCode());
         this.resultCode = resultCodeEnum;
     }
 
     public BusinessException(ResultCodeEnum resultCodeEnum, String message) {
+        super(resultCodeEnum.getCode());
         this.resultCode = resultCodeEnum;
         this.message = message;
     }
