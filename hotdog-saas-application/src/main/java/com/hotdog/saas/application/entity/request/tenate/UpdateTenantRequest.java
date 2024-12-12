@@ -32,7 +32,6 @@ public class UpdateTenantRequest extends BaseRequestParam {
     private LocalDateTime expireTime;
 
     @Schema(description = "租户状态（0正常 1停用）")
-    // todo to enum
     private Integer status;
 
 }
