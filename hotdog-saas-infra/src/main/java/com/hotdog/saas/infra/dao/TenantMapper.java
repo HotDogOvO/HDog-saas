@@ -1,7 +1,7 @@
 package com.hotdog.saas.infra.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hotdog.saas.infra.entity.po.TenantPO;
+import com.hotdog.saas.infra.entity.TenantDO;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,6 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-12-06 14:08:15
  */
 @Mapper
-public interface TenantMapper extends BaseMapper<TenantPO> {
+public interface TenantMapper extends BaseMapper<TenantDO> {
 
 }

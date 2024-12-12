@@ -30,10 +30,10 @@ public class TenantDeleteProcess extends AbstractTenantProcessor<DeleteTenantReq
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(DeleteTenantRequest request, BaseResponse<Boolean> response) {
         // 校验租户是否存在
-        tenantService.exists(request.getId());
+        super.exists(request.getId());
 
-        Boolean createFlag = tenantService.deleteTenant(request.getId());
-        response.setData(createFlag);
+        Integer removeFlag = tenantRepository.remove(request.getId(), request.getOperator());
+        response.setData(checkFlag(removeFlag));
     }
 
 }

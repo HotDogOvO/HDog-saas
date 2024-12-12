@@ -22,6 +22,17 @@ public class BaseProcess {
     @Autowired
     private RedissonClient redissonClient;
 
+    /**
+     * 业务执行器
+     *
+     * @param req       请求参数
+     * @param processor 业务处理器
+     * @param isLock    是否需要分布式锁
+     * @param lockKey   锁Key
+     * @param <Req>     extends BaseRequestParam
+     * @param <Resp>    extends BaseResponse
+     * @return BaseResponse
+     */
     protected <Req extends BaseRequestParam, Resp extends BaseResponse<?>> Resp doBiz(Req req,
                                                                                       final BizProcessorTemplate<Req, Resp> processor,
                                                                                       Boolean isLock,

@@ -25,4 +25,6 @@ public interface TenantAssembler {
     Tenant convert(UpdateTenantRequest updateTenantRequest);
 
     PageResponseDTO<TenantDTO> convertPage(PageResponse<List<Tenant>> pageResponse);
+
+    TenantDTO convertToDTO(Tenant tenant);
 }

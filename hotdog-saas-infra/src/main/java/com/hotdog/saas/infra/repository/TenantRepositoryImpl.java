@@ -11,14 +11,12 @@ import com.hotdog.saas.domain.repository.TenantRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.TenantConverter;
 import com.hotdog.saas.infra.dao.TenantMapper;
-import com.hotdog.saas.infra.entity.po.TenantPO;
+import com.hotdog.saas.infra.entity.TenantDO;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class TenantRepositoryImpl extends AbstractBaseRepository implements TenantRepository {
@@ -31,51 +29,74 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
 
     @Override
     public Integer save(Tenant tenant) {
-        TenantPO tenantPO = TenantConverter.INSTANCE.convert2PO(tenant);
+        TenantDO tenantDO = TenantConverter.INSTANCE.convert2DO(tenant);
         LocalDateTime now = DateUtils.now();
-        tenantPO.setCreator(tenant.getOperator()).setCreateTime(now)
+        tenantDO.setCreator(tenant.getOperator()).setCreateTime(now)
                 .setUpdater(tenant.getOperator()).setUpdateTime(now);
-        return tenantMapper.insert(tenantPO);
+        return tenantMapper.insert(tenantDO);
     }
 
     @Override
     public PageResponse<List<Tenant>> listPage(Tenant tenant, PageRequest pageRequest) {
-        Page<TenantPO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
-        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
-        Page<TenantPO> pageResult = tenantMapper.selectPage(page, queryWrapper);
-        PageResponse<List<Tenant>> listPageResponse = pageConverter(pageResult);
+        Page<TenantDO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
+        LambdaQueryWrapper<TenantDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TenantDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.orderByDesc(TenantDO::getCreateTime);
+
+        Page<TenantDO> pageResult = tenantMapper.selectPage(page, queryWrapper);
         List<Tenant> list = pageResult.getRecords().stream().map(TenantConverter.INSTANCE::convert).toList();
+
+        PageResponse<List<Tenant>> listPageResponse = pageConverter(pageResult);
         listPageResponse.setData(list);
         return listPageResponse;
     }
 
     @Override
-    public Long count(Tenant tenant) {
-        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(TenantPO::getDeleted, DeleteEnum.NO.getCode())
-                .eq(StringUtils.isNotEmpty(tenant.getName()), TenantPO::getName, tenant.getName())
-                .eq(StringUtils.isNotEmpty(tenant.getAppId()), TenantPO::getAppId, tenant.getAppId());
+    public Tenant findById(Long id) {
+        TenantDO tenantDO = tenantMapper.selectById(id);
+        return TenantConverter.INSTANCE.convert(tenantDO);
+    }
+
+    @Override
+    public Long exists(Long id) {
+        LambdaQueryWrapper<TenantDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TenantDO::getDeleted, DeleteEnum.NO.getCode())
+                .eq(TenantDO::getId, id);
+        return tenantMapper.selectCount(queryWrapper);
+    }
+
+    @Override
+    public Long existsByName(String name) {
+        LambdaQueryWrapper<TenantDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TenantDO::getDeleted, DeleteEnum.NO.getCode())
+                .eq(TenantDO::getName, name);
+        return tenantMapper.selectCount(queryWrapper);
+    }
+
+    @Override
+    public Long existsByAppId(String appId) {
+        LambdaQueryWrapper<TenantDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TenantDO::getDeleted, DeleteEnum.NO.getCode())
+                .eq(TenantDO::getAppId, appId);
         return tenantMapper.selectCount(queryWrapper);
     }
 
     @Override
     public Integer modify(Tenant tenant) {
-        LambdaUpdateWrapper<TenantPO> updateWrapper = new LambdaUpdateWrapper<>();
-//        updateWrapper.eq(StringUtils.isNotEmpty(tenant.getName()),TenantPO::getName, tenant.getName())
-//                .eq(StringUtils.isNotEmpty(tenant.getContactName()),TenantPO::getContactName, tenant.getContactName())
-//                .eq(StringUtils.isNotEmpty(tenant.getContractPhone()),TenantPO::getContractPhone, tenant.getContractPhone())
-//                .eq(StringUtils.isNotEmpty(tenant.getContractEmail()),TenantPO::getContractEmail, tenant.getContractEmail())
-//                .eq(Objects.nonNull(tenant.getExpireTime()),TenantPO::getExpireTime, tenant.getExpireTime())
-//                .eq(Objects.nonNull(tenant.getStatus()),TenantPO::getStatus, tenant.getStatus())
-//                .eq(TenantPO::getUpdater, tenant.getOperator())
-//                .eq(TenantPO::getUpdateTime, DateUtils.now());
-//        return tenantMapper.updateById(updateWrapper);
-        return 0;
+        TenantDO tenantDO = TenantConverter.INSTANCE.convert2DO(tenant)
+                .setUpdater(tenant.getOperator())
+                .setUpdateTime(DateUtils.now());
+        return tenantMapper.updateById(tenantDO);
     }
 
     @Override
-    public Integer remove(Long id) {
-        return 0;
+    public Integer remove(Long id, String operator) {
+        TenantDO tenantDO = new TenantDO()
+                .setId(id)
+                .setDeleted(DeleteEnum.YES.getCode())
+                .setUpdater(operator)
+                .setUpdateTime(DateUtils.now());;
+        return tenantMapper.updateById(tenantDO);
     }
 
 }

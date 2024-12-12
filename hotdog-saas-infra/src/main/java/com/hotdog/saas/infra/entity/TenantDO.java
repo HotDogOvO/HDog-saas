@@ -1,4 +1,4 @@
-package com.hotdog.saas.infra.entity.po;
+package com.hotdog.saas.infra.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -9,8 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -24,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @TableName("tenant")
-public class TenantPO implements Serializable {
+public class TenantDO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,7 +31,7 @@ public class TenantPO implements Serializable {
      * 租户ID
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 租户名
@@ -73,12 +71,12 @@ public class TenantPO implements Serializable {
     /**
      * 状态（0正常 1停用）
      */
-    private Boolean status;
+    private Integer status;
 
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人

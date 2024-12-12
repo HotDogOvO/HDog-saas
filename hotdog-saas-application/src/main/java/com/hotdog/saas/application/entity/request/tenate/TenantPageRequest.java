@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-@Schema(name = "租户分页请求DTO", description = "租户分页请求DTO")
+@Schema(name = "租户分页DTO", description = "租户分页DTO")
 public class TenantPageRequest extends PageRequestParam {
 
 }

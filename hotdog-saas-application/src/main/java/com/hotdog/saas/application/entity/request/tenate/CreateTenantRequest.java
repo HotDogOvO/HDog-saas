@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-@Schema(name = "创建租户请求DTO", description = "创建租户请求DTO")
+@Schema(name = "创建租户DTO", description = "创建租户DTO")
 public class CreateTenantRequest extends BaseRequestParam {
 
     @NotBlank(message = "租户名不能为空")

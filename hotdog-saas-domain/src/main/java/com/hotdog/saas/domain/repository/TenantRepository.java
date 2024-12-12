@@ -12,9 +12,15 @@ public interface TenantRepository {
 
     PageResponse<List<Tenant>> listPage(Tenant tenant, PageRequest pageRequest);
 
-    Long count(Tenant tenant);
+    Tenant findById(Long id);
+
+    Long exists(Long id);
+
+    Long existsByName(String name);
+
+    Long existsByAppId(String appId);
 
     Integer modify(Tenant tenant);
 
-    Integer remove(Long id);
+    Integer remove(Long id, String operator);
 }

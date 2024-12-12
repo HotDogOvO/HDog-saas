@@ -1,7 +1,7 @@
 package com.hotdog.saas.infra.converter;
 
 import com.hotdog.saas.domain.model.SystemProperties;
-import com.hotdog.saas.infra.entity.po.SystemPropertiesPO;
+import com.hotdog.saas.infra.entity.SystemPropertiesDO;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -11,6 +11,6 @@ public interface SystemPropertiesConverter {
 
     SystemPropertiesConverter INSTANCE = Mappers.getMapper(SystemPropertiesConverter.class);
 
-    SystemProperties convert(SystemPropertiesPO systemPropertiesPO);
+    SystemProperties convert(SystemPropertiesDO systemPropertiesDO);
 
 }

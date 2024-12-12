@@ -2,6 +2,7 @@ package com.hotdog.saas.web.controller;
 
 import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.DeleteTenantRequest;
+import com.hotdog.saas.application.entity.request.tenate.QueryTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.TenantPageRequest;
 import com.hotdog.saas.application.entity.request.tenate.UpdateTenantRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
@@ -37,7 +38,13 @@ public class TenantController {
     @Operation(summary = "查询租户分页列表")
     @PostMapping("/list/page")
     public BaseResponse<PageResponseDTO<TenantDTO>> tenantListPage(@RequestBody @Validated TenantPageRequest tenantPageRequest) {
-        return tenantFacade.getTenantList(tenantPageRequest);
+        return tenantFacade.tenantListPage(tenantPageRequest);
+    }
+
+    @Operation(summary = "查询租户详情")
+    @PostMapping("/detail")
+    public BaseResponse<TenantDTO> tenantDetail(@RequestBody @Validated QueryTenantRequest queryTenantRequest) {
+        return tenantFacade.tenantDetail(queryTenantRequest);
     }
 
     @Operation(summary = "更新租户")

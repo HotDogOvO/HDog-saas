@@ -30,12 +30,12 @@ public class TenantCreateProcess extends AbstractTenantProcessor<CreateTenantReq
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(CreateTenantRequest request, BaseResponse<Boolean> response) {
         // 校验租户名是否存在
-        tenantService.existsByName(request.getName());
+        super.existsByName(request.getName());
         // 校验AppId是否存在
-        tenantService.existsByAppId(request.getAppId());
+        super.existsByAppId(request.getAppId());
         // 保存
-        Boolean createFlag = tenantService.createTenant(buildTenant(request));
-        response.setData(createFlag);
+        Integer saveFlag = tenantRepository.save(buildTenant(request));
+        response.setData(checkFlag(saveFlag));
     }
 
     private Tenant buildTenant(CreateTenantRequest createTenantRequest) {

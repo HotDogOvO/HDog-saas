@@ -49,12 +49,32 @@ public class Tenant {
     /**
      * 状态（0正常 1停用）
      */
-    private Boolean status;
+    private Integer status;
 
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
+
+    /**
+     * 创建人
+     */
+    private String creator;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * 更新人
+     */
+    private String updater;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime updateTime;
 
     /**
      * 操作人

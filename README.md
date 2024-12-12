@@ -28,7 +28,7 @@
 
 + 对外接口统一
 + 业务编排
-+ DO与DTO的转换
++ model与DTO的转换
 
 ### domain
 
@@ -43,7 +43,7 @@
 
 基础设施层
 
-+ PO与DO转换
++ DO与model转换
 + 存储层具体实现
 + 提供数据库对象
 
@@ -98,7 +98,7 @@
                    |- core (系统核心层)
                         |- init (系统初始化操作)
                    |- dao (MybatisPlus实现)
-                   |- entity.po (PO，和数据库表一对一对应)
+                   |- entity (DO，和数据库表一对一对应)
                    |- repository (repository实现，做参数转换（DO转PO)，多DB功能预留）
          |- resources
               |- mapper（sql实现）

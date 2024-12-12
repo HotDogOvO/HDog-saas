@@ -9,12 +9,12 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@Schema(name = "创建租户请求DTO", description = "创建租户请求DTO")
+@Schema(name = "更新租户DTO", description = "更新租户DTO")
 public class UpdateTenantRequest extends BaseRequestParam {
 
-    @NotBlank(message = "租户ID不能为空")
+    @NotNull(message = "租户ID不能为空")
     @Schema(description = "租户ID")
-    private String id;
+    private Long id;
 
     @Schema(description = "租户名")
     private String name;
@@ -33,6 +33,6 @@ public class UpdateTenantRequest extends BaseRequestParam {
 
     @Schema(description = "租户状态（0正常 1停用）")
     // todo to enum
-    private Boolean status;
+    private Integer status;
 
 }

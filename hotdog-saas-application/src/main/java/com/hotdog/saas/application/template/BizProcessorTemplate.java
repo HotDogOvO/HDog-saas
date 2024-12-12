@@ -38,6 +38,11 @@ public interface BizProcessorTemplate<Req extends BaseRequestParam, Resp extends
         this.afterExecute(request, response);
     }
 
+    /**
+     * 请求参数转Page
+     * @param request
+     * @return
+     */
     default PageRequest reqToPage(Req request) {
         if (request instanceof PageRequestParam pageRequestParam) {
             return new PageRequest(pageRequestParam.getPageIndex(), pageRequestParam.getPageSize());
