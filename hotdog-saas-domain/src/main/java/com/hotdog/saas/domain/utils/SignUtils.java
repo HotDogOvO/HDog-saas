@@ -36,7 +36,7 @@ public class SignUtils {
         return sha256(signStr);
     }
 
-    private static String sha256(String str) {
+    public static String sha256(String str) {
         try {
             // 获取 SHA-256 的 MessageDigest 实例
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

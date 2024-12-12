@@ -10,28 +10,28 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-@Schema(name = "创建租户DTO", description = "创建租户DTO")
+@Schema(name = "创建用户DTO", description = "创建用户DTO")
 public class CreateUserRequest extends BaseRequestParam {
 
-    @NotBlank(message = "租户名不能为空")
-    @Schema(description = "租户名")
-    private String name;
+    @NotBlank(message = "租户ID不能为空")
+    @Schema(description = "租户ID")
+    private Long tenantId;
 
-    @NotBlank(message = "联系人不能为空")
-    @Schema(description = "租户联系人姓名")
-    private String contactName;
+    @NotBlank(message = "用户账号不能为空")
+    @Schema(description = "用户账号")
+    private String username;
 
-    @Schema(description = "租户联系人手机号")
-    private String contractPhone;
+    @NotBlank(message = "用户昵称不能为空")
+    @Schema(description = "用户昵称")
+    private String nickname;
 
-    @Schema(description = "租户联系人邮箱")
-    private String contractEmail;
+    @Schema(description = "备注")
+    private String remark;
 
-    @NotBlank(message = "appId不能为空")
-    @Schema(description = "租户AppId")
-    private String appId;
+    @Schema(description = "邮箱")
+    private String email;
 
-    @NotNull(message = "过期时间不能为空")
-    @Schema(description = "租户过期时间")
-    private LocalDateTime expireTime;
+    @Schema(description = "手机号")
+    private String mobile;
+
 }

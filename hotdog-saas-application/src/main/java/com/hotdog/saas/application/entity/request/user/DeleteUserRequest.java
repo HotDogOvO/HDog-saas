@@ -7,11 +7,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-@Schema(name = "删除租户DTO", description = "删除租户DTO")
+@Schema(name = "删除用户DTO", description = "删除用户DTO")
 public class DeleteUserRequest extends BaseRequestParam {
 
-    @NotNull(message = "租户ID不能为空")
-    @Schema(description = "租户ID")
+    @NotNull(message = "用户ID不能为空")
+    @Schema(description = "用户ID")
     private Long id;
 
 }

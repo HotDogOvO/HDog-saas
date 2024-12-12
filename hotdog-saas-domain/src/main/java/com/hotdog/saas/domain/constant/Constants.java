@@ -9,6 +9,10 @@ public class Constants {
 
     public static final String HTTP_POST = "POST";
 
+    public static final String DEFAULT_PASSWORD = "123456";
+
+    public static final String DEFAULT_AVATAR = "avatar.jpg";
+
     // ======================= SYSTEM PATH =======================
     // 工作目录
     public static final String PROJECT_WORK_PATH = System.getProperty("user.dir");

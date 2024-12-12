@@ -7,11 +7,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-@Schema(name = "查询租户DTO", description = "查询租户DTO")
+@Schema(name = "查询用户DTO", description = "查询用户DTO")
 public class QueryUserRequest extends BaseRequestParam {
 
-    @NotNull(message = "租户ID不能为空")
-    @Schema(description = "租户ID")
+    @NotNull(message = "用户ID不能为空")
+    @Schema(description = "用户ID")
     private Long id;
 
 }

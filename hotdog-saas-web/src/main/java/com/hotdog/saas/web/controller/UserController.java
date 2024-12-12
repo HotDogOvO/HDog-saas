@@ -1,10 +1,6 @@
 package com.hotdog.saas.web.controller;
 
-import com.hotdog.saas.application.entity.request.user.CreateUserRequest;
-import com.hotdog.saas.application.entity.request.user.DeleteUserRequest;
-import com.hotdog.saas.application.entity.request.user.QueryUserRequest;
-import com.hotdog.saas.application.entity.request.user.UpdateUserRequest;
-import com.hotdog.saas.application.entity.request.user.UserPageRequest;
+import com.hotdog.saas.application.entity.request.user.*;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.user.UserDTO;
@@ -52,6 +48,12 @@ public class UserController {
     @PostMapping("/update")
     public BaseResponse<Boolean> updateUser(@RequestBody @Validated UpdateUserRequest updateUserRequest) {
         return userFacade.updateUser(updateUserRequest);
+    }
+
+    @Operation(summary = "修改密码")
+    @PostMapping("/change-password")
+    public BaseResponse<Boolean> changePassword(@RequestBody @Validated ChangePasswordRequest changePasswordRequest) {
+        return userFacade.changePassword(changePasswordRequest);
     }
 
     @Operation(summary = "删除用户")

@@ -1,50 +1,68 @@
 package com.hotdog.saas.domain.model;
 
-import java.time.LocalDateTime;
-
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
-public class Tenant extends BaseModel{
+public class User extends BaseModel{
 
+    /**
+     * 用户ID
+     */
     private Long id;
 
     /**
-     * 租户名
+     * 租户ID
      */
-    private String name;
+    private Long tenantId;
 
     /**
-     * 联系人姓名
+     * 用户账号
      */
-    private String contactName;
+    private String username;
 
     /**
-     * 联系人手机号
+     * 密码
      */
-    private String contractPhone;
+    private String password;
 
     /**
-     * 联系人邮箱
+     * 用户昵称
      */
-    private String contractEmail;
+    private String nickname;
 
     /**
-     * appId
+     * 备注
      */
-    private String appId;
+    private String remark;
 
     /**
-     * app秘钥
+     * 用户邮箱
      */
-    private String appSecret;
+    private String email;
 
     /**
-     * 过期时间
+     * 手机号码
      */
-    private LocalDateTime expireTime;
+    private String mobile;
+
+    /**
+     * 头像地址
+     */
+    private String avatar;
+
+    /**
+     * 最后登录IP
+     */
+    private String loginIp;
+
+    /**
+     * 最后登录时间
+     */
+    private LocalDateTime loginDate;
 
     /**
      * 状态（0正常 1停用）

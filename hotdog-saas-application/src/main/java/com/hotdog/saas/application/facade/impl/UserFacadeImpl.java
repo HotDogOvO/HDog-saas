@@ -1,10 +1,6 @@
 package com.hotdog.saas.application.facade.impl;
 
-import com.hotdog.saas.application.entity.request.user.CreateUserRequest;
-import com.hotdog.saas.application.entity.request.user.DeleteUserRequest;
-import com.hotdog.saas.application.entity.request.user.QueryUserRequest;
-import com.hotdog.saas.application.entity.request.user.UpdateUserRequest;
-import com.hotdog.saas.application.entity.request.user.UserPageRequest;
+import com.hotdog.saas.application.entity.request.user.*;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.user.UserDTO;
@@ -31,6 +27,11 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public BaseResponse<Boolean> updateUser(UpdateUserRequest updateUserRequest) {
+        return null;
+    }
+
+    @Override
+    public BaseResponse<Boolean> changePassword(ChangePasswordRequest changePasswordRequest) {
         return null;
     }
 
