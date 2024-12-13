@@ -1,16 +1,11 @@
 package com.hotdog.saas.application.processor.user;
 
-import com.hotdog.saas.application.assembler.TenantAssembler;
 import com.hotdog.saas.application.assembler.UserAssembler;
-import com.hotdog.saas.application.entity.request.tenate.TenantPageRequest;
 import com.hotdog.saas.application.entity.request.user.UserPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
-import com.hotdog.saas.application.entity.response.tenate.TenantDTO;
 import com.hotdog.saas.application.entity.response.user.UserDTO;
-import com.hotdog.saas.application.processor.tenant.AbstractTenantProcessor;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
-import com.hotdog.saas.domain.model.Tenant;
 import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
@@ -23,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class UserListProcess extends AbstractUserProcessor<UserPageRequest, BaseResponse<PageResponseDTO<UserDTO>>> {
+public class UserListProcessor extends AbstractUserProcessor<UserPageRequest, BaseResponse<PageResponseDTO<UserDTO>>> {
 
     @Override
     public BaseResponse<PageResponseDTO<UserDTO>> initResult() {

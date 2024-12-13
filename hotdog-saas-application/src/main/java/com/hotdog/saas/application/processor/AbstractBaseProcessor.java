@@ -1,6 +1,6 @@
 package com.hotdog.saas.application.processor;
 
-public abstract class AbstractBaseProcess {
+public abstract class AbstractBaseProcessor {
 
     /**
      * 检查数据库操作是否成功

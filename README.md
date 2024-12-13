@@ -86,7 +86,7 @@
                    |- enums (系统枚举)
                    |- exception (系统异常)
                    |- model (领域模型)
-                   |- repository (存储层接口，多DB功能预留)
+                   |- repository (存储层接口)
                    |- service (业务实现接口)
                         |- impl (具体业务逻辑实现)
                    |- utils (系统工具类)
@@ -99,7 +99,7 @@
                         |- init (系统初始化操作)
                    |- dao (MybatisPlus实现)
                    |- entity (DO，和数据库表一对一对应)
-                   |- repository (repository实现，做参数转换（DO转PO)，多DB功能预留）
+                   |- repository (repository实现，做参数转换（DO转PO)，处理缓存）
          |- resources
               |- mapper（sql实现）
          |-pom.xml

@@ -109,28 +109,10 @@ public class User {
     private String operator;
 
     /**
-     * 生成密码（密码+盐）
-     */
-    public void generatorPassword(String password) {
-        this.password = SignUtils.md5(password + this.salt);
-    }
-
-    /**
      * 生成密码盐
      */
     public void generatorSalt() {
         this.salt = SignUtils.uuid();
-    }
-
-    /**
-     * 校验密码
-     *
-     * @param password 待校验的密码
-     * @return boolean
-     */
-    public Boolean checkPassword(String password) {
-        String hashPassword = SignUtils.md5(password + this.salt);
-        return StringUtils.equals(hashPassword, this.password);
     }
 
 }

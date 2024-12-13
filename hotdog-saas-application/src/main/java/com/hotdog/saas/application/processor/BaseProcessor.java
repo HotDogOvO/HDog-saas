@@ -4,10 +4,10 @@ package com.hotdog.saas.application.processor;
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.template.BizProcessorTemplate;
+import com.hotdog.saas.domain.cache.RedisCacheService;
 import com.hotdog.saas.domain.constant.Constants;
 
 import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
@@ -17,10 +17,10 @@ import java.util.function.Supplier;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class BaseProcess {
+public class BaseProcessor {
 
     @Autowired
-    private RedissonClient redissonClient;
+    private RedisCacheService redisCacheService;
 
     /**
      * 业务执行器
@@ -45,7 +45,7 @@ public class BaseProcess {
         // 加锁
         RLock lock = null;
         if (Objects.nonNull(isLock) && isLock && Objects.nonNull(lockKey)) {
-            lock = this.redissonClient.getLock(lockKey.get());
+            lock = this.redisCacheService.getLock(lockKey.get());
         }
 
         try {

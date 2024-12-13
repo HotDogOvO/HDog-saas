@@ -5,53 +5,53 @@ import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.user.UserDTO;
 import com.hotdog.saas.application.facade.UserFacade;
-import com.hotdog.saas.application.processor.BaseProcess;
-import com.hotdog.saas.application.processor.user.UserChangePasswordProcess;
-import com.hotdog.saas.application.processor.user.UserCreateProcess;
-import com.hotdog.saas.application.processor.user.UserDeleteProcess;
-import com.hotdog.saas.application.processor.user.UserDetailProcess;
-import com.hotdog.saas.application.processor.user.UserListProcess;
-import com.hotdog.saas.application.processor.user.UserUpdateProcess;
+import com.hotdog.saas.application.processor.BaseProcessor;
+import com.hotdog.saas.application.processor.user.UserChangePasswordProcessor;
+import com.hotdog.saas.application.processor.user.UserCreateProcessor;
+import com.hotdog.saas.application.processor.user.UserDeleteProcessor;
+import com.hotdog.saas.application.processor.user.UserDetailProcessor;
+import com.hotdog.saas.application.processor.user.UserListProcessor;
+import com.hotdog.saas.application.processor.user.UserUpdateProcessor;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserFacadeImpl extends BaseProcess implements UserFacade {
+public class UserFacadeImpl extends BaseProcessor implements UserFacade {
 
-    private final UserCreateProcess userCreateProcess;
-    private final UserListProcess userListProcess;
-    private final UserDetailProcess userDetailProcess;
-    private final UserUpdateProcess userUpdateProcess;
-    private final UserChangePasswordProcess userChangePasswordProcess;
-    private final UserDeleteProcess userDeleteProcess;
+    private final UserCreateProcessor userCreateProcessor;
+    private final UserListProcessor userListProcessor;
+    private final UserDetailProcessor userDetailProcessor;
+    private final UserUpdateProcessor userUpdateProcessor;
+    private final UserChangePasswordProcessor userChangePasswordProcess;
+    private final UserDeleteProcessor userDeleteProcessor;
 
-    public UserFacadeImpl(UserCreateProcess userCreateProcess, UserListProcess userListProcess, UserDetailProcess userDetailProcess, UserUpdateProcess userUpdateProcess, UserChangePasswordProcess userChangePasswordProcess, UserDeleteProcess userDeleteProcess) {
-        this.userCreateProcess = userCreateProcess;
-        this.userListProcess = userListProcess;
-        this.userDetailProcess = userDetailProcess;
-        this.userUpdateProcess = userUpdateProcess;
+    public UserFacadeImpl(UserCreateProcessor userCreateProcessor, UserListProcessor userListProcessor, UserDetailProcessor userDetailProcessor, UserUpdateProcessor userUpdateProcessor, UserChangePasswordProcessor userChangePasswordProcess, UserDeleteProcessor userDeleteProcessor) {
+        this.userCreateProcessor = userCreateProcessor;
+        this.userListProcessor = userListProcessor;
+        this.userDetailProcessor = userDetailProcessor;
+        this.userUpdateProcessor = userUpdateProcessor;
         this.userChangePasswordProcess = userChangePasswordProcess;
-        this.userDeleteProcess = userDeleteProcess;
+        this.userDeleteProcessor = userDeleteProcessor;
     }
 
     @Override
     public BaseResponse<Boolean> createUser(CreateUserRequest createUserRequest) {
-        return this.doBiz(createUserRequest, userCreateProcess, false, () -> "");
+        return this.doBiz(createUserRequest, userCreateProcessor, false, () -> "");
     }
 
     @Override
     public BaseResponse<PageResponseDTO<UserDTO>> userListPage(UserPageRequest userPageRequest) {
-        return this.doBiz(userPageRequest, userListProcess, false, () -> "");
+        return this.doBiz(userPageRequest, userListProcessor, false, () -> "");
     }
 
     @Override
     public BaseResponse<UserDTO> userDetail(QueryUserRequest queryUserRequest) {
-        return this.doBiz(queryUserRequest, userDetailProcess, false, () -> "");
+        return this.doBiz(queryUserRequest, userDetailProcessor, false, () -> "");
     }
 
     @Override
     public BaseResponse<Boolean> updateUser(UpdateUserRequest updateUserRequest) {
-        return this.doBiz(updateUserRequest, userUpdateProcess, false, () -> "");
+        return this.doBiz(updateUserRequest, userUpdateProcessor, false, () -> "");
     }
 
     @Override
@@ -61,6 +61,6 @@ public class UserFacadeImpl extends BaseProcess implements UserFacade {
 
     @Override
     public BaseResponse<Boolean> deleteUser(DeleteUserRequest deleteUserRequest) {
-        return this.doBiz(deleteUserRequest, userDeleteProcess, false, () -> "");
+        return this.doBiz(deleteUserRequest, userDeleteProcessor, false, () -> "");
     }
 }

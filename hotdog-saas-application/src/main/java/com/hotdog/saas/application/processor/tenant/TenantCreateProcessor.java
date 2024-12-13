@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class TenantCreateProcess extends AbstractTenantProcessor<CreateTenantRequest, BaseResponse<Boolean>> {
+public class TenantCreateProcessor extends AbstractTenantProcessor<CreateTenantRequest, BaseResponse<Boolean>> {
 
     @Override
     public BaseResponse<Boolean> initResult() {

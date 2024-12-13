@@ -1,25 +1,26 @@
 package com.hotdog.saas.application.processor.user;
 
-import com.hotdog.saas.application.assembler.TenantAssembler;
 import com.hotdog.saas.application.assembler.UserAssembler;
-import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
 import com.hotdog.saas.application.entity.request.user.CreateUserRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.processor.tenant.AbstractTenantProcessor;
-import com.hotdog.saas.domain.config.ProjectConfig;
 import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
-import com.hotdog.saas.domain.exception.BusinessException;
-import com.hotdog.saas.domain.model.Tenant;
 import com.hotdog.saas.domain.model.User;
-import com.hotdog.saas.domain.utils.SignUtils;
+import com.hotdog.saas.domain.service.PasswordService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
-public class UserCreateProcess extends AbstractUserProcessor<CreateUserRequest, BaseResponse<Boolean>> {
+public class UserCreateProcessor extends AbstractUserProcessor<CreateUserRequest, BaseResponse<Boolean>> {
+
+    private final PasswordService passwordService;
+
+    public UserCreateProcessor(PasswordService passwordService) {
+        this.passwordService = passwordService;
+    }
 
     @Override
     public BaseResponse<Boolean> initResult() {
@@ -45,7 +46,8 @@ public class UserCreateProcess extends AbstractUserProcessor<CreateUserRequest, 
         // 生成盐
         user.generatorSalt();
         // 生成密码
-        user.generatorPassword(Constants.DEFAULT_PASSWORD);
+        String password = passwordService.generatorPassword(Constants.DEFAULT_PASSWORD, user.getSalt());
+        user.setPassword(password);
 
         user.setAvatar(Constants.DEFAULT_AVATAR);
         return user;

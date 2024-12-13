@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class TenantListProcess extends AbstractTenantProcessor<TenantPageRequest, BaseResponse<PageResponseDTO<TenantDTO>>> {
+public class TenantListProcessor extends AbstractTenantProcessor<TenantPageRequest, BaseResponse<PageResponseDTO<TenantDTO>>> {
 
     @Override
     public BaseResponse<PageResponseDTO<TenantDTO>> initResult() {

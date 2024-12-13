@@ -1,7 +1,7 @@
 package com.hotdog.saas.application.processor.tenant;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
-import com.hotdog.saas.application.processor.AbstractBaseProcess;
+import com.hotdog.saas.application.processor.AbstractBaseProcessor;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.repository.TenantRepository;
@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import io.micrometer.common.util.StringUtils;
 
-public abstract class AbstractTenantProcessor<Req extends BaseRequestParam, Resp extends BaseResponse<?>> extends AbstractBaseProcess implements BizProcessorTemplate<Req, Resp> {
+public abstract class AbstractTenantProcessor<Req extends BaseRequestParam, Resp extends BaseResponse<?>> extends AbstractBaseProcessor implements BizProcessorTemplate<Req, Resp> {
 
     @Autowired
     protected TenantRepository tenantRepository;

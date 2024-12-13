@@ -2,24 +2,18 @@ package com.hotdog.saas.application.processor.user;
 
 import com.hotdog.saas.application.assembler.UserAssembler;
 import com.hotdog.saas.application.entity.request.user.QueryUserRequest;
-import com.hotdog.saas.application.entity.request.user.UserPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.user.UserDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.User;
-import com.hotdog.saas.domain.model.page.PageRequest;
-import com.hotdog.saas.domain.model.page.PageResponse;
 
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class UserDetailProcess extends AbstractUserProcessor<QueryUserRequest, BaseResponse<UserDTO>> {
+public class UserDetailProcessor extends AbstractUserProcessor<QueryUserRequest, BaseResponse<UserDTO>> {
 
     @Override
     public BaseResponse<UserDTO> initResult() {

@@ -1,21 +1,16 @@
 package com.hotdog.saas.application.processor.tenant;
 
-import com.hotdog.saas.application.assembler.TenantAssembler;
-import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.DeleteTenantRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.domain.config.ProjectConfig;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
-import com.hotdog.saas.domain.exception.BusinessException;
-import com.hotdog.saas.domain.model.Tenant;
-import com.hotdog.saas.domain.utils.SignUtils;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
-public class TenantDeleteProcess extends AbstractTenantProcessor<DeleteTenantRequest, BaseResponse<Boolean>> {
+public class TenantDeleteProcessor extends AbstractTenantProcessor<DeleteTenantRequest, BaseResponse<Boolean>> {
 
     @Override
     public BaseResponse<Boolean> initResult() {

@@ -8,56 +8,56 @@ import com.hotdog.saas.application.entity.request.tenate.UpdateTenantRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.tenate.TenantDTO;
 import com.hotdog.saas.application.facade.TenantFacade;
-import com.hotdog.saas.application.processor.tenant.TenantCreateProcess;
-import com.hotdog.saas.application.processor.tenant.TenantDeleteProcess;
-import com.hotdog.saas.application.processor.tenant.TenantDetailProcess;
-import com.hotdog.saas.application.processor.tenant.TenantListProcess;
-import com.hotdog.saas.application.processor.BaseProcess;
+import com.hotdog.saas.application.processor.tenant.TenantCreateProcessor;
+import com.hotdog.saas.application.processor.tenant.TenantDeleteProcessor;
+import com.hotdog.saas.application.processor.tenant.TenantDetailProcessor;
+import com.hotdog.saas.application.processor.tenant.TenantListProcessor;
+import com.hotdog.saas.application.processor.BaseProcessor;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 
-import com.hotdog.saas.application.processor.tenant.TenantUpdateProcess;
+import com.hotdog.saas.application.processor.tenant.TenantUpdateProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TenantFacadeImpl extends BaseProcess implements TenantFacade {
+public class TenantFacadeImpl extends BaseProcessor implements TenantFacade {
 
-    private final TenantCreateProcess tenantCreateProcess;
-    private final TenantListProcess tenantListProcess;
-    private final TenantDetailProcess tenantDetailProcess;
-    private final TenantUpdateProcess tenantUpdateProcess;
-    private final TenantDeleteProcess tenantDeleteProcess;
+    private final TenantCreateProcessor tenantCreateProcessor;
+    private final TenantListProcessor tenantListProcessor;
+    private final TenantDetailProcessor tenantDetailProcessor;
+    private final TenantUpdateProcessor tenantUpdateProcessor;
+    private final TenantDeleteProcessor tenantDeleteProcessor;
 
-    public TenantFacadeImpl(TenantCreateProcess tenantCreateProcess, TenantListProcess tenantListProcess, TenantDetailProcess tenantDetailProcess, TenantUpdateProcess tenantUpdateProcess, TenantDeleteProcess tenantDeleteProcess) {
-        this.tenantCreateProcess = tenantCreateProcess;
-        this.tenantListProcess = tenantListProcess;
-        this.tenantDetailProcess = tenantDetailProcess;
-        this.tenantUpdateProcess = tenantUpdateProcess;
-        this.tenantDeleteProcess = tenantDeleteProcess;
+    public TenantFacadeImpl(TenantCreateProcessor tenantCreateProcessor, TenantListProcessor tenantListProcessor, TenantDetailProcessor tenantDetailProcessor, TenantUpdateProcessor tenantUpdateProcessor, TenantDeleteProcessor tenantDeleteProcessor) {
+        this.tenantCreateProcessor = tenantCreateProcessor;
+        this.tenantListProcessor = tenantListProcessor;
+        this.tenantDetailProcessor = tenantDetailProcessor;
+        this.tenantUpdateProcessor = tenantUpdateProcessor;
+        this.tenantDeleteProcessor = tenantDeleteProcessor;
     }
 
     @Override
     public BaseResponse<Boolean> createTenant(CreateTenantRequest createTenantRequest) {
-        return this.doBiz(createTenantRequest, tenantCreateProcess, false, () -> "");
+        return this.doBiz(createTenantRequest, tenantCreateProcessor, false, () -> "");
     }
 
     @Override
     public BaseResponse<PageResponseDTO<TenantDTO>> tenantListPage(TenantPageRequest tenantPageRequest) {
-        return this.doBiz(tenantPageRequest, tenantListProcess, false, () -> "");
+        return this.doBiz(tenantPageRequest, tenantListProcessor, false, () -> "");
     }
 
     @Override
     public BaseResponse<TenantDTO> tenantDetail(QueryTenantRequest queryTenantRequest) {
-        return this.doBiz(queryTenantRequest, tenantDetailProcess, false, () -> "");
+        return this.doBiz(queryTenantRequest, tenantDetailProcessor, false, () -> "");
     }
 
     @Override
     public BaseResponse<Boolean> updateTenant(UpdateTenantRequest updateTenantRequest) {
-        return this.doBiz(updateTenantRequest, tenantUpdateProcess, false, () -> "");
+        return this.doBiz(updateTenantRequest, tenantUpdateProcessor, false, () -> "");
     }
 
     @Override
     public BaseResponse<Boolean> deleteTenant(DeleteTenantRequest deleteTenantRequest) {
-        return this.doBiz(deleteTenantRequest, tenantDeleteProcess, false, () -> "");
+        return this.doBiz(deleteTenantRequest, tenantDeleteProcessor, false, () -> "");
     }
 
 }
