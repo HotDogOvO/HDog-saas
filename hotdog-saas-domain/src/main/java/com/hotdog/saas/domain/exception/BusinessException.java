@@ -20,4 +20,10 @@ public class BusinessException extends RuntimeException {
         this.resultCode = resultCodeEnum;
         this.message = message;
     }
+
+    public BusinessException(String message) {
+        super(ResultCodeEnum.FAIL.getCode());
+        this.message = message;
+        this.resultCode = ResultCodeEnum.FAIL;
+    }
 }

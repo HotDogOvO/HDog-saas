@@ -37,9 +37,13 @@ public class BaseProcess {
                                                                                       final BizProcessorTemplate<Req, Resp> processor,
                                                                                       Boolean isLock,
                                                                                       Supplier<String> lockKey) {
+        // 参数校验
+        req.validate();
+        // 初始化返回值
         final Resp result = processor.initResult();
-        RLock lock = null;
 
+        // 加锁
+        RLock lock = null;
         if (Objects.nonNull(isLock) && isLock && Objects.nonNull(lockKey)) {
             lock = this.redissonClient.getLock(lockKey.get());
         }
@@ -48,6 +52,7 @@ public class BaseProcess {
             if (Objects.nonNull(lock)) {
                 lock.lock(Constants.LOCK_TIME_SECONDS, TimeUnit.SECONDS);
             }
+            // 业务执行
             processor.execute(req, result);
         } finally {
             if (Objects.nonNull(lock) && lock.isHeldByCurrentThread()) {

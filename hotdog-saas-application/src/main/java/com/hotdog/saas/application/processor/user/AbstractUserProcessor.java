@@ -33,7 +33,7 @@ public abstract class AbstractUserProcessor<Req extends BaseRequestParam, Resp e
             return;
         }
         Long count = userRepository.exists(id);
-        if (count > 0) {
+        if (count == 0) {
             throw new BusinessException(ResultCodeEnum.FAIL, "用户不存在");
         }
     }

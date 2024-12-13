@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Tenant extends BaseModel{
+public class Tenant {
 
     private Long id;
 
@@ -75,5 +75,10 @@ public class Tenant extends BaseModel{
      * 创建时间
      */
     private LocalDateTime updateTime;
+
+    /**
+     * 操作人
+     */
+    private String operator;
 
 }

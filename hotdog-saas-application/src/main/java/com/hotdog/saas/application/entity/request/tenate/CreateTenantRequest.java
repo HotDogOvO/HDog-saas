@@ -34,4 +34,9 @@ public class CreateTenantRequest extends BaseRequestParam {
     @NotNull(message = "过期时间不能为空")
     @Schema(description = "租户过期时间")
     private LocalDateTime expireTime;
+
+    @Override
+    public void validate() {
+
+    }
 }

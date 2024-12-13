@@ -14,4 +14,8 @@ public class DeleteUserRequest extends BaseRequestParam {
     @Schema(description = "用户ID")
     private Long id;
 
+    @Override
+    public void validate() {
+
+    }
 }

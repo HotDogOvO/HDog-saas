@@ -13,7 +13,7 @@ import lombok.Data;
 @Schema(name = "创建用户DTO", description = "创建用户DTO")
 public class CreateUserRequest extends BaseRequestParam {
 
-    @NotBlank(message = "租户ID不能为空")
+    @NotNull(message = "租户ID不能为空")
     @Schema(description = "租户ID")
     private Long tenantId;
 
@@ -34,4 +34,8 @@ public class CreateUserRequest extends BaseRequestParam {
     @Schema(description = "手机号")
     private String mobile;
 
+    @Override
+    public void validate() {
+
+    }
 }

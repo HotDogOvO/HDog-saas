@@ -14,4 +14,8 @@ public class DeleteTenantRequest extends BaseRequestParam {
     @Schema(description = "租户ID")
     private Long id;
 
+    @Override
+    public void validate() {
+
+    }
 }

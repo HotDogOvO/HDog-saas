@@ -1,6 +1,11 @@
 package com.hotdog.saas.application.entity.request.user;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
+import com.hotdog.saas.domain.enums.ResultCodeEnum;
+import com.hotdog.saas.domain.exception.BusinessException;
+
+import org.apache.commons.lang3.StringUtils;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,4 +31,11 @@ public class ChangePasswordRequest extends BaseRequestParam {
     @Schema(description = "校验密码")
     private String checkPassword;
 
+    @Override
+    public void validate() {
+        // 原密码与新密码校验
+        if(!StringUtils.equals(newPassword, checkPassword)) {
+            throw new BusinessException("新密码校验不一致，请检查后重试");
+        }
+    }
 }

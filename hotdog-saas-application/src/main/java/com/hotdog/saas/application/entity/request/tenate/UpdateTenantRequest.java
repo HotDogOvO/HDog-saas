@@ -34,4 +34,8 @@ public class UpdateTenantRequest extends BaseRequestParam {
     @Schema(description = "租户状态（0正常 1停用）")
     private Integer status;
 
+    @Override
+    public void validate() {
+
+    }
 }

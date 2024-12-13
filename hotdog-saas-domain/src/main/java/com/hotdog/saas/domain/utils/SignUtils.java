@@ -19,8 +19,16 @@ public class SignUtils {
      * @return 租户secret
      */
     public static String generatorAppSecret(String appSecret) throws Exception {
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        return aesEncrypt(uuid, appSecret);
+        return aesEncrypt(uuid(), appSecret);
+    }
+
+    /**
+     * 生成一个UUID
+     *
+     * @return uuid
+     */
+    public static String uuid() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
     /**
@@ -36,29 +44,41 @@ public class SignUtils {
         return sha256(signStr);
     }
 
+    /**
+     * sha256加密
+     *
+     * @param str 待加密串
+     * @return 加密串
+     */
     public static String sha256(String str) {
         try {
-            // 获取 SHA-256 的 MessageDigest 实例
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-
-            // 将输入字符串转换为字节数组
-            byte[] hashBytes = digest.digest(str.getBytes());
-
-            // 将字节数组转换为十六进制字符串
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hashBytes) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-
-            return hexString.toString();
+            return hashString(digest, str);
         } catch (NoSuchAlgorithmException e) {
-            // 如果算法不存在
             throw new RuntimeException("SHA-256 algorithm not available", e);
         }
+    }
+
+    public static String md5(String str) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            return hashString(digest, str);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-256 algorithm not available", e);
+        }
+    }
+
+    private static String hashString(MessageDigest digest, String str) {
+        byte[] hashBytes = digest.digest(str.getBytes());
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hashBytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
     /**

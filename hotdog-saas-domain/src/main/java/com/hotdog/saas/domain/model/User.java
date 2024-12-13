@@ -1,5 +1,9 @@
 package com.hotdog.saas.domain.model;
 
+import com.hotdog.saas.domain.utils.SignUtils;
+
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -7,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class User extends BaseModel{
+public class User {
 
     /**
      * 用户ID
@@ -28,6 +32,11 @@ public class User extends BaseModel{
      * 密码
      */
     private String password;
+
+    /**
+     * 盐
+     */
+    private String salt;
 
     /**
      * 用户昵称
@@ -93,5 +102,35 @@ public class User extends BaseModel{
      * 创建时间
      */
     private LocalDateTime updateTime;
+
+    /**
+     * 操作人
+     */
+    private String operator;
+
+    /**
+     * 生成密码（密码+盐）
+     */
+    public void generatorPassword(String password) {
+        this.password = SignUtils.md5(password + this.salt);
+    }
+
+    /**
+     * 生成密码盐
+     */
+    public void generatorSalt() {
+        this.salt = SignUtils.uuid();
+    }
+
+    /**
+     * 校验密码
+     *
+     * @param password 待校验的密码
+     * @return boolean
+     */
+    public Boolean checkPassword(String password) {
+        String hashPassword = SignUtils.md5(password + this.salt);
+        return StringUtils.equals(hashPassword, this.password);
+    }
 
 }

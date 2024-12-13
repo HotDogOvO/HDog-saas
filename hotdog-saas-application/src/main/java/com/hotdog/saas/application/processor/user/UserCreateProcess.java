@@ -42,10 +42,12 @@ public class UserCreateProcess extends AbstractUserProcessor<CreateUserRequest, 
 
     private User buildUser(CreateUserRequest request) {
         User user = UserAssembler.INSTANCE.convert(request);
-        String password = SignUtils.sha256(Constants.DEFAULT_PASSWORD);
-        user.setPassword(password);
-        user.setAvatar(Constants.DEFAULT_AVATAR);
+        // 生成盐
+        user.generatorSalt();
+        // 生成密码
+        user.generatorPassword(Constants.DEFAULT_PASSWORD);
 
+        user.setAvatar(Constants.DEFAULT_AVATAR);
         return user;
     }
 

@@ -10,8 +10,6 @@ public enum ResultCodeEnum {
     // 成功
     SUCCESS("success", "请求成功"),
 
-
-
     // 系统异常
     DATABASE_UPDATE_FAIL("database_update_fail", "数据库升级异常"),
     TIMESTAMP_INVALID("timestamp_invalid", "时间戳非法"),

@@ -48,6 +48,11 @@ public class UserDO implements Serializable {
     private String password;
 
     /**
+     * 密码盐
+     */
+    private String salt;
+
+    /**
      * 用户昵称
      */
     private String nickname;
