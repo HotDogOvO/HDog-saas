@@ -4,8 +4,8 @@ import com.hotdog.saas.application.assembler.LoginAssembler;
 import com.hotdog.saas.application.entity.request.login.LoginRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.login.LoginDTO;
-import com.hotdog.saas.domain.core.auth.AuthService;
-import com.hotdog.saas.domain.core.cache.RedisCacheService;
+import com.hotdog.saas.domain.foundation.AuthService;
+import com.hotdog.saas.domain.foundation.RedisCacheService;
 import com.hotdog.saas.domain.constant.RedisConstants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
@@ -14,7 +14,6 @@ import com.hotdog.saas.domain.repository.LoginRepository;
 import com.hotdog.saas.domain.repository.UserRepository;
 import com.hotdog.saas.domain.service.PasswordService;
 
-import com.hotdog.saas.domain.utils.SignUtils;
 import org.springframework.stereotype.Component;
 
 import io.micrometer.common.util.StringUtils;

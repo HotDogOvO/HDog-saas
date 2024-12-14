@@ -1,7 +1,7 @@
-package com.hotdog.saas.infra.core.init;
+package com.hotdog.saas.infra.init;
 
-import com.hotdog.saas.infra.core.init.database.AbstractDataBaseUpdateExecute;
-import com.hotdog.saas.infra.core.init.database.DataBaseUpdateFactory;
+import com.hotdog.saas.infra.init.database.AbstractDataBaseUpdateExecute;
+import com.hotdog.saas.infra.init.database.DataBaseUpdateFactory;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

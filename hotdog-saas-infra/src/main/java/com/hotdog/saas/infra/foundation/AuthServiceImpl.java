@@ -1,8 +1,7 @@
-package com.hotdog.saas.infra.core.auth;
+package com.hotdog.saas.infra.foundation;
 
-import com.alibaba.fastjson2.JSONObject;
 import com.hotdog.saas.domain.config.JwtConfig;
-import com.hotdog.saas.domain.core.auth.AuthService;
+import com.hotdog.saas.domain.foundation.AuthService;
 import com.hotdog.saas.domain.model.Login;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

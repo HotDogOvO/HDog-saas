@@ -1,4 +1,4 @@
-package com.hotdog.saas.domain.core.cache;
+package com.hotdog.saas.domain.foundation;
 
 import org.redisson.api.RLock;
 

@@ -4,7 +4,7 @@ package com.hotdog.saas.application.processor;
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.template.BizProcessorTemplate;
-import com.hotdog.saas.domain.core.cache.RedisCacheService;
+import com.hotdog.saas.domain.foundation.RedisCacheService;
 import com.hotdog.saas.domain.constant.Constants;
 
 import org.redisson.api.RLock;

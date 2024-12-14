@@ -46,6 +46,7 @@
 + DO与model转换
 + 存储层具体实现
 + 提供数据库对象
++ 项目初始化
 
 ```
 |- hdog-saas
@@ -85,6 +86,7 @@
                    |- constant (系统常量)
                    |- enums (系统枚举)
                    |- exception (系统异常)
+                   |- foundation（基础模块，缓存、认证等）
                    |- model (领域模型)
                    |- repository (存储层接口)
                    |- service (业务实现接口)
@@ -95,10 +97,10 @@
          |- src/main/java
               |- com.hotdog.saas.infra (主包路径)
                    |- converter (PO和DO转换（使用mapstruct）)
-                   |- core (系统核心层)
-                        |- init (系统初始化操作)
                    |- dao (MybatisPlus实现)
                    |- entity (DO，和数据库表一对一对应)
+                   |- foundation（基础模块，缓存、认证等）
+                   |- init (系统初始化操作)
                    |- repository (repository实现，做参数转换（DO转PO)，处理缓存）
          |- resources
               |- mapper（sql实现）

@@ -1,4 +1,4 @@
-package com.hotdog.saas.infra.core.init.database;
+package com.hotdog.saas.infra.init.database;
 
 import com.hotdog.saas.domain.enums.DataBaseEnum;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;

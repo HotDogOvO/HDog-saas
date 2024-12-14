@@ -1,4 +1,4 @@
-package com.hotdog.saas.infra.core.init.database;
+package com.hotdog.saas.infra.init.database;
 
 import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.model.SystemProperties;

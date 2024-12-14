@@ -1,4 +1,4 @@
-package com.hotdog.saas.domain.core.auth;
+package com.hotdog.saas.domain.foundation;
 
 import com.hotdog.saas.domain.model.Login;
 
