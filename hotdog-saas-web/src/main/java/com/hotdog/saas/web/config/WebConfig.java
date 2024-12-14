@@ -23,10 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     };
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SignInterceptor(ProjectConfig.appSecret, needValidSign))
+        registry.addInterceptor(new SignInterceptor(ProjectConfig.APP_SECRET, needValidSign))
                 .addPathPatterns("/**")
                 .excludePathPatterns(EXCLUDE_PATTERN_URL);
     }

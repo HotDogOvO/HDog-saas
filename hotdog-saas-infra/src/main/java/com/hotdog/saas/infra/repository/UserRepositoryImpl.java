@@ -2,15 +2,12 @@ package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hotdog.saas.domain.cache.RedisCacheService;
-import com.hotdog.saas.domain.constant.RedisConstants;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 import com.hotdog.saas.domain.repository.UserRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
-import com.hotdog.saas.infra.cache.RedisCacheServiceImpl;
 import com.hotdog.saas.infra.converter.UserConverter;
 import com.hotdog.saas.infra.dao.UserMapper;
 import com.hotdog.saas.infra.entity.UserDO;

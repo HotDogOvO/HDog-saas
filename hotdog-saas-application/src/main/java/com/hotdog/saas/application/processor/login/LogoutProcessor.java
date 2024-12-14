@@ -2,23 +2,28 @@ package com.hotdog.saas.application.processor.login;
 
 import com.hotdog.saas.application.entity.request.login.LogoutRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.entity.response.login.LoginDTO;
-import com.hotdog.saas.domain.cache.RedisCacheService;
+import com.hotdog.saas.domain.core.auth.AuthService;
+import com.hotdog.saas.domain.core.cache.RedisCacheService;
 import com.hotdog.saas.domain.constant.RedisConstants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 
+import com.hotdog.saas.domain.model.Login;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class LogoutProcessor extends AbstractLoginProcessor<LogoutRequest, BaseResponse<Boolean>>{
+public class LogoutProcessor extends AbstractLoginProcessor<LogoutRequest, BaseResponse<Boolean>> {
 
     private final RedisCacheService redisCacheService;
 
-    public LogoutProcessor(RedisCacheService redisCacheService) {
+    private final AuthService authService;
+
+    public LogoutProcessor(RedisCacheService redisCacheService, AuthService authService) {
         this.redisCacheService = redisCacheService;
+        this.authService = authService;
     }
 
     @Override
@@ -31,8 +36,13 @@ public class LogoutProcessor extends AbstractLoginProcessor<LogoutRequest, BaseR
 
     @Override
     public void doExecute(LogoutRequest request, BaseResponse<Boolean> response) {
-        // todo 校验
-        redisCacheService.delete(RedisConstants.getUserKey(request.getToken()));
+        String token = request.getToken();
+        authService.verifyToken(token);
+        String username = authService.extractUsername(token);
+        if (StringUtils.isNotEmpty(username)) {
+            redisCacheService.delete(RedisConstants.getUserKey(username));
+        }
+
         response.setData(Boolean.TRUE);
     }
 }

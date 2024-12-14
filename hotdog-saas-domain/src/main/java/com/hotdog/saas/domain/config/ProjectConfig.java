@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ProjectConfig {
 
-    public static String appSecret;
+    public static String APP_SECRET;
 
     @Value("${project.secret}")
     public void setAppSecret(String appSecret) {
-        ProjectConfig.appSecret = appSecret;
+        ProjectConfig.APP_SECRET = appSecret;
     }
 }

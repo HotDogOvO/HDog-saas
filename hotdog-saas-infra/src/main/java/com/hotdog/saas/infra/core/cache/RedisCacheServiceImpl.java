@@ -1,7 +1,7 @@
-package com.hotdog.saas.infra.cache;
+package com.hotdog.saas.infra.core.cache;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.hotdog.saas.domain.cache.RedisCacheService;
+import com.hotdog.saas.domain.core.cache.RedisCacheService;
 
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;

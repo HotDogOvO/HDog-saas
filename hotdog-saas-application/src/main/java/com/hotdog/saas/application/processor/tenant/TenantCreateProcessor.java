@@ -41,7 +41,7 @@ public class TenantCreateProcessor extends AbstractTenantProcessor<CreateTenantR
     private Tenant buildTenant(CreateTenantRequest createTenantRequest) {
         Tenant tenant = TenantAssembler.INSTANCE.convert(createTenantRequest);
         try {
-            tenant.setAppSecret(SignUtils.generatorAppSecret(ProjectConfig.appSecret));
+            tenant.setAppSecret(SignUtils.generatorAppSecret(ProjectConfig.APP_SECRET));
         } catch (Exception e) {
             log.error("创建租户失败，生成appSecret异常，{}", e.getMessage(), e);
             throw new BusinessException(ResultCodeEnum.FAIL);
