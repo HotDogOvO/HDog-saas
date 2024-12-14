@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName("tenant")
+@TableName("t_tenant")
 public class TenantDO implements Serializable {
 
     @Serial

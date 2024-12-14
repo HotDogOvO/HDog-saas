@@ -37,6 +37,7 @@
         <bootstrap.version>4.2.0</bootstrap.version>
         <alibaba.cloud.version>2023.0.3.2</alibaba.cloud.version>
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
+        <velocity.version>2.3</velocity.version>
         <mysql.version>8.0.22</mysql.version>
         <redis.version>3.40.0</redis.version>
         <mapstruct.version>1.6.3</mapstruct.version>
@@ -114,6 +115,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
 
             <!-- mysql -->

@@ -5,29 +5,28 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户信息表
+ * 角色信息表
  * </p>
  *
  * @author hotdog
- * @since 2024-12-12 18:42:49
+ * @since 2024-12-14 21:40:04
  */
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
-@TableName("t_user")
-public class UserDO implements Serializable {
+@TableName("t_role")
+public class RoleDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户ID
+     * 角色ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
@@ -38,54 +37,14 @@ public class UserDO implements Serializable {
     private Long tenantId;
 
     /**
-     * 用户账号
+     * 角色名
      */
-    private String username;
-
-    /**
-     * 密码
-     */
-    private String password;
-
-    /**
-     * 密码盐
-     */
-    private String salt;
-
-    /**
-     * 用户昵称
-     */
-    private String nickname;
+    private String name;
 
     /**
      * 备注
      */
     private String remark;
-
-    /**
-     * 用户邮箱
-     */
-    private String email;
-
-    /**
-     * 手机号码
-     */
-    private String mobile;
-
-    /**
-     * 头像地址
-     */
-    private String avatar;
-
-    /**
-     * 最后登录IP
-     */
-    private String loginIp;
-
-    /**
-     * 最后登录时间
-     */
-    private LocalDateTime loginDate;
 
     /**
      * 状态（0正常 1停用）

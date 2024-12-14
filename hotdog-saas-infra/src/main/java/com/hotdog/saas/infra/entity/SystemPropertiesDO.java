@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("system_properties")
+@TableName("t_system_properties")
 public class SystemPropertiesDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
