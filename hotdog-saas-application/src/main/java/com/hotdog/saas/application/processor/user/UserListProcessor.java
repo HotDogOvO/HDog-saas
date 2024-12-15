@@ -6,6 +6,7 @@ import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.user.UserDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
+import com.hotdog.saas.domain.model.Role;
 import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
@@ -37,6 +38,11 @@ public class UserListProcessor extends AbstractUserProcessor<UserPageRequest, Ba
         PageResponse<List<User>> listPageResponse = userRepository.listPage(user, pageRequest);
 
         PageResponseDTO<UserDTO> userPageResponseDTO = UserAssembler.INSTANCE.convertPage(listPageResponse);
+
+        userPageResponseDTO.getData().forEach(x -> {
+            List<Role> userRoleList = super.findUserRole(x.getId());
+            super.setUserRoleName(userRoleList, x);
+        });
         response.setData(userPageResponseDTO);
     }
 

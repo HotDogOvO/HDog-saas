@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -17,6 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 @TableName("t_user_role")
 public class UserRoleDO implements Serializable {
 

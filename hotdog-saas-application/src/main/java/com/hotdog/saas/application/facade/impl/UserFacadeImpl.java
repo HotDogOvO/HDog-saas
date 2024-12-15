@@ -6,12 +6,7 @@ import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.user.UserDTO;
 import com.hotdog.saas.application.facade.UserFacade;
 import com.hotdog.saas.application.processor.BaseProcessor;
-import com.hotdog.saas.application.processor.user.UserChangePasswordProcessor;
-import com.hotdog.saas.application.processor.user.UserCreateProcessor;
-import com.hotdog.saas.application.processor.user.UserDeleteProcessor;
-import com.hotdog.saas.application.processor.user.UserDetailProcessor;
-import com.hotdog.saas.application.processor.user.UserListProcessor;
-import com.hotdog.saas.application.processor.user.UserUpdateProcessor;
+import com.hotdog.saas.application.processor.user.*;
 
 import org.springframework.stereotype.Component;
 
@@ -23,14 +18,16 @@ public class UserFacadeImpl extends BaseProcessor implements UserFacade {
     private final UserDetailProcessor userDetailProcessor;
     private final UserUpdateProcessor userUpdateProcessor;
     private final UserChangePasswordProcessor userChangePasswordProcess;
+    private final UserPermissionProcessor userPermissionProcessor;
     private final UserDeleteProcessor userDeleteProcessor;
 
-    public UserFacadeImpl(UserCreateProcessor userCreateProcessor, UserListProcessor userListProcessor, UserDetailProcessor userDetailProcessor, UserUpdateProcessor userUpdateProcessor, UserChangePasswordProcessor userChangePasswordProcess, UserDeleteProcessor userDeleteProcessor) {
+    public UserFacadeImpl(UserCreateProcessor userCreateProcessor, UserListProcessor userListProcessor, UserDetailProcessor userDetailProcessor, UserUpdateProcessor userUpdateProcessor, UserChangePasswordProcessor userChangePasswordProcess, UserPermissionProcessor userPermissionProcessor, UserDeleteProcessor userDeleteProcessor) {
         this.userCreateProcessor = userCreateProcessor;
         this.userListProcessor = userListProcessor;
         this.userDetailProcessor = userDetailProcessor;
         this.userUpdateProcessor = userUpdateProcessor;
         this.userChangePasswordProcess = userChangePasswordProcess;
+        this.userPermissionProcessor = userPermissionProcessor;
         this.userDeleteProcessor = userDeleteProcessor;
     }
 
@@ -57,6 +54,11 @@ public class UserFacadeImpl extends BaseProcessor implements UserFacade {
     @Override
     public BaseResponse<Boolean> changePassword(ChangePasswordRequest changePasswordRequest) {
         return this.doBiz(changePasswordRequest, userChangePasswordProcess, false, () -> "");
+    }
+
+    @Override
+    public BaseResponse<Boolean> userPermission(PermissionUserRequest permissionUserRequest) {
+        return this.doBiz(permissionUserRequest, userPermissionProcessor, false, () -> "");
     }
 
     @Override

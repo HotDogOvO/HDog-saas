@@ -16,6 +16,8 @@ public interface UserFacade {
 
     BaseResponse<Boolean> changePassword(ChangePasswordRequest changePasswordRequest);
 
+    BaseResponse<Boolean> userPermission(PermissionUserRequest permissionUserRequest);
+
     BaseResponse<Boolean> deleteUser(DeleteUserRequest deleteUserRequest);
 
 }

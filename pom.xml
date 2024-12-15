@@ -47,6 +47,7 @@
         <logback.version>1.5.12</logback.version>
         <fastjson.version>2.0.53</fastjson.version>
         <jwt.version>0.12.6</jwt.version>
+        <guava.version>33.3.1-jre</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -194,6 +195,13 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-jackson</artifactId>
                 <version>${jwt.version}</version>
+            </dependency>
+
+            <!-- guava工具类 -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

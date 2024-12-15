@@ -2,6 +2,7 @@ package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.common.collect.Lists;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.Role;
 import com.hotdog.saas.domain.model.page.PageRequest;
@@ -11,6 +12,7 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.RoleConverter;
 import com.hotdog.saas.infra.dao.RoleMapper;
 import com.hotdog.saas.infra.entity.RoleDO;
+import io.jsonwebtoken.lang.Collections;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -58,6 +60,17 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
     }
 
     @Override
+    public List<Role> findByIdList(List<Long> idList) {
+        if(Collections.isEmpty(idList)){
+            return Lists.newArrayList();
+        }
+        LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(RoleDO::getId, idList);
+        List<RoleDO> roleDOList = roleMapper.selectList(queryWrapper);
+        return roleDOList.stream().map(RoleConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
     public Long exists(Long id) {
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(RoleDO::getDeleted, DeleteEnum.NO.getCode())
@@ -69,6 +82,17 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
     public Long existsByName(String name) {
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(RoleDO::getDeleted, DeleteEnum.NO.getCode()).eq(RoleDO::getName, name);
+        return roleMapper.selectCount(queryWrapper);
+    }
+
+    @Override
+    public Long countByIdList(List<Long> idList) {
+        // todo Collections工具类更换
+        if(Collections.isEmpty(idList)){
+            return 0L;
+        }
+        LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(RoleDO::getId, idList);
         return roleMapper.selectCount(queryWrapper);
     }
 

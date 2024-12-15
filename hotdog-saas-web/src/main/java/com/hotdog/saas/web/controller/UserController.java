@@ -56,6 +56,12 @@ public class UserController {
         return userFacade.changePassword(changePasswordRequest);
     }
 
+    @Operation(summary = "授权")
+    @PostMapping("/permission")
+    public BaseResponse<Boolean> userPermission(@RequestBody @Validated PermissionUserRequest permissionUserRequest) {
+        return userFacade.userPermission(permissionUserRequest);
+    }
+
     @Operation(summary = "删除用户")
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteUser(@RequestBody @Validated DeleteUserRequest deleteUserRequest) {

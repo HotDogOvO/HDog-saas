@@ -1,5 +1,6 @@
 package com.hotdog.saas.domain.exception;
 
+import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class BusinessException extends RuntimeException {
 
     public BusinessException(String message) {
         super(ResultCodeEnum.FAIL.getCode());
-        this.message = message;
+        this.message = ResultCodeEnum.FAIL.getMessage() + Constants.CN_COMMA + message;
         this.resultCode = ResultCodeEnum.FAIL;
     }
 }

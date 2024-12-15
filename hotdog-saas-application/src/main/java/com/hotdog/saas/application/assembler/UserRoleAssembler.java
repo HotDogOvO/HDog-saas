@@ -17,17 +17,12 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface UserAssembler {
+public interface UserRoleAssembler {
 
-    UserAssembler INSTANCE = Mappers.getMapper(UserAssembler.class);
+    UserRoleAssembler INSTANCE = Mappers.getMapper(UserRoleAssembler.class);
 
-    User convert(CreateUserRequest createUserRequest);
-
-    User convert(UserPageRequest userPageRequest);
-
-    User convert(UpdateUserRequest updateUserRequest);
-
-    PageResponseDTO<UserDTO> convertPage(PageResponse<List<User>> pageResponse);
-
-    UserDTO convertToDTO(User user);
+    @Mappings(
+            @Mapping(source = "id", target = "userId")
+    )
+    UserRole convert(PermissionUserRequest permissionUserRequest);
 }
