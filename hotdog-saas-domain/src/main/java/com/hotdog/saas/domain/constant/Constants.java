@@ -20,6 +20,13 @@ public class Constants {
     /** 默认菜单icon */
     public static final String DEFAULT_MENU_ICON = "default";
 
+    /** token请求头 */
+    public static final String HEADER_TOKEN_KEY = "Authorization";
+
+    public static final String[] TOKEN_EXCLUDE_PATTERN_URL = new String[]{
+            "/api/hotdog/v1/login"
+    };
+
     // ======================= SYSTEM PATH =======================
     /** 工作目录 */
     public static final String PROJECT_WORK_PATH = System.getProperty("user.dir");

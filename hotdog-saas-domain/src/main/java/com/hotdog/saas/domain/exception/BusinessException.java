@@ -9,11 +9,12 @@ import lombok.Getter;
 public class BusinessException extends RuntimeException {
 
     private final ResultCodeEnum resultCode;
-    private String message;
+    private final String message;
 
     public BusinessException(ResultCodeEnum resultCodeEnum) {
         super(resultCodeEnum.getCode());
         this.resultCode = resultCodeEnum;
+        this.message = resultCodeEnum.getMessage();
     }
 
     public BusinessException(ResultCodeEnum resultCodeEnum, String message) {
