@@ -3,18 +3,22 @@ package com.hotdog.saas.infra.foundation;
 import com.hotdog.saas.domain.config.JwtConfig;
 import com.hotdog.saas.domain.foundation.AuthService;
 import com.hotdog.saas.domain.model.Login;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+
 import java.util.*;
 
 @Slf4j
 @Component
 public class AuthServiceImpl implements AuthService {
 
+    private static final String USER_ID_KEY = "userId";
     private static final String TENANT_ID_KEY = "tenantId";
     private static final String USER_NAME_KEY = "username";
     private static final String NICK_NAME_KEY = "nickname";
@@ -28,6 +32,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String generateToken(Login login) {
         HashMap<String, Object> payLoad = new HashMap<>(8);
+        payLoad.put(USER_ID_KEY, login.getId());
         payLoad.put(TENANT_ID_KEY, login.getTenantId());
         payLoad.put(USER_NAME_KEY, login.getUsername());
         payLoad.put(NICK_NAME_KEY, login.getNickname());

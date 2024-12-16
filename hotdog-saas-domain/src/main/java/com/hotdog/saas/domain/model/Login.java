@@ -14,6 +14,11 @@ import lombok.Data;
 public class Login {
 
     /**
+     * 用户ID
+     */
+    private Long id;
+
+    /**
      * 租户ID
      */
     private Long tenantId;

@@ -1,5 +1,7 @@
 package com.hotdog.saas.infra.repository;
 
+import com.google.common.collect.Sets;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.hotdog.saas.domain.model.RoleMenu;
 import com.hotdog.saas.domain.repository.RoleMenuRepository;
@@ -12,7 +14,10 @@ import com.hotdog.saas.infra.entity.UserRoleDO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class RoleMenuRepositoryImpl extends AbstractBaseRepository implements RoleMenuRepository {
@@ -41,6 +46,17 @@ public class RoleMenuRepositoryImpl extends AbstractBaseRepository implements Ro
         lambdaQueryWrapper.eq(RoleMenuDO::getRoleId, roleId);
         List<RoleMenuDO> roleMenuDOList = roleMenuMapper.selectList(lambdaQueryWrapper);
         return roleMenuDOList.stream().map(RoleMenuConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
+    public Set<RoleMenu> findByRoleIdList(List<Long> roleIdList) {
+        if(CollectionUtils.isEmpty(roleIdList)) {
+            return Sets.newHashSet();
+        }
+        LambdaQueryWrapper<RoleMenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(RoleMenuDO::getRoleId, roleIdList);
+        List<RoleMenuDO> roleMenuDOList = roleMenuMapper.selectList(lambdaQueryWrapper);
+        return roleMenuDOList.stream().map(RoleMenuConverter.INSTANCE::convert).collect(Collectors.toSet());
     }
 
     @Override

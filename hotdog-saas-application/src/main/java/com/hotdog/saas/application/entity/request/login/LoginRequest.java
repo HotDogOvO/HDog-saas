@@ -18,6 +18,9 @@ public class LoginRequest extends BaseRequestParam {
     @Schema(description = "密码")
     private String password;
 
+    @Schema(description = "登录IP")
+    private String loginIp;
+
     @Override
     public void validate() {
 
