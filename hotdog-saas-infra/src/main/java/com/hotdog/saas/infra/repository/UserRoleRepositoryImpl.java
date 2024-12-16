@@ -1,16 +1,13 @@
 package com.hotdog.saas.infra.repository;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.google.common.collect.Lists;
 import com.hotdog.saas.domain.model.UserRole;
 import com.hotdog.saas.domain.repository.UserRoleRepository;
 import com.hotdog.saas.infra.converter.UserRoleConverter;
 import com.hotdog.saas.infra.dao.UserRoleMapper;
-import com.hotdog.saas.infra.entity.UserDO;
 import com.hotdog.saas.infra.entity.UserRoleDO;
-import io.jsonwebtoken.lang.Collections;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class UserRoleRepositoryImpl extends AbstractBaseRepository implements Us
 
     @Override
     public Integer save(UserRole userRole) {
-        if(Collections.isEmpty(userRole.getRoleIdList())) {
+        if(CollectionUtils.isEmpty(userRole.getRoleIdList())) {
             return 0;
         }
         Long userId = userRole.getUserId();

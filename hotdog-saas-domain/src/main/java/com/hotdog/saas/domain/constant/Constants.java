@@ -17,6 +17,9 @@ public class Constants {
     /** 默认头像 */
     public static final String DEFAULT_AVATAR = "avatar.jpg";
 
+    /** 默认菜单icon */
+    public static final String DEFAULT_MENU_ICON = "default";
+
     // ======================= SYSTEM PATH =======================
     /** 工作目录 */
     public static final String PROJECT_WORK_PATH = System.getProperty("user.dir");

@@ -25,9 +25,9 @@ public class MybatisPlusGenerator {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addInclude("t_user_role")
+                        .addInclude("t_menu")
                         .addTablePrefix("t_")
-                        .entityBuilder().enableLombok().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel).formatFileName("%sPO")
+                        .entityBuilder().enableLombok().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel).formatFileName("%sDO")
                         .serviceBuilder().disable()
                         .controllerBuilder().disable()
                 )

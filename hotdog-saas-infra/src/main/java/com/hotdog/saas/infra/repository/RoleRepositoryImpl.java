@@ -12,8 +12,8 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.RoleConverter;
 import com.hotdog.saas.infra.dao.RoleMapper;
 import com.hotdog.saas.infra.entity.RoleDO;
-import io.jsonwebtoken.lang.Collections;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -61,7 +61,7 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
 
     @Override
     public List<Role> findByIdList(List<Long> idList) {
-        if(Collections.isEmpty(idList)){
+        if(CollectionUtils.isEmpty(idList)){
             return Lists.newArrayList();
         }
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
@@ -87,8 +87,7 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
 
     @Override
     public Long countByIdList(List<Long> idList) {
-        // todo Collections工具类更换
-        if(Collections.isEmpty(idList)){
+        if(CollectionUtils.isEmpty(idList)){
             return 0L;
         }
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
@@ -112,6 +111,5 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
                 .setUpdater(operator)
                 .setUpdateTime(DateUtils.now());;
         return roleMapper.updateById(roleDO);
-
     }
 }
