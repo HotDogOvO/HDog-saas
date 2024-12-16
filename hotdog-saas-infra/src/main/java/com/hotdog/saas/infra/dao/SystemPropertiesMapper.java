@@ -1,6 +1,6 @@
 package com.hotdog.saas.infra.dao;
 
-import com.hotdog.saas.infra.entity.po.SystemPropertiesPO;
+import com.hotdog.saas.infra.entity.SystemPropertiesDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-12-09 09:58:22
  */
 @Mapper
-public interface SystemPropertiesMapper extends BaseMapper<SystemPropertiesPO> {
+public interface SystemPropertiesMapper extends BaseMapper<SystemPropertiesDO> {
 
 }

@@ -1,7 +1,7 @@
 package com.hotdog.saas.infra.converter;
 
 import com.hotdog.saas.domain.model.Tenant;
-import com.hotdog.saas.infra.entity.po.TenantPO;
+import com.hotdog.saas.infra.entity.TenantDO;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -11,7 +11,7 @@ public interface TenantConverter {
 
     TenantConverter INSTANCE = Mappers.getMapper(TenantConverter.class);
 
-    TenantPO convert2PO(Tenant tenant);
+    TenantDO convert2DO(Tenant tenant);
 
-    Tenant convert(TenantPO tenantPO);
+    Tenant convert(TenantDO tenantDO);
 }

@@ -1,82 +1,50 @@
 package com.hotdog.saas.application.entity.response.tenate;
 
-
 import java.time.LocalDateTime;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
+@Schema(name = "租户返回DTO", description = "租户返回DTO")
 public class TenantDTO {
 
-    /**
-     * 租户ID
-     */
-    private Integer id;
+    @Schema(description = "租户ID")
+    private Long id;
 
-    /**
-     * 租户名
-     */
+    @Schema(description = "租户名")
     private String name;
 
-    /**
-     * 联系人姓名
-     */
+    @Schema(description = "联系人姓名")
     private String contactName;
 
-    /**
-     * 联系人手机号
-     */
+    @Schema(description = "联系人手机号")
     private String contractPhone;
 
-    /**
-     * 联系人邮箱
-     */
+    @Schema(description = "联系人邮箱")
     private String contractEmail;
 
-    /**
-     * appId
-     */
+    @Schema(description = "appId")
     private String appId;
 
-    /**
-     * app秘钥
-     */
-    private String appSecret;
-
-    /**
-     * 过期时间
-     */
+    @Schema(description = "过期时间")
     private LocalDateTime expireTime;
 
-    /**
-     * 状态（0正常 1停用）
-     */
-    private Boolean status;
+    @Schema(description = "状态（0正常 1停用）")
+    private Integer status;
 
-    /**
-     * 是否删除（0 正常 1 删除）
-     */
-    private Boolean deleted;
-
-    /**
-     * 创建人
-     */
+    @Schema(description = "创建人")
     private String creator;
 
-    /**
-     * 创建时间
-     */
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    /**
-     * 更新人
-     */
+    @Schema(description = "更新人")
     private String updater;
 
-    /**
-     * 创建时间
-     */
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
+
 }

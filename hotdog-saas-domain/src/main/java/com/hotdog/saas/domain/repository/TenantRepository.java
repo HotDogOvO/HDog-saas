@@ -8,7 +8,19 @@ import java.util.List;
 
 public interface TenantRepository {
 
-    int save(Tenant tenant);
+    Integer save(Tenant tenant);
 
     PageResponse<List<Tenant>> listPage(Tenant tenant, PageRequest pageRequest);
+
+    Tenant findById(Long id);
+
+    Long exists(Long id);
+
+    Long existsByName(String name);
+
+    Long existsByAppId(String appId);
+
+    Integer modify(Tenant tenant);
+
+    Integer remove(Long id, String operator);
 }
