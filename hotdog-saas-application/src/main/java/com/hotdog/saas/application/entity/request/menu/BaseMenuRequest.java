@@ -8,12 +8,14 @@ import com.hotdog.saas.domain.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class BaseMenuRequest extends BaseRequestParam {
 
+    @NotEmpty(message = "权限标识不能为空")
     @Schema(description = "权限标识")
     private String permission;
 
@@ -31,12 +33,6 @@ public class BaseMenuRequest extends BaseRequestParam {
             case MENU -> {
                 if (StringUtils.isEmpty(path)) {
                     throw new BusinessException(ResultCodeEnum.PARAMS_INVALID, "菜单路由地址不能为空");
-                }
-            }
-
-            case ACTION -> {
-                if (StringUtils.isEmpty(permission)) {
-                    throw new BusinessException(ResultCodeEnum.PARAMS_INVALID, "权限标识不能为空");
                 }
             }
 

@@ -58,7 +58,16 @@ public class UserDTO {
     @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 
-    @Schema(description = "用户角色名集合")
-    private List<String> roleNameList;
+    @Schema(description = "用户角色")
+    private List<UserRoleDTO> roleList;
 
+    @Data
+    @Builder
+    public static class UserRoleDTO {
+        @Schema(description = "角色ID")
+        private Long roleId;
+
+        @Schema(description = "角色名")
+        private String roleName;
+    }
 }

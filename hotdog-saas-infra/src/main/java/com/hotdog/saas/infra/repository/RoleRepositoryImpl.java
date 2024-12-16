@@ -12,6 +12,8 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.RoleConverter;
 import com.hotdog.saas.infra.dao.RoleMapper;
 import com.hotdog.saas.infra.entity.RoleDO;
+import com.hotdog.saas.infra.entity.UserDO;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -41,6 +43,7 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
     public PageResponse<List<Role>> listPage(Role role, PageRequest pageRequest) {
         Page<RoleDO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(RoleDO::getTenantId, role.getTenantId());
         queryWrapper.eq(RoleDO::getDeleted, DeleteEnum.NO.getCode());
         queryWrapper.orderByDesc(RoleDO::getCreateTime);
 

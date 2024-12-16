@@ -41,7 +41,7 @@ public class UserListProcessor extends AbstractUserProcessor<UserPageRequest, Ba
 
         userPageResponseDTO.getData().forEach(x -> {
             List<Role> userRoleList = super.findUserRole(x.getId());
-            super.setUserRoleName(userRoleList, x);
+            super.setUserRole(userRoleList, x);
         });
         response.setData(userPageResponseDTO);
     }

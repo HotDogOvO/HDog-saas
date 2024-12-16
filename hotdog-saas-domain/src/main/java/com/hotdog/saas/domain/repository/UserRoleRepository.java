@@ -10,5 +10,7 @@ public interface UserRoleRepository {
 
     List<UserRole> findByUserId(Long userId);
 
+    List<UserRole> findByRoleId(Long roleId);
+
     Integer removeByUserId(Long userId);
 }

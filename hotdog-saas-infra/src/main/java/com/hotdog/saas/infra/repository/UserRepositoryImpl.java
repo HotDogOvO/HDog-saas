@@ -39,6 +39,7 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
     public PageResponse<List<User>> listPage(User user, PageRequest pageRequest) {
         Page<UserDO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserDO::getTenantId, user.getTenantId());
         queryWrapper.eq(UserDO::getDeleted, DeleteEnum.NO.getCode());
         queryWrapper.orderByDesc(UserDO::getCreateTime);
 

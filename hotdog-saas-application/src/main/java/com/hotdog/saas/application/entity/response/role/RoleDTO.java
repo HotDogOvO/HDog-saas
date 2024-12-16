@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -37,4 +38,17 @@ public class RoleDTO {
 
     @Schema(description = "更新时间")
     private LocalDateTime updateTime;
+
+    @Schema(description = "角色权限集合")
+    private List<RoleMenuDTO> roleMenuList;
+
+    @Data
+    @Builder
+    public static class RoleMenuDTO {
+        @Schema(description = "权限名")
+        private String name;
+
+        @Schema(description = "权限code")
+        private String permission;
+    }
 }

@@ -1,6 +1,7 @@
 package com.hotdog.saas.web.controller;
 
 import com.hotdog.saas.application.entity.request.role.*;
+import com.hotdog.saas.application.entity.request.user.PermissionUserRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.role.RoleDTO;
@@ -47,6 +48,13 @@ public class RoleController {
     public BaseResponse<Boolean> updateRole(@RequestBody @Validated UpdateRoleRequest updateRoleRequest) {
         return roleFacade.updateRole(updateRoleRequest);
     }
+
+    @Operation(summary = "授权")
+    @PostMapping("/permission")
+    public BaseResponse<Boolean> rolePermission(@RequestBody @Validated PermissionRoleRequest permissionRoleRequest) {
+        return roleFacade.rolePermission(permissionRoleRequest);
+    }
+
 
     @Operation(summary = "删除角色")
     @PostMapping("/delete")

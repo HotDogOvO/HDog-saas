@@ -16,12 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class LogoutProcessor extends AbstractLoginProcessor<LogoutRequest, BaseResponse<Boolean>> {
 
-    private final RedisCacheService redisCacheService;
-
     private final AuthService authService;
 
-    public LogoutProcessor(RedisCacheService redisCacheService, AuthService authService) {
-        this.redisCacheService = redisCacheService;
+    public LogoutProcessor(AuthService authService) {
         this.authService = authService;
     }
 
@@ -38,10 +35,7 @@ public class LogoutProcessor extends AbstractLoginProcessor<LogoutRequest, BaseR
         String token = request.getToken();
         authService.verifyToken(token);
         String username = authService.extractUsername(token);
-        if (StringUtils.isNotEmpty(username)) {
-            redisCacheService.delete(RedisConstants.getUserKey(username));
-        }
-
+        super.removeToken(username);
         response.setData(Boolean.TRUE);
     }
 }

@@ -31,6 +31,7 @@ public class MenuTreeProcessor extends AbstractMenuProcessor<MenuTreeRequest, Ba
 
         List<Menu> list = menuRepository.list(menu);
         list = super.buildMenuTree(list);
+        super.sortMenuTree(list);
         List<MenuDTO> menuDTOList = MenuAssembler.INSTANCE.convertList(list);
 
         response.setData(menuDTOList);

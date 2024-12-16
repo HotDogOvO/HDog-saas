@@ -15,6 +15,9 @@ import com.hotdog.saas.domain.model.Role;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
+import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -34,8 +37,10 @@ public class MenuDetailProcessor extends AbstractMenuProcessor<QueryMenuRequest,
         Long menuId = request.getId();
         super.exists(menuId);
         Menu menu = menuRepository.findById(menuId);
-        // 转树
-        menu = super.buildMenuTree(menu);
+
+        List<Menu> childrenMenu = menuRepository.findByParentId(menuId);
+        super.sortMenuTree(childrenMenu);
+        menu.setChildren(childrenMenu);
         MenuDTO menuDTO = MenuAssembler.INSTANCE.convertToDTO(menu);
         response.setData(menuDTO);
     }

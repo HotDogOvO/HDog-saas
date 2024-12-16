@@ -1,5 +1,7 @@
 package com.hotdog.saas.application.processor.user;
 
+import com.google.common.collect.Lists;
+
 import com.hotdog.saas.application.assembler.UserAssembler;
 import com.hotdog.saas.application.assembler.UserRoleAssembler;
 import com.hotdog.saas.application.entity.request.user.ChangePasswordRequest;
@@ -28,12 +30,10 @@ public class UserPermissionProcessor extends AbstractUserProcessor<PermissionUse
 
     private final UserRoleRepository userRoleRepository;
     private final RoleRepository roleRepository;
-    private final RedisCacheService redisCacheService;
 
-    public UserPermissionProcessor(UserRoleRepository userRoleRepository, RoleRepository roleRepository, RedisCacheService redisCacheService) {
+    public UserPermissionProcessor(UserRoleRepository userRoleRepository, RoleRepository roleRepository) {
         this.userRoleRepository = userRoleRepository;
         this.roleRepository = roleRepository;
-        this.redisCacheService = redisCacheService;
     }
 
     @Override
@@ -58,9 +58,7 @@ public class UserPermissionProcessor extends AbstractUserProcessor<PermissionUse
         Integer saveFlag = userRoleRepository.save(userRole);
 
         // 清空token，重新登录
-        // todo code review
-        User user = userRepository.findById(userId);
-        redisCacheService.delete(RedisConstants.getUserKey(user.getUsername()));
+        super.removeToken(Lists.newArrayList(userId));
 
         response.setData(checkFlag(saveFlag));
     }

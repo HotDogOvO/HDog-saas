@@ -39,7 +39,7 @@ public class UserDetailProcessor extends AbstractUserProcessor<QueryUserRequest,
 
         // 查询用户角色
         List<Role> userRoleList = super.findUserRole(userId);
-        super.setUserRoleName(userRoleList, userDTO);
+        super.setUserRole(userRoleList, userDTO);
 
         response.setData(userDTO);
     }

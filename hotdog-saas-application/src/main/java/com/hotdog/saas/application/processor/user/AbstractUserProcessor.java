@@ -12,16 +12,15 @@ import com.hotdog.saas.domain.model.UserRole;
 import com.hotdog.saas.domain.repository.RoleRepository;
 import com.hotdog.saas.domain.repository.UserRepository;
 import com.hotdog.saas.domain.repository.UserRoleRepository;
+
 import io.micrometer.common.util.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractUserProcessor<Req extends BaseRequestParam, Resp extends BaseResponse<?>> extends AbstractBaseProcessor implements BizProcessorTemplate<Req, Resp> {
-
-    @Autowired
-    protected UserRepository userRepository;
 
     @Autowired
     private UserRoleRepository userRoleRepository;
@@ -50,15 +49,17 @@ public abstract class AbstractUserProcessor<Req extends BaseRequestParam, Resp e
         }
     }
 
-    protected List<Role> findUserRole(Long userId){
+    protected List<Role> findUserRole(Long userId) {
         List<UserRole> userRoleList = userRoleRepository.findByUserId(userId);
         List<Long> roleIdList = userRoleList.stream().map(UserRole::getRoleId).toList();
         return roleRepository.findByIdList(roleIdList);
     }
 
-    protected void setUserRoleName(List<Role> roleList, UserDTO userDTO){
-        List<String> roleNameList = roleList.stream().map(Role::getName).toList();
-        userDTO.setRoleNameList(roleNameList);
+    protected void setUserRole(List<Role> roleList, UserDTO userDTO) {
+        List<UserDTO.UserRoleDTO> userRoleList = roleList.stream().map(x -> UserDTO.UserRoleDTO.builder()
+                .roleId(x.getId())
+                .roleName(x.getName()).build()).toList();
+        userDTO.setRoleList(userRoleList);
     }
 
 }

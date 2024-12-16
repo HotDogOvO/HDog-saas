@@ -41,6 +41,14 @@ public class UserRoleRepositoryImpl extends AbstractBaseRepository implements Us
     }
 
     @Override
+    public List<UserRole> findByRoleId(Long roleId) {
+        LambdaQueryWrapper<UserRoleDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(UserRoleDO::getRoleId, roleId);
+        List<UserRoleDO> userRoleDOList = userRoleMapper.selectList(lambdaQueryWrapper);
+        return userRoleDOList.stream().map(UserRoleConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
     public Integer removeByUserId(Long userId) {
         LambdaQueryWrapper<UserRoleDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(UserRoleDO::getUserId, userId);

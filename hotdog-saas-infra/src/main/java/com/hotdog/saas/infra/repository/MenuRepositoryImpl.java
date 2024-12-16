@@ -1,5 +1,7 @@
 package com.hotdog.saas.infra.repository;
 
+import com.google.common.collect.Lists;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.Menu;
@@ -8,11 +10,15 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.MenuConverter;
 import com.hotdog.saas.infra.dao.MenuMapper;
 import com.hotdog.saas.infra.entity.MenuDO;
+import com.hotdog.saas.infra.entity.RoleDO;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRepository {
@@ -25,8 +31,9 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
 
     @Override
     public List<Menu> list(Menu menu) {
-        LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        List<MenuDO> menuDOList = menuMapper.selectList(lambdaQueryWrapper);
+        LambdaQueryWrapper<MenuDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(MenuDO::getDeleted, DeleteEnum.NO.getCode());
+        List<MenuDO> menuDOList = menuMapper.selectList(queryWrapper);
         return menuDOList.stream().map(MenuConverter.INSTANCE::convert).toList();
     }
 
@@ -47,6 +54,25 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
     }
 
     @Override
+    public List<Menu> findByParentId(Long parentId) {
+        LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(MenuDO::getParentId, parentId);
+        List<MenuDO> menuDOList = menuMapper.selectList(lambdaQueryWrapper);
+        return menuDOList.stream().map(MenuConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
+    public List<Menu> findByIdList(Set<Long> idList) {
+        if (CollectionUtils.isEmpty(idList)) {
+            return Lists.newArrayList();
+        }
+        LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(MenuDO::getId, idList);
+        List<MenuDO> menuDOList = menuMapper.selectList(lambdaQueryWrapper);
+        return menuDOList.stream().map(MenuConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
     public Long exists(Long id) {
         LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(MenuDO::getId, id);
@@ -64,6 +90,16 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
     public Long existsByPermission(String permission) {
         LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(MenuDO::getPermission, permission);
+        return menuMapper.selectCount(lambdaQueryWrapper);
+    }
+
+    @Override
+    public Long countByIdList(List<Long> idList) {
+        if (CollectionUtils.isEmpty(idList)) {
+            return 0L;
+        }
+        LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(MenuDO::getId, idList);
         return menuMapper.selectCount(lambdaQueryWrapper);
     }
 

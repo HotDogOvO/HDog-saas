@@ -17,13 +17,15 @@ public class RoleFacadeImpl extends BaseProcessor implements RoleFacade {
     private final RoleDetailProcessor roleDetailProcessor;
     private final RoleUpdateProcessor roleUpdateProcessor;
     private final RoleDeleteProcessor roleDeleteProcessor;
+    private final RolePermissionProcessor rolePermissionProcessor;
 
-    public RoleFacadeImpl(RoleCreateProcessor roleCreateProcessor, RoleListProcessor roleListProcessor, RoleDetailProcessor roleDetailProcessor, RoleUpdateProcessor roleUpdateProcessor, RoleDeleteProcessor roleDeleteProcessor) {
+    public RoleFacadeImpl(RoleCreateProcessor roleCreateProcessor, RoleListProcessor roleListProcessor, RoleDetailProcessor roleDetailProcessor, RoleUpdateProcessor roleUpdateProcessor, RoleDeleteProcessor roleDeleteProcessor, RolePermissionProcessor rolePermissionProcessor) {
         this.roleCreateProcessor = roleCreateProcessor;
         this.roleListProcessor = roleListProcessor;
         this.roleDetailProcessor = roleDetailProcessor;
         this.roleUpdateProcessor = roleUpdateProcessor;
         this.roleDeleteProcessor = roleDeleteProcessor;
+        this.rolePermissionProcessor = rolePermissionProcessor;
     }
 
     @Override
@@ -44,6 +46,11 @@ public class RoleFacadeImpl extends BaseProcessor implements RoleFacade {
     @Override
     public BaseResponse<Boolean> updateRole(UpdateRoleRequest updateRoleRequest) {
         return this.doBiz(updateRoleRequest, roleUpdateProcessor, false, () -> "");
+    }
+
+    @Override
+    public BaseResponse<Boolean> rolePermission(PermissionRoleRequest permissionRoleRequest) {
+        return this.doBiz(permissionRoleRequest, rolePermissionProcessor, false, () -> "");
     }
 
     @Override

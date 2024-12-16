@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -58,11 +59,6 @@ public abstract class AbstractMenuProcessor<Req extends BaseRequestParam, Resp e
         }
     }
 
-    protected Menu buildMenuTree(Menu menu) {
-        List<Menu> menus = buildMenuTree(Lists.newArrayList(menu));
-        return CollectionUtils.isEmpty(menus) ? Menu.builder().build() : menus.get(0);
-    }
-
     protected List<Menu> buildMenuTree(List<Menu> menuList) {
         List<Menu> resultTree = new ArrayList<>();
 
@@ -84,6 +80,10 @@ public abstract class AbstractMenuProcessor<Req extends BaseRequestParam, Resp e
             }
         });
         return resultTree;
+    }
+
+    protected void sortMenuTree(List<Menu> menuList) {
+        menuList.sort(Comparator.comparing(Menu::getSort));
     }
 
 }

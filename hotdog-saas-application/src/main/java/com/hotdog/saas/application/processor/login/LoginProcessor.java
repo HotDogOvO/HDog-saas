@@ -25,18 +25,12 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
 
     private final LoginRepository loginRepository;
 
-    private final UserRepository userRepository;
-
-    private final RedisCacheService redisCacheService;
-
     private final PasswordService passwordService;
 
     private final AuthService authService;
 
-    public LoginProcessor(LoginRepository loginRepository, UserRepository userRepository, RedisCacheService redisCacheService, PasswordService passwordService, AuthService authService) {
+    public LoginProcessor(LoginRepository loginRepository, PasswordService passwordService, AuthService authService) {
         this.loginRepository = loginRepository;
-        this.userRepository = userRepository;
-        this.redisCacheService = redisCacheService;
         this.passwordService = passwordService;
         this.authService = authService;
     }
