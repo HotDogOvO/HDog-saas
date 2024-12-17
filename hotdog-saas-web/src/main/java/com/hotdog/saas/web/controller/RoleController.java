@@ -33,13 +33,13 @@ public class RoleController {
 
     @Operation(summary = "查询角色分页列表")
     @PostMapping("/list/page")
-    public BaseResponse<PageResponseDTO<RoleDTO>> RoleListPage(@RequestBody @Validated RolePageRequest RolePageRequest) {
+    public BaseResponse<PageResponseDTO<RoleDTO>> roleListPage(@RequestBody @Validated RolePageRequest RolePageRequest) {
         return roleFacade.roleListPage(RolePageRequest);
     }
 
     @Operation(summary = "查询角色详情")
     @PostMapping("/detail")
-    public BaseResponse<RoleDTO> RoleDetail(@RequestBody @Validated QueryRoleRequest queryRoleRequest) {
+    public BaseResponse<RoleDTO> roleDetail(@RequestBody @Validated QueryRoleRequest queryRoleRequest) {
         return roleFacade.roleDetail(queryRoleRequest);
     }
 

@@ -84,13 +84,4 @@ public class LoginLogDO implements Serializable {
      */
     private LocalDateTime createTime;
 
-    /**
-     * 更新人
-     */
-    private String updater;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime updateTime;
 }
