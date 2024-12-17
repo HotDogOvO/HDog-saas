@@ -22,11 +22,7 @@
     </licenses>
 
     <modules>
-        <module>hotdog-saas-start</module>
-        <module>hotdog-saas-web</module>
-        <module>hotdog-saas-domain</module>
-        <module>hotdog-saas-application</module>
-        <module>hotdog-saas-infra</module>
+        <module>hotdog-saas-tob</module>
     </modules>
 
     <properties>

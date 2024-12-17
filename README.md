@@ -1,19 +1,20 @@
 # HDog-saas
 
-## 功能说明
+## hotdog-saas-tob
+### 功能说明
 多租户小程序的B端功能
 
-## 代码层级说明
+### 代码层级说明
 
 系统采用DDD设计，具体说明如下
 
-### start
+#### start
 
 启动层
 
 + 只用来服务启动
 
-### web
+#### web
 
 接口层
 
@@ -22,7 +23,7 @@
 + 全局异常处理
 + 签名、token校验
 
-### application
+#### application
 
 交互编排层
 
@@ -30,7 +31,7 @@
 + 业务编排
 + model与DTO的转换
 
-### domain
+#### domain
 
 领域层，属于最底层
 
@@ -39,7 +40,7 @@
 + 提供领域对象
 + 提供常量、枚举、配置、工具类
 
-### infra
+#### infra
 
 基础设施层
 
@@ -49,7 +50,7 @@
 + 项目初始化
 
 ```
-|- hdog-saas
+|- hdog-saas-tob
     |-> hdog-saas-start （启动层）
          |- src/main/java
               |- com.hotdog.saas (主包路径)
