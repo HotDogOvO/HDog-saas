@@ -1,13 +1,17 @@
 package com.hotdog.saas.infra.foundation;
 
 import com.hotdog.saas.domain.config.JwtConfig;
+import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.foundation.AuthService;
 import com.hotdog.saas.domain.model.Login;
+import com.hotdog.saas.domain.utils.NetworkUtils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -52,8 +56,31 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String extractUsername(String token) {
+    public String extractToken() {
+        HttpServletRequest request = NetworkUtils.getRequest();
+        if (request == null) {
+            return StringUtils.EMPTY;
+        }
+        String token = request.getHeader(Constants.HEADER_TOKEN_KEY);
+        return StringUtils.isEmpty(token) ? StringUtils.EMPTY : token;
+    }
+
+    @Override
+    public String extractUsername() {
+        String token = extractToken();
+        if (StringUtils.isEmpty(token)) {
+            return StringUtils.EMPTY;
+        }
         return (String) getClaims(token).get(USER_NAME_KEY);
+    }
+
+    @Override
+    public Long extractTenantId() {
+        String token = extractToken();
+        if (StringUtils.isEmpty(token)) {
+            return 0L;
+        }
+        return (Long) getClaims(token).get(TENANT_ID_KEY);
     }
 
     private Claims getClaims(String token) {

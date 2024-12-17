@@ -13,71 +13,66 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 菜单表
+ * 登陆日志表
  * </p>
  *
  * @author hotdog
- * @since 2024-12-16 09:45:03
+ * @since 2024-12-17 13:16:10
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_menu")
-public class MenuDO implements Serializable {
+@TableName("t_login_log")
+public class LoginLogDO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
-     * 菜单ID
+     * 日志ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 父菜单ID
+     * 租户ID
      */
-    private Long parentId;
+    private Integer tenantId;
 
     /**
-     * 权限名称
+     * 用户名
      */
-    private String name;
+    private String username;
 
     /**
-     * 权限标识
+     * 日志类型
      */
-    private String permission;
+    private Byte logType;
 
     /**
-     * 菜单类型（1：菜单 2：按钮）
+     * 登录IP
      */
-    private Integer type;
+    private String loginIp;
 
     /**
-     * 显示顺序
+     * 登录时间
      */
-    private Integer sort;
+    private LocalDateTime loginDate;
 
     /**
-     * 路由地址
+     * UserAgent
      */
-    private String path;
+    private String userAgent;
 
     /**
-     * 菜单icon
+     * 是否成功（0：成功，1：失败）
      */
-    private String icon;
+    private Byte success;
 
     /**
-     * 状态（0正常 1停用）
+     * 失败原因
      */
-    private Integer status;
-
-    /**
-     * 是否删除（0 正常 1 删除）
-     */
-    private Integer deleted;
+    private String errorMessage;
 
     /**
      * 创建人

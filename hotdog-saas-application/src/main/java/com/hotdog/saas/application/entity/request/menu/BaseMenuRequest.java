@@ -1,7 +1,7 @@
 package com.hotdog.saas.application.entity.request.menu;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
-import com.hotdog.saas.domain.enums.MenuEnum;
+import com.hotdog.saas.domain.enums.menu.MenuEnum;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 

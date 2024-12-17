@@ -1,6 +1,5 @@
 package com.hotdog.saas.web.interceptor;
 
-import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.foundation.AuthService;
@@ -40,7 +39,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         try {
             if (needValidToken) {
-                String token = request.getHeader(Constants.HEADER_TOKEN_KEY);
+                String token = authService.extractToken();
                 if (StringUtils.isEmpty(token)) {
                     throw new BusinessException("token为空");
                 }

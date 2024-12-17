@@ -1,37 +1,39 @@
 package com.hotdog.saas.application.processor.login;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.hotdog.saas.application.assembler.LoginAssembler;
 import com.hotdog.saas.application.entity.request.login.LoginRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.login.LoginDTO;
+import com.hotdog.saas.application.service.LoginService;
+import com.hotdog.saas.domain.enums.log.LogSuccessEnum;
+import com.hotdog.saas.domain.enums.log.LogTypeEnum;
 import com.hotdog.saas.domain.foundation.AuthService;
-import com.hotdog.saas.domain.foundation.RedisCacheService;
 import com.hotdog.saas.domain.constant.RedisConstants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.Login;
+import com.hotdog.saas.domain.model.LoginLog;
 import com.hotdog.saas.domain.model.Menu;
 import com.hotdog.saas.domain.model.Role;
 import com.hotdog.saas.domain.model.RoleMenu;
-import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.UserRole;
 import com.hotdog.saas.domain.repository.LoginRepository;
 import com.hotdog.saas.domain.repository.MenuRepository;
 import com.hotdog.saas.domain.repository.RoleMenuRepository;
 import com.hotdog.saas.domain.repository.RoleRepository;
-import com.hotdog.saas.domain.repository.UserRepository;
 import com.hotdog.saas.domain.repository.UserRoleRepository;
 import com.hotdog.saas.domain.service.PasswordService;
 import com.hotdog.saas.domain.utils.DateUtils;
+import com.hotdog.saas.domain.utils.NetworkUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -52,7 +54,9 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
 
     private final AuthService authService;
 
-    public LoginProcessor(LoginRepository loginRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository, MenuRepository menuRepository, RoleMenuRepository roleMenuRepository, PasswordService passwordService, AuthService authService) {
+    private final LoginService loginService;
+
+    public LoginProcessor(LoginRepository loginRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository, MenuRepository menuRepository, RoleMenuRepository roleMenuRepository, PasswordService passwordService, AuthService authService, LoginService loginService) {
         this.loginRepository = loginRepository;
         this.roleRepository = roleRepository;
         this.userRoleRepository = userRoleRepository;
@@ -60,6 +64,7 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
         this.roleMenuRepository = roleMenuRepository;
         this.passwordService = passwordService;
         this.authService = authService;
+        this.loginService = loginService;
     }
 
     @Override
@@ -75,13 +80,19 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
         // 校验用户是否存在
         existsLogin(request.getUsername());
         LoginDTO loginDTO = redisCacheService.get(RedisConstants.getUserKey(request.getUsername()), LoginDTO.class);
-//        if (loginDTO == null) {
+        if (loginDTO == null) {
+            log.info("系统登录，登录人：{}", request.getUsername());
             // 1. 登录
             Login loginUser = loginRepository.findLoginUser(request.getUsername());
 
             Boolean loginFlag = passwordService.checkPassword(loginUser.getPassword(), request.getPassword(), loginUser.getSalt());
             if (!loginFlag) {
-                throw new BusinessException("用户名或密码错误，请检查后重试");
+                String errorMessage = "用户名或密码错误，请检查后重试";
+                log.error("登录失败，用户名：{}，{}", request.getUsername(), errorMessage);
+                // 记录登录失败日志
+                loginService.createLoginLog(buildLoginLog(loginUser.getId(), loginUser.getTenantId(), loginUser.getUsername(),
+                        LogSuccessEnum.FAIL, errorMessage));
+                throw new BusinessException(errorMessage);
             }
             loginDTO = buildLoginDTO(loginUser);
 
@@ -95,13 +106,15 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
             List<LoginDTO.RoleMenuDTO> roleMenuList = getRoleMenu(roleIdList);
             loginDTO.setMenuList(roleMenuList);
 
-            // 4. 记录登录IP和时间
-            saveLoginIpAndDate(userId, request.getLoginIp(), loginUser.getUsername());
-
             // 写入redis
             redisCacheService.set(RedisConstants.getUserKey(loginDTO.getUsername()), loginDTO, RedisConstants.USER_TOKEN_TTL);
-//        }
+        }
 
+        // 4. 异步记录登陆日志
+        loginService.createLoginLog(buildLoginLog(loginDTO.getUserId(), loginDTO.getTenantId(), loginDTO.getUsername(),
+                LogSuccessEnum.SUCCESS, StringUtils.EMPTY));
+
+        log.info("登录成功，登录用户：{}", JSONObject.toJSONString(loginDTO));
         response.setData(loginDTO);
     }
 
@@ -117,6 +130,7 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
         }
         Long nameCount = userRepository.existsByUsername(username);
         if (nameCount == 0) {
+            log.error("登录失败，用户名不存在，用户名：{}", username);
             throw new BusinessException(ResultCodeEnum.FAIL, "用户名不存在");
         }
     }
@@ -136,13 +150,14 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
         return menuList.stream().map(x -> LoginDTO.RoleMenuDTO.builder().name(x.getName()).permission(x.getPermission()).build()).toList();
     }
 
-    private void saveLoginIpAndDate(Long userId, String loginIp, String operator) {
-        LocalDateTime now = DateUtils.now();
-        User user = User.builder().id(userId)
-                .loginIp(loginIp).loginDate(now)
-                .updater(operator).updateTime(now)
+    public LoginLog buildLoginLog(Long userId, Long tenantId, String username, LogSuccessEnum logSuccessEnum, String errorMessage) {
+        return LoginLog.builder().userId(userId).tenantId(tenantId).username(username)
+                .logType(LogTypeEnum.WEB.getCode()).loginIp(NetworkUtils.getClientIP()).loginDate(DateUtils.now())
+                .userAgent(NetworkUtils.getUserAgent())
+                .success(logSuccessEnum.getCode()).errorMessage(errorMessage)
+                .operator(username)
                 .build();
-        userRepository.modify(user);
     }
+
 
 }

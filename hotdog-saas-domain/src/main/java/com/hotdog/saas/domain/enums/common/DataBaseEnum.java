@@ -1,4 +1,6 @@
-package com.hotdog.saas.domain.enums;
+package com.hotdog.saas.domain.enums.common;
+
+import com.hotdog.saas.domain.enums.EnumInterface;
 
 import org.apache.commons.lang3.StringUtils;
 

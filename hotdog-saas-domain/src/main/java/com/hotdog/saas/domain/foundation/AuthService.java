@@ -8,5 +8,9 @@ public interface AuthService {
 
     void verifyToken(String token);
 
-    String extractUsername(String token);
+    String extractToken();
+
+    String extractUsername();
+
+    Long extractTenantId();
 }

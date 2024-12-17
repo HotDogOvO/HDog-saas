@@ -5,6 +5,9 @@ public class Constants {
     /** 分布式锁默认时间 */
     public static final Long LOCK_TIME_SECONDS = 60L;
 
+    /** 系统时区 */
+    public static final String SYSTEM_TIME_ZONE = "Asia/Shanghai";
+
     /** 系统操作人 */
     public static final String SYSTEM_OPERATOR = "system";
 
@@ -22,6 +25,13 @@ public class Constants {
 
     /** token请求头 */
     public static final String HEADER_TOKEN_KEY = "Authorization";
+
+    /** ip请求头 */
+    public static final String[] HEADER_IP_KEY = new String[]{
+            "X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"
+    };
+
+    public static final String HEADER_USER_AGENT_KEY = "User-Agent";
 
     public static final String[] TOKEN_EXCLUDE_PATTERN_URL = new String[]{
             "/api/hotdog/v1/login"

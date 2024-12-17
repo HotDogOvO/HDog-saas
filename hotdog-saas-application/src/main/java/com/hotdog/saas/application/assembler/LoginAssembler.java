@@ -11,6 +11,8 @@ import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public interface LoginAssembler {
 
     LoginAssembler INSTANCE = Mappers.getMapper(LoginAssembler.class);
 
+    @Mappings(
+            @Mapping(source = "id", target = "userId")
+    )
     LoginDTO convert(Login login);
 
 }

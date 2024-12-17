@@ -1,6 +1,8 @@
 package com.hotdog.saas.infra.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -19,6 +21,7 @@ import lombok.Setter;
 @TableName("t_system_properties")
 public class SystemPropertiesDO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;

@@ -11,6 +11,9 @@ import lombok.Data;
 @Schema(name = "登录返回DTO", description = "登录返回DTO")
 public class LoginDTO {
 
+    @Schema(description = "用户ID")
+    private Long userId;
+
     @Schema(description = "租户ID")
     private Long tenantId;
 

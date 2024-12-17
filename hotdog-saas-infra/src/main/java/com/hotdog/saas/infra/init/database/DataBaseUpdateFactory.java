@@ -1,6 +1,6 @@
 package com.hotdog.saas.infra.init.database;
 
-import com.hotdog.saas.domain.enums.DataBaseEnum;
+import com.hotdog.saas.domain.enums.common.DataBaseEnum;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 

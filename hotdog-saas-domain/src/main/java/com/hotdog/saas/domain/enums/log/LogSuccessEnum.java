@@ -1,6 +1,6 @@
-package com.hotdog.saas.domain.enums;
+package com.hotdog.saas.domain.enums.log;
 
-import org.apache.commons.lang3.StringUtils;
+import com.hotdog.saas.domain.enums.EnumInterface;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -10,10 +10,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum MenuEnum implements EnumInterface {
-    UNKNOWN(0, "未知"),
-    MENU(1, "菜单"),
-    ACTION(2, "按钮"),
+public enum LogSuccessEnum implements EnumInterface {
+    UNKNOWN(-1, "未知"),
+    SUCCESS(0, "成功"),
+    FAIL(1, "失败"),
     ;
     private final Integer code;
     private final String desc;
@@ -23,8 +23,8 @@ public enum MenuEnum implements EnumInterface {
         return Stream.of(values()).anyMatch(s -> s.getCode().equals(code));
     }
 
-    public static MenuEnum codeToEnum(Integer code) {
-        for (MenuEnum menuEnum : values()) {
+    public static LogSuccessEnum codeToEnum(Integer code) {
+        for (LogSuccessEnum menuEnum : values()) {
             if (Objects.equals(menuEnum.getCode(), code)) {
                 return menuEnum;
             }
