@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum StatusEnum implements EnumInterface {
+public enum StatusEnum implements EnumInterface<Integer> {
     ENABLE(0, "启用"),
     DISABLE(1, "停用"),
     ;

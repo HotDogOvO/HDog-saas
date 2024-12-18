@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum DataBaseEnum implements EnumInterface {
+public enum DataBaseEnum implements EnumInterface<Integer> {
 
     UNKNOWN(-1, "unknown"),
     MYSQL(1, "mysql"),

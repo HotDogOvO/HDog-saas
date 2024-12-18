@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum DeleteEnum implements EnumInterface {
+public enum DeleteEnum implements EnumInterface<Integer> {
     NO(0, "未删除"),
     YES(1, "已删除"),
     ;

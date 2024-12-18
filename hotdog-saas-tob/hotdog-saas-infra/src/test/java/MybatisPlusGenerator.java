@@ -8,7 +8,7 @@ public class MybatisPlusGenerator {
     private final static String URL = "jdbc:mysql://124.221.85.208:3306/hotdog-saas?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
     private final static String USERNAME = "root";
     private final static String PASSWORD = "cyfe67373";
-    private final static String PROJECT_PATH = Paths.get(System.getProperty("user.dir")) + "/hotdog-saas-infra/src/main/java";
+    private final static String PROJECT_PATH = Paths.get(System.getProperty("user.dir")) + "/hotdog-saas-tob/hotdog-saas-infra/src/main/java";
 
     public static void main(String[] args) {
         FastAutoGenerator.create(URL, USERNAME, PASSWORD)
@@ -25,7 +25,7 @@ public class MybatisPlusGenerator {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addInclude("t_login_log")
+                        .addInclude("t_operation_log")
                         .addTablePrefix("t_")
                         .entityBuilder().enableLombok().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel).formatFileName("%sDO")
                         .serviceBuilder().disable()

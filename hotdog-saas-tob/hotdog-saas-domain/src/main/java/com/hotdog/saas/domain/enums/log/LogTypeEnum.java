@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum LogTypeEnum implements EnumInterface {
+public enum LogTypeEnum implements EnumInterface<Integer> {
     UNKNOWN(0, "未知"),
     WEB(100, "WEB"),
     ;
@@ -23,9 +23,9 @@ public enum LogTypeEnum implements EnumInterface {
     }
 
     public static LogTypeEnum codeToEnum(Integer code) {
-        for (LogTypeEnum menuEnum : values()) {
-            if (Objects.equals(menuEnum.getCode(), code)) {
-                return menuEnum;
+        for (LogTypeEnum logTypeEnum : values()) {
+            if (Objects.equals(logTypeEnum.getCode(), code)) {
+                return logTypeEnum;
             }
         }
         return UNKNOWN;

@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum LogSuccessEnum implements EnumInterface {
+public enum LogSuccessEnum implements EnumInterface<Integer> {
     UNKNOWN(-1, "未知"),
     SUCCESS(0, "成功"),
     FAIL(1, "失败"),
@@ -24,9 +24,9 @@ public enum LogSuccessEnum implements EnumInterface {
     }
 
     public static LogSuccessEnum codeToEnum(Integer code) {
-        for (LogSuccessEnum menuEnum : values()) {
-            if (Objects.equals(menuEnum.getCode(), code)) {
-                return menuEnum;
+        for (LogSuccessEnum logSuccessEnum : values()) {
+            if (Objects.equals(logSuccessEnum.getCode(), code)) {
+                return logSuccessEnum;
             }
         }
         return UNKNOWN;
