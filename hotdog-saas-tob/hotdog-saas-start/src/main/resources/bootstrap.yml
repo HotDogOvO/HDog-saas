@@ -42,7 +42,6 @@ spring:
       stat-view-servlet:
         enabled: true
         url-pattern: /druid/*
-
   data:
     redis:
       host: 124.221.85.208
@@ -56,6 +55,21 @@ spring:
           max-idle: 5
           min-idle: 1
           max-wait: -1
+  # kafka配置
+  kafka:
+    bootstrap-servers: 124.221.85.208:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: hdog-saas-tob
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual
+      poll-timeout: 3000
+      missing-topics-fatal: false
 
 knife4j:
   enable: true
