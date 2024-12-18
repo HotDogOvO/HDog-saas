@@ -33,36 +33,36 @@ public class UserFacadeImpl extends BaseProcessor implements UserFacade {
 
     @Override
     public BaseResponse<Boolean> createUser(CreateUserRequest createUserRequest) {
-        return this.doBiz(createUserRequest, userCreateProcessor, false, () -> "");
+        return this.doBiz(createUserRequest, userCreateProcessor);
     }
 
     @Override
     public BaseResponse<PageResponseDTO<UserDTO>> userListPage(UserPageRequest userPageRequest) {
-        return this.doBiz(userPageRequest, userListProcessor, false, () -> "");
+        return this.doBiz(userPageRequest, userListProcessor);
     }
 
     @Override
     public BaseResponse<UserDTO> userDetail(QueryUserRequest queryUserRequest) {
-        return this.doBiz(queryUserRequest, userDetailProcessor, false, () -> "");
+        return this.doBiz(queryUserRequest, userDetailProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> updateUser(UpdateUserRequest updateUserRequest) {
-        return this.doBiz(updateUserRequest, userUpdateProcessor, false, () -> "");
+        return this.doBiz(updateUserRequest, userUpdateProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> changePassword(ChangePasswordRequest changePasswordRequest) {
-        return this.doBiz(changePasswordRequest, userChangePasswordProcess, false, () -> "");
+        return this.doBiz(changePasswordRequest, userChangePasswordProcess);
     }
 
     @Override
     public BaseResponse<Boolean> userPermission(PermissionUserRequest permissionUserRequest) {
-        return this.doBiz(permissionUserRequest, userPermissionProcessor, false, () -> "");
+        return this.doBiz(permissionUserRequest, userPermissionProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> deleteUser(DeleteUserRequest deleteUserRequest) {
-        return this.doBiz(deleteUserRequest, userDeleteProcessor, false, () -> "");
+        return this.doBiz(deleteUserRequest, userDeleteProcessor);
     }
 }

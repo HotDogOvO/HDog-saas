@@ -37,27 +37,27 @@ public class TenantFacadeImpl extends BaseProcessor implements TenantFacade {
 
     @Override
     public BaseResponse<Boolean> createTenant(CreateTenantRequest createTenantRequest) {
-        return this.doBiz(createTenantRequest, tenantCreateProcessor, false, () -> "");
+        return this.doBiz(createTenantRequest, tenantCreateProcessor);
     }
 
     @Override
     public BaseResponse<PageResponseDTO<TenantDTO>> tenantListPage(TenantPageRequest tenantPageRequest) {
-        return this.doBiz(tenantPageRequest, tenantListProcessor, false, () -> "");
+        return this.doBiz(tenantPageRequest, tenantListProcessor);
     }
 
     @Override
     public BaseResponse<TenantDTO> tenantDetail(QueryTenantRequest queryTenantRequest) {
-        return this.doBiz(queryTenantRequest, tenantDetailProcessor, false, () -> "");
+        return this.doBiz(queryTenantRequest, tenantDetailProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> updateTenant(UpdateTenantRequest updateTenantRequest) {
-        return this.doBiz(updateTenantRequest, tenantUpdateProcessor, false, () -> "");
+        return this.doBiz(updateTenantRequest, tenantUpdateProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> deleteTenant(DeleteTenantRequest deleteTenantRequest) {
-        return this.doBiz(deleteTenantRequest, tenantDeleteProcessor, false, () -> "");
+        return this.doBiz(deleteTenantRequest, tenantDeleteProcessor);
     }
 
 }

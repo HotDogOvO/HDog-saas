@@ -24,11 +24,11 @@ public class LoginFacadeImpl extends BaseProcessor implements LoginFacade {
 
     @Override
     public BaseResponse<LoginDTO> login(LoginRequest loginRequest) {
-        return this.doBiz(loginRequest, loginProcessor, false, () -> "");
+        return this.doBiz(loginRequest, loginProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> logout(LogoutRequest logoutRequest) {
-        return this.doBiz(logoutRequest, logoutProcessor, false, () -> "");
+        return this.doBiz(logoutRequest, logoutProcessor);
     }
 }

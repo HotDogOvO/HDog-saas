@@ -30,31 +30,31 @@ public class RoleFacadeImpl extends BaseProcessor implements RoleFacade {
 
     @Override
     public BaseResponse<Boolean> createRole(CreateRoleRequest createRoleRequest) {
-        return this.doBiz(createRoleRequest, roleCreateProcessor, false, () -> "");
+        return this.doBiz(createRoleRequest, roleCreateProcessor);
     }
 
     @Override
     public BaseResponse<PageResponseDTO<RoleDTO>> roleListPage(RolePageRequest rolePageRequest) {
-        return this.doBiz(rolePageRequest, roleListProcessor, false, () -> "");
+        return this.doBiz(rolePageRequest, roleListProcessor);
     }
 
     @Override
     public BaseResponse<RoleDTO> roleDetail(QueryRoleRequest queryRoleRequest) {
-        return this.doBiz(queryRoleRequest, roleDetailProcessor, false, () -> "");
+        return this.doBiz(queryRoleRequest, roleDetailProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> updateRole(UpdateRoleRequest updateRoleRequest) {
-        return this.doBiz(updateRoleRequest, roleUpdateProcessor, false, () -> "");
+        return this.doBiz(updateRoleRequest, roleUpdateProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> rolePermission(PermissionRoleRequest permissionRoleRequest) {
-        return this.doBiz(permissionRoleRequest, rolePermissionProcessor, false, () -> "");
+        return this.doBiz(permissionRoleRequest, rolePermissionProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> deleteRole(DeleteRoleRequest deleteRoleRequest) {
-        return this.doBiz(deleteRoleRequest, roleDeleteProcessor, false, () -> "");
+        return this.doBiz(deleteRoleRequest, roleDeleteProcessor);
     }
 }

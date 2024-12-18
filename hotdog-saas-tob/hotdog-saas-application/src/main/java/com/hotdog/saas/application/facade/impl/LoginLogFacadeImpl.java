@@ -21,6 +21,6 @@ public class LoginLogFacadeImpl extends BaseProcessor implements LoginLogFacade 
 
     @Override
     public BaseResponse<PageResponseDTO<LoginLogDTO>> loginLogListPage(LoginLogPageRequest loginLogPageRequest) {
-        return this.doBiz(loginLogPageRequest, loginLogListProcessor, false, () -> "");
+        return this.doBiz(loginLogPageRequest, loginLogListProcessor);
     }
 }

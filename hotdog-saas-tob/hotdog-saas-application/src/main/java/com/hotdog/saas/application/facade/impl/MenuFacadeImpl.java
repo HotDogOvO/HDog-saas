@@ -38,26 +38,26 @@ public class MenuFacadeImpl extends BaseProcessor implements MenuFacade {
 
     @Override
     public BaseResponse<Boolean> createMenu(CreateMenuRequest createMenuRequest) {
-        return this.doBiz(createMenuRequest, menuCreateProcessor, false, () -> "");
+        return this.doBiz(createMenuRequest, menuCreateProcessor);
     }
 
     @Override
     public BaseResponse<List<MenuDTO>> menuTree(MenuTreeRequest menuTreeRequest) {
-        return this.doBiz(menuTreeRequest, menuTreeProcessor, false, () -> "");
+        return this.doBiz(menuTreeRequest, menuTreeProcessor);
     }
 
     @Override
     public BaseResponse<MenuDTO> menuDetail(QueryMenuRequest queryMenuRequest) {
-        return this.doBiz(queryMenuRequest, menuDetailProcessor, false, () -> "");
+        return this.doBiz(queryMenuRequest, menuDetailProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> updateMenu(UpdateMenuRequest updateMenuRequest) {
-        return this.doBiz(updateMenuRequest, menuUpdateProcessor, false, () -> "");
+        return this.doBiz(updateMenuRequest, menuUpdateProcessor);
     }
 
     @Override
     public BaseResponse<Boolean> deleteMenu(DeleteMenuRequest deleteMenuRequest) {
-        return this.doBiz(deleteMenuRequest, menuDeleteProcessor, false, () -> "");
+        return this.doBiz(deleteMenuRequest, menuDeleteProcessor);
     }
 }
