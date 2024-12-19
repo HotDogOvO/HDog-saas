@@ -33,14 +33,16 @@ public class CanalOperationLogConsumer extends AbstractKafkaConsumer<CanalLogMes
     @KafkaListener(topics = KafkaConstants.CANAL_OPERATION_TOPIC)
     public void operationLogListener(String message, Acknowledgment acknowledgment) {
         try {
-            if (true) {
-                throw new RuntimeException();
-            }
             log.debug("监听canal-kafka消息，请求原串：{}", message);
             CanalLogMessage canalLogMessage = super.decodeMessage(message, CanalLogMessage.class);
 
             if (!checkTable(canalLogMessage.getTable())) {
                 return;
+            }
+
+            // todo
+            if (true) {
+                throw new RuntimeException();
             }
 
             LogOperationEnum logOperationEnum = LogOperationEnum.getByAction(canalLogMessage.getType());

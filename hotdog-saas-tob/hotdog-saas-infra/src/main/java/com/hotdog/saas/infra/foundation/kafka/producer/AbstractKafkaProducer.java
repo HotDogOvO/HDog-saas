@@ -6,7 +6,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public abstract class AbstractKafkaProducer<T> implements KafkaProducer<T> {
+public class AbstractKafkaProducer<T> implements KafkaProducer<T> {
 
     private final KafkaTemplate<String, T> kafkaTemplate;
 
@@ -15,7 +15,7 @@ public abstract class AbstractKafkaProducer<T> implements KafkaProducer<T> {
     }
 
     @Override
-    public void publish(T message, String partitionKey) {
-        System.out.println(message);
+    public void publish(String topic, T message) {
+        kafkaTemplate.send(topic, message);
     }
 }
