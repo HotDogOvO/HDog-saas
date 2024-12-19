@@ -1,9 +1,11 @@
 package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.hotdog.saas.domain.enums.kafka.KafkaDeadMessageStatusEnum;
 import com.hotdog.saas.domain.model.KafkaDeadMessage;
 import com.hotdog.saas.domain.repository.KafkaDeadMessageRepository;
+import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.KafkaDeadMessageConverter;
 import com.hotdog.saas.infra.dao.KafkaDeadMessageMapper;
 import com.hotdog.saas.infra.entity.KafkaDeadMessageDO;
@@ -33,5 +35,14 @@ public class KafkaDeadMessageRepositoryImpl extends AbstractBaseRepository imple
         lambdaQueryWrapper.in(KafkaDeadMessageDO::getStatus, statusList);
         List<KafkaDeadMessageDO> kafkaDeadMessageDOList = kafkaDeadMessageMapper.selectList(lambdaQueryWrapper);
         return kafkaDeadMessageDOList.stream().map(KafkaDeadMessageConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
+    public void update(Long id, KafkaDeadMessageStatusEnum kafkaDeadMessageStatusEnum) {
+        KafkaDeadMessageDO kafkaDeadMessageDO = new KafkaDeadMessageDO()
+                .setId(id)
+                .setStatus(kafkaDeadMessageStatusEnum.getCode())
+                .setRetryTime(DateUtils.now());
+        kafkaDeadMessageMapper.updateById(kafkaDeadMessageDO);
     }
 }

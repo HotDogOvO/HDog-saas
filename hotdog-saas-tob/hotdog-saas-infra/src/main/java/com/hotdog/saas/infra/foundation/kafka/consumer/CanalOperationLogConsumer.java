@@ -16,8 +16,10 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -30,6 +32,7 @@ public class CanalOperationLogConsumer extends AbstractKafkaConsumer<CanalLogMes
         this.operationLogRepository = operationLogRepository;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @KafkaListener(topics = KafkaConstants.CANAL_OPERATION_TOPIC)
     public void operationLogListener(String message, Acknowledgment acknowledgment) {
         try {
@@ -40,15 +43,14 @@ public class CanalOperationLogConsumer extends AbstractKafkaConsumer<CanalLogMes
                 return;
             }
 
-            // todo
-            if (true) {
-                throw new RuntimeException();
-            }
-
             LogOperationEnum logOperationEnum = LogOperationEnum.getByAction(canalLogMessage.getType());
             List<OperationLog> operationLogList = logOperationEnum.execute(canalLogMessage);
 
+            log.info("监听canal-kafka消息，请求原串：{}", message);
             Integer saveCount = operationLogRepository.batchSave(operationLogList);
+
+            // 如果是补偿任务，需要更新补偿任务表的状态
+            super.checkRetryTask(canalLogMessage);
 
             log.debug("监听canal-kafka消息，操作日志记录完成，记录条数：{}，日志：{}", saveCount, operationLogList);
         } catch (Exception e) {

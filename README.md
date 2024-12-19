@@ -45,16 +45,24 @@
 基础设施层
 
 + DO与model转换
++ 提供基础设施能力
+  + 缓存
+  + 权限
+  + 定时任务
+  + 消息队列
 + 存储层具体实现
 + 提供数据库对象
 + 项目初始化
 
+### 代码结构
 ```
 |- hdog-saas-tob
     |-> hdog-saas-start （启动层）
          |- src/main/java
               |- com.hotdog.saas (主包路径)
                    |- Application (启动类)
+         |- src/test/java
+              |- com.hotdog.saas (单元测试)
          |- resources
               |- banner.txt
               |- application.yml
@@ -69,7 +77,7 @@
                    |- filter (过滤器) 
                    |- interceptor (拦截器，签名&token的校验) 
          |-pom.xml
-    |-> hdog-saas-application （交互编排层，中间层）
+    |-> hdog-saas-application （业务编排层，中间层）
          |- src/main/java
               |- com.hotdog.saas.application (主包路径)
                    |- assembler (DO和DTO转换（使用mapstruct）)
@@ -101,6 +109,8 @@
                    |- dao (MybatisPlus实现)
                    |- entity (DO，和数据库表一对一对应)
                    |- foundation（基础模块，缓存、认证等）
+                        |- kafka (消息队列)
+                        |- task（定时任务）
                    |- init (系统初始化操作)
                    |- repository (repository实现，做参数转换（DO转PO)，处理缓存）
          |- resources

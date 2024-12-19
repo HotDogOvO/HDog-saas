@@ -1,4 +1,4 @@
-package com.hotdog.saas.infra.task;
+package com.hotdog.saas.test.infra.task;
 
 import com.hotdog.saas.Application;
 import com.hotdog.saas.infra.foundation.task.KafkaCompensateTask;
@@ -14,7 +14,9 @@ public class TaskTest {
     private KafkaCompensateTask kafkaCompensateTask;
 
     @Test
-    public void kafkaCompensateTaskTest(){
+    public void kafkaCompensateTaskTest() throws InterruptedException {
         kafkaCompensateTask.kafkaCompensateTask();
+
+        Thread.sleep(10000);
     }
 }

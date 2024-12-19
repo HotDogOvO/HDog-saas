@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -18,6 +19,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 @TableName("s_kafka_dead_message")
 public class KafkaDeadMessageDO implements Serializable {
 
@@ -53,6 +55,11 @@ public class KafkaDeadMessageDO implements Serializable {
      * 重试状态（0：未重试，1：重试成功，2：重试失败）
      */
     private Integer status;
+
+    /**
+     * 重试时间
+     */
+    private LocalDateTime retryTime;
 
     /**
      * 创建时间

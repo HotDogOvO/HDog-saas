@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Data
 @Builder
-public class CanalLogMessage {
+public class CanalLogMessage extends BaseMessage {
 
     /**
      * 修改后的对象
@@ -35,4 +35,5 @@ public class CanalLogMessage {
      * 操作表名
      */
     private String table;
+
 }

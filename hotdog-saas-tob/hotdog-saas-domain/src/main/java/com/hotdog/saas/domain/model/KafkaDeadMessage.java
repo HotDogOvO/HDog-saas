@@ -12,6 +12,11 @@ import lombok.Data;
 public class KafkaDeadMessage {
 
     /**
+     * 主键
+     */
+    private Long id;
+
+    /**
      * 失败任务topic
      */
     private String kafkaTopic;
@@ -33,9 +38,15 @@ public class KafkaDeadMessage {
 
     /**
      * 重试状态（0：未重试，1：重试成功，2：重试失败）
+     *
      * @see com.hotdog.saas.domain.enums.kafka.KafkaDeadMessageStatusEnum
      */
     private Integer status;
+
+    /**
+     * 重试时间
+     */
+    private LocalDateTime retryTime;
 
     /**
      * 创建时间

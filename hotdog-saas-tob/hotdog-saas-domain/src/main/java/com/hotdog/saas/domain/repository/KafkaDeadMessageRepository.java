@@ -10,4 +10,6 @@ public interface KafkaDeadMessageRepository {
     void save(KafkaDeadMessage kafkaDeadMessage);
 
     List<KafkaDeadMessage> list(List<KafkaDeadMessageStatusEnum> statusList);
+
+    void update(Long id, KafkaDeadMessageStatusEnum kafkaDeadMessageStatusEnum);
 }
