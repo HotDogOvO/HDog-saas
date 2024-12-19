@@ -58,6 +58,10 @@ spring:
   # kafka配置
   kafka:
     bootstrap-servers: 124.221.85.208:9092
+    # 自定义重试次数
+    max-attempts: 3
+    # 自定义重试间隔时长
+    interval: 3000
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -73,6 +77,10 @@ spring:
 
 knife4j:
   enable: true
+
+logging:
+  level:
+    com.hotdog.saas: DEBUG
 
 mybatis-plus:
   configuration:

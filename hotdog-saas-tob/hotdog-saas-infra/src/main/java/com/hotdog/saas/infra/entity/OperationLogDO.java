@@ -1,10 +1,13 @@
 package com.hotdog.saas.infra.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -16,6 +19,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 @TableName("t_operation_log")
 public class OperationLogDO implements Serializable {
 
@@ -24,6 +28,7 @@ public class OperationLogDO implements Serializable {
     /**
      * 操作日志ID
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -39,7 +44,7 @@ public class OperationLogDO implements Serializable {
     /**
      * 操作类型（1：查询，2：新增，3：更新，4：删除）
      */
-    private Byte operationType;
+    private Integer operationType;
 
     /**
      * 操作时间

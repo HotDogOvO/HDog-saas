@@ -30,4 +30,9 @@ public class CanalLogMessage {
      * 操作类型
      */
     private String type;
+
+    /**
+     * 操作表名
+     */
+    private String table;
 }

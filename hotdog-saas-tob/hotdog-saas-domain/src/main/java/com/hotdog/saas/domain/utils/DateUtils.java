@@ -16,6 +16,11 @@ public class DateUtils {
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
+    public static LocalDateTime getDateByMill(long timestamp) {
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    }
+
     public static LocalDateTime getDateByMinutesAgo(LocalDateTime localDateTime, int minutes) {
         return localDateTime.minusMinutes(minutes);
     }
