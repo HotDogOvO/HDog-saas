@@ -31,6 +31,10 @@ public class CreateWechatAppRequest extends BaseRequestParam {
     @Schema(description = "小程序AppSecret")
     private String wechatAppSecret;
 
+    @NotBlank(message = "业务类型不能为空")
+    @Schema(description = "业务类型")
+    private Integer businessType;
+
     @Schema(description = "备注")
     private String remark;
 

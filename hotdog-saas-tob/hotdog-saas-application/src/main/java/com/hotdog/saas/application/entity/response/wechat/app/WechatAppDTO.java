@@ -25,6 +25,9 @@ public class WechatAppDTO {
     @Schema(description = "小程序AppID")
     private String wechatAppId;
 
+    @Schema(description = "业务类型")
+    private Integer businessType;
+
     @Schema(description = "备注")
     private String remark;
 

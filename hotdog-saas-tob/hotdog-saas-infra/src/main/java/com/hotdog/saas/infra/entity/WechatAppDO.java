@@ -57,6 +57,12 @@ public class WechatAppDO implements Serializable {
     private String wechatAppSecret;
 
     /**
+     * 业务类型
+     * @see com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum
+     */
+    private Integer businessType;
+
+    /**
      * 备注
      */
     private String remark;
