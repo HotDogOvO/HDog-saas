@@ -25,7 +25,7 @@ public class MybatisPlusGenerator {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addInclude("t_operation_log")
+                        .addInclude("t_wechat_app")
                         .addTablePrefix("t_")
                         .entityBuilder().enableLombok().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel).formatFileName("%sDO")
                         .serviceBuilder().disable()
