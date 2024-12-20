@@ -28,7 +28,7 @@ public class DeadLetterQueueConsumer {
         this.kafkaDeadMessageRepository = kafkaDeadMessageRepository;
     }
 
-    @KafkaListener(topics = KafkaConstants.DEAD_LETTER_QUEUE_TOPIC)
+//    @KafkaListener(topics = KafkaConstants.DEAD_LETTER_QUEUE_TOPIC)
     public void handleDltMessage(ConsumerRecord<String, String> record, Acknowledgment acknowledgment) {
         try{
             KafkaDeadMessage kafkaDeadMessage = KafkaDeadMessage.builder()

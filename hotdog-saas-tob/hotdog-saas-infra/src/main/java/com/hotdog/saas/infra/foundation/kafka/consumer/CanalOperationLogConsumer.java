@@ -32,7 +32,7 @@ public class CanalOperationLogConsumer extends AbstractKafkaConsumer<CanalLogMes
     }
 
     @Transactional(rollbackFor = Exception.class)
-    @KafkaListener(topics = KafkaConstants.CANAL_OPERATION_TOPIC)
+//    @KafkaListener(topics = KafkaConstants.CANAL_OPERATION_TOPIC)
     public void operationLogListener(String message, Acknowledgment acknowledgment) {
         try {
             log.debug("监听canal-kafka消息，请求原串：{}", message);
