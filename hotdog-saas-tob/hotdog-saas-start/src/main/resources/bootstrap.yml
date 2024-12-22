@@ -1,0 +1,90 @@
+project:
+  version: @project.version@
+  database: mysql
+  secret: 1234567890abcdef
+  valid:
+    sign: false
+    token: false
+  jwt:
+    subject: HDOG-SAAS
+    secret: Uz9BsvWY9sEelGfgrtuvVwN1LUoto21I6QzsBJosue3PJqXxehABxY3uv1IHvViq
+    ttl: 86400
+
+server:
+  port: 12306
+
+spring:
+  application:
+    name: hotdog-saas
+  cloud:
+    nacos:
+      server-addr: 124.221.85.208:8848
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://124.221.85.208:3306/hotdog-saas?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      username: root
+      password: cyfe67373
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 30000
+      test-while-idle: true
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 30000
+      validation-query: select 1
+      test-on-borrow: true
+      test-on-return: true
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: -1
+      use-global-data-source-stat: true
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+  data:
+    redis:
+      host: 124.221.85.208
+      port: 6379
+      password: cyfe67373
+      database: 0
+      timeout: 1000
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 1
+          max-wait: -1
+  # kafka配置
+  kafka:
+    bootstrap-servers: 124.221.85.208:9092
+    # 自定义重试次数
+    max-attempts: 1
+    # 自定义重试间隔时长
+    interval: 3000
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: hdog-saas-tob
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual
+      poll-timeout: 3000
+      missing-topics-fatal: false
+
+knife4j:
+  enable: true
+
+logging:
+  level:
+    com.hotdog.saas: DEBUG
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    use-generated-keys: true
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.hotdog.saas.domain.repository.entity.po

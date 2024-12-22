@@ -22,11 +22,7 @@
     </licenses>
 
     <modules>
-        <module>hotdog-saas-start</module>
-        <module>hotdog-saas-web</module>
-        <module>hotdog-saas-domain</module>
-        <module>hotdog-saas-application</module>
-        <module>hotdog-saas-infra</module>
+        <module>hotdog-saas-tob</module>
     </modules>
 
     <properties>
@@ -39,6 +35,7 @@
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <velocity.version>2.3</velocity.version>
         <mysql.version>8.0.22</mysql.version>
+        <druid.version>1.2.24</druid.version>
         <redis.version>3.40.0</redis.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <apache.version>3.17.0</apache.version>
@@ -48,6 +45,7 @@
         <fastjson.version>2.0.53</fastjson.version>
         <jwt.version>0.12.6</jwt.version>
         <guava.version>33.3.1-jre</guava.version>
+        <kafka.version>3.3.0</kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -131,6 +129,13 @@
                 <version>${mysql.version}</version>
             </dependency>
 
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
             <!-- redis -->
             <dependency>
                 <groupId>org.redisson</groupId>
@@ -202,6 +207,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${kafka.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
