@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_login_log")
+@TableName("b_login_log")
 public class LoginLogDO implements Serializable {
 
     @Serial

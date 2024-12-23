@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName("t_user")
+@TableName("b_user")
 public class UserDO implements Serializable {
 
     @Serial

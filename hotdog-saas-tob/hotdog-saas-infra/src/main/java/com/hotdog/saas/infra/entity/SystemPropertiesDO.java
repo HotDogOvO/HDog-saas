@@ -18,7 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("t_system_properties")
+@TableName("s_system_properties")
 public class SystemPropertiesDO implements Serializable {
 
     @Serial

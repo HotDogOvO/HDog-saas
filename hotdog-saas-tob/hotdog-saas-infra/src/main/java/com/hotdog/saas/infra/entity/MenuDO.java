@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_menu")
+@TableName("b_menu")
 public class MenuDO implements Serializable {
 
     @Serial

@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_operation_log")
+@TableName("b_operation_log")
 public class OperationLogDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
