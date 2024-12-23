@@ -23,6 +23,7 @@ public enum ResultCodeEnum {
     SIGN_FAIL("sign_fail", "签名非法"),
     SIGN_EMPTY("sign_empty", "签名为空"),
     PARAMS_INVALID("params_invalid", "请求参数非法"),
+    FEIGN_CALL_FAIL("feign_call_fail", "远程请求失败"),
     FAIL("fail", "请求失败"),
     ;
 
