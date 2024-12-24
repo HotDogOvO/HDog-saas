@@ -33,8 +33,9 @@ public class EducationCourseClassPersonDO implements Serializable {
 
     /**
      * 人员类型（1：教师 2：学员）
+     * @see com.hotdog.saas.domain.enums.education.CourseClassPersonTypeEnum
      */
-    private Byte type;
+    private Integer type;
 
     /**
      * 人员openId
@@ -44,7 +45,7 @@ public class EducationCourseClassPersonDO implements Serializable {
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人

@@ -36,9 +36,9 @@ public class EducationCourseDO implements Serializable {
     private Long tenantId;
 
     /**
-     * 微信小程序ID
+     * 微信ID
      */
-    private Long wechatAppId;
+    private Long wechatId;
 
     /**
      * 课程编号
@@ -56,9 +56,10 @@ public class EducationCourseDO implements Serializable {
     private String description;
 
     /**
-     * 课程类型（1:线下 2：线上 3：录像）
+     * 课程类型（1:线下 2：线上）
+     * @see com.hotdog.saas.domain.enums.education.CourseTypeEnum
      */
-    private Byte courseType;
+    private Integer courseType;
 
     /**
      * 课程价格
@@ -68,12 +69,12 @@ public class EducationCourseDO implements Serializable {
     /**
      * 状态（0正常 1停用）
      */
-    private Boolean status;
+    private Integer status;
 
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人

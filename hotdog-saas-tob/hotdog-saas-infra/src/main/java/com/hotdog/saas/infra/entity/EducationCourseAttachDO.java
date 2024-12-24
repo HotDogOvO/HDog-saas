@@ -36,8 +36,9 @@ public class EducationCourseAttachDO implements Serializable {
 
     /**
      * 附件类型（1：图片 2：视频）
+     * @see com.hotdog.saas.domain.enums.education.CourseAttachTypeEnum
      */
-    private Byte attachType;
+    private Integer attachType;
 
     /**
      * 附件路径
@@ -47,7 +48,7 @@ public class EducationCourseAttachDO implements Serializable {
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人

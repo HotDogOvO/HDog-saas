@@ -47,14 +47,15 @@ public class EducationCourseClassScheduleDO implements Serializable {
     private LocalDateTime classEndTime;
 
     /**
-     * 状态（1：待开课 2：开课中 3：以下课）
+     * 状态（1：待开课 2：开课中 3：已下课）
+     * @see com.hotdog.saas.domain.enums.education.CourseClassScheduleStatusEnum
      */
-    private Byte status;
+    private Integer status;
 
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人

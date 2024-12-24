@@ -67,13 +67,14 @@ public class EducationCourseClassDO implements Serializable {
 
     /**
      * 状态（1：待开班 2：开班中 3：结业 9：取消）
+     * @see com.hotdog.saas.domain.enums.education.CourseClassStatusEnum
      */
-    private Boolean status;
+    private Integer status;
 
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人

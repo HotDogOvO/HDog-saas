@@ -54,7 +54,7 @@ public class EducationCourseClassRecordDO implements Serializable {
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人

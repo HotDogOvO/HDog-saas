@@ -42,12 +42,12 @@ public class EducationCourseTypeDO implements Serializable {
     /**
      * 状态（0正常 1停用）
      */
-    private Boolean status;
+    private Integer status;
 
     /**
      * 是否删除（0 正常 1 删除）
      */
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * 创建人
