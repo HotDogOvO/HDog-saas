@@ -1,13 +1,10 @@
 package com.hotdog.saas.application.processor.education;
 
 import com.hotdog.saas.application.assembler.EducationCourseAssembler;
-import com.hotdog.saas.application.assembler.UserAssembler;
-import com.hotdog.saas.application.entity.request.education.UpdateEducationCourseRequest;
-import com.hotdog.saas.application.entity.request.user.UpdateUserRequest;
+import com.hotdog.saas.application.entity.request.education.CreateEducationCourseRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
-import com.hotdog.saas.domain.model.User;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class EducationUpdateProcessor extends AbstractEducationProcessor<UpdateEducationCourseRequest, BaseResponse<Boolean>> {
+public class EducationCourseCreateProcessor extends AbstractEducationProcessor<CreateEducationCourseRequest, BaseResponse<Boolean>> {
 
     @Override
     public BaseResponse<Boolean> initResult() {
@@ -28,13 +25,21 @@ public class EducationUpdateProcessor extends AbstractEducationProcessor<UpdateE
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void doExecute(UpdateEducationCourseRequest request, BaseResponse<Boolean> response) {
-        super.exists(request.getCourseNo());
-        // 保存
+    public void doExecute(CreateEducationCourseRequest request, BaseResponse<Boolean> response) {
+        super.existsByName(request.getName());
+
+        EducationCourse educationCourse = buildEducationCourse(request);
+
+        Integer saveFlag = educationCourseRepository.save(educationCourse);
+        response.setData(checkFlag(saveFlag));
+    }
+
+    private EducationCourse buildEducationCourse(CreateEducationCourseRequest request){
         EducationCourse educationCourse = EducationCourseAssembler.INSTANCE.convert(request);
+        // 生成业务编号
+        educationCourse.generateBusinessNo();
         educationCourse.setTenantId(getTenantId());
-        Integer modifyFlag = educationCourseRepository.modify(educationCourse);
-        response.setData(checkFlag(modifyFlag));
+        return educationCourse;
     }
 
 }

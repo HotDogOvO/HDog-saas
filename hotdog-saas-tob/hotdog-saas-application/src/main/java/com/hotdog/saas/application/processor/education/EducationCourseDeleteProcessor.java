@@ -1,7 +1,6 @@
 package com.hotdog.saas.application.processor.education;
 
 import com.hotdog.saas.application.entity.request.education.DeleteEducationCourseRequest;
-import com.hotdog.saas.application.entity.request.user.DeleteUserRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 
@@ -12,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class EducationDeleteProcessor extends AbstractEducationProcessor<DeleteEducationCourseRequest, BaseResponse<Boolean>> {
+public class EducationCourseDeleteProcessor extends AbstractEducationProcessor<DeleteEducationCourseRequest, BaseResponse<Boolean>> {
 
     @Override
     public BaseResponse<Boolean> initResult() {

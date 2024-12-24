@@ -1,17 +1,12 @@
 package com.hotdog.saas.application.processor.education;
 
 import com.hotdog.saas.application.assembler.EducationCourseAssembler;
-import com.hotdog.saas.application.assembler.UserAssembler;
 import com.hotdog.saas.application.entity.request.education.EducationCoursePageRequest;
-import com.hotdog.saas.application.entity.request.user.UserPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
-import com.hotdog.saas.application.entity.response.user.UserDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
-import com.hotdog.saas.domain.model.Role;
-import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
@@ -23,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class EducationListProcessor extends AbstractEducationProcessor<EducationCoursePageRequest, BaseResponse<PageResponseDTO<EducationCourseDTO>>> {
+public class EducationCourseListProcessor extends AbstractEducationProcessor<EducationCoursePageRequest, BaseResponse<PageResponseDTO<EducationCourseDTO>>> {
 
     @Override
     public BaseResponse<PageResponseDTO<EducationCourseDTO>> initResult() {

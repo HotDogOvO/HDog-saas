@@ -1,7 +1,10 @@
 package com.hotdog.saas.domain.utils;
 
+import com.hotdog.saas.domain.exception.BusinessException;
+
 /**
  * 雪花ID生成器
+ *
  * @author hotdog
  * @date 2024/12/24 18:22
  */
@@ -27,7 +30,7 @@ public class SnowFlakeIdGenerator {
     public static String nextId() {
         long timestamp = timeGen();
         if (timestamp < lastTimestamp) {
-            throw new RuntimeException(String.format("Clock moved backwards. Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
+            throw new BusinessException("雪花ID生成异常，时间戳异常");
         }
 
         if (lastTimestamp == timestamp) {
@@ -41,10 +44,10 @@ public class SnowFlakeIdGenerator {
 
         lastTimestamp = timestamp;
 
-        long low = ((timestamp - twepoch) << timestampLeftShift) // 时间戳部分
-                | (dataCenterId << dataCenterIdShift) // 数据中心部分
-                | (workerId << workerIdShift) // 机器标识部分
-                | sequence; // 序列号部分;
+        long low = ((timestamp - twepoch) << timestampLeftShift)
+                | (dataCenterId << dataCenterIdShift)
+                | (workerId << workerIdShift)
+                | sequence;
 
         return customId + String.format("%019d", low);
     }
@@ -71,4 +74,5 @@ public class SnowFlakeIdGenerator {
     private static Long timeGen() {
         return System.currentTimeMillis();
     }
+
 }

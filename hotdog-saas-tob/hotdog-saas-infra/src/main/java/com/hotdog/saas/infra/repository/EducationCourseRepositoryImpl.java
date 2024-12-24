@@ -44,7 +44,7 @@ public class EducationCourseRepositoryImpl extends AbstractBaseRepository implem
     public PageResponse<List<EducationCourse>> listPage(EducationCourse educationCourse, PageRequest pageRequest) {
         Page<EducationCourseDO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
         LambdaQueryWrapper<EducationCourseDO> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(EducationCourseDO::getTenantId, educationCourse.getTenantId());
+        queryWrapper.eq(EducationCourseDO::getWechatId, educationCourse.getWechatId());
         queryWrapper.eq(EducationCourseDO::getDeleted, DeleteEnum.NO.getCode());
         queryWrapper.orderByDesc(EducationCourseDO::getCreateTime);
 
@@ -91,7 +91,7 @@ public class EducationCourseRepositoryImpl extends AbstractBaseRepository implem
                 .setUpdateTime(DateUtils.now());
 
         LambdaUpdateWrapper<EducationCourseDO> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.set(EducationCourseDO::getCourseNo, educationCourse.getCourseNo());
+        updateWrapper.eq(EducationCourseDO::getCourseNo, educationCourse.getCourseNo());
         return educationCourseMapper.update(educationCourseDO, updateWrapper);
     }
 
@@ -104,7 +104,7 @@ public class EducationCourseRepositoryImpl extends AbstractBaseRepository implem
                 .setUpdateTime(DateUtils.now());
 
         LambdaUpdateWrapper<EducationCourseDO> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.set(EducationCourseDO::getCourseNo, courseNo);
+        updateWrapper.eq(EducationCourseDO::getCourseNo, courseNo);
         return educationCourseMapper.update(educationCourseDO, updateWrapper);
     }
 }
