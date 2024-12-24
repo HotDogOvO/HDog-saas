@@ -33,7 +33,7 @@ public abstract class AbstractUserProcessor<Req extends BaseRequestParam, Resp e
         if (StringUtils.isEmpty(username)) {
             return;
         }
-        Long nameCount = userRepository.existsByUsername(username);
+        Long nameCount = userRepository.existsByUsername(username, getTenantId());
         if (nameCount > 0) {
             throw new BusinessException(ResultCodeEnum.FAIL, "用户名重复");
         }

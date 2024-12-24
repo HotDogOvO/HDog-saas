@@ -82,9 +82,10 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
     }
 
     @Override
-    public Long existsByName(String name) {
+    public Long existsByName(String name, Long tenantId) {
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(RoleDO::getDeleted, DeleteEnum.NO.getCode()).eq(RoleDO::getName, name);
+        queryWrapper.eq(RoleDO::getTenantId, tenantId);
         return roleMapper.selectCount(queryWrapper);
     }
 

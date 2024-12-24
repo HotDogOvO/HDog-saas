@@ -11,10 +11,12 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.UserConverter;
 import com.hotdog.saas.infra.dao.UserMapper;
 import com.hotdog.saas.infra.entity.UserDO;
+
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class UserRepositoryImpl extends AbstractBaseRepository implements UserRepository {
@@ -66,10 +68,13 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
     }
 
     @Override
-    public Long existsByUsername(String username) {
+    public Long existsByUsername(String username, Long tenantId) {
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserDO::getDeleted, DeleteEnum.NO.getCode())
                 .eq(UserDO::getUsername, username);
+        if (Objects.nonNull(tenantId)) {
+            queryWrapper.eq(UserDO::getTenantId, tenantId);
+        }
         return userMapper.selectCount(queryWrapper);
     }
 
@@ -87,7 +92,8 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
                 .setId(id)
                 .setDeleted(DeleteEnum.YES.getCode())
                 .setUpdater(operator)
-                .setUpdateTime(DateUtils.now());;
+                .setUpdateTime(DateUtils.now());
+        ;
         return userMapper.updateById(userDO);
     }
 }

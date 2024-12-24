@@ -16,7 +16,7 @@ public interface UserRepository {
 
     Long exists(Long id);
 
-    Long existsByUsername(String username);
+    Long existsByUsername(String username, Long tenantId);
 
     Integer modify(User user);
 

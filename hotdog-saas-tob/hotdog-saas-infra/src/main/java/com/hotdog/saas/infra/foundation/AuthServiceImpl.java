@@ -76,11 +76,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Long extractTenantId() {
-        String token = extractToken();
-        if (StringUtils.isEmpty(token)) {
-            return 0L;
-        }
-        return (Long) getClaims(token).get(TENANT_ID_KEY);
+        // todo mock tenantId
+        return 1L;
+//        String token = extractToken();
+//        if (StringUtils.isEmpty(token)) {
+//            return 0L;
+//        }
+//        return (Long) getClaims(token).get(TENANT_ID_KEY);
     }
 
     private Claims getClaims(String token) {

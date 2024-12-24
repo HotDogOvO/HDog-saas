@@ -19,7 +19,7 @@ public interface RoleRepository {
 
     Long exists(Long id);
 
-    Long existsByName(String name);
+    Long existsByName(String name, Long tenantId);
 
     Long countByIdList(List<Long> idList);
 
