@@ -1,36 +1,19 @@
-package com.hotdog.saas.infra.entity;
+package com.hotdog.saas.domain.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+
+import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
+import com.hotdog.saas.domain.utils.BusinessNoUtils;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 课程信息表
- * </p>
- *
- * @author hotdog
- * @since 2024-12-24 15:07:03
- */
-@Getter
-@Setter
-@Accessors(chain = true)
-@TableName("c_education_course")
-public class EducationCourseDO implements Serializable {
+import lombok.Builder;
+import lombok.Data;
 
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 主键
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+@Data
+@Builder
+public class EducationCourse {
 
     /**
      * 租户ID
@@ -97,4 +80,16 @@ public class EducationCourseDO implements Serializable {
      * 创建时间
      */
     private LocalDateTime updateTime;
+
+    /**
+     * 操作人
+     */
+    private String operator;
+
+    /**
+     * 生成业务编号
+     */
+    public void generateBusinessNo(){
+        this.courseNo = BusinessNoUtils.generateBusinessNo(BusinessTypeEnum.EDUCATION);
+    }
 }

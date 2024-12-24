@@ -1,6 +1,8 @@
 package com.hotdog.saas.application.entity.request.wechat.app;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
+import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
+import com.hotdog.saas.domain.exception.BusinessException;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +42,9 @@ public class CreateWechatAppRequest extends BaseRequestParam {
 
     @Override
     public void validate() {
-
+        BusinessTypeEnum businessTypeEnum = BusinessTypeEnum.codeToEnum(businessType);
+        if(businessTypeEnum == BusinessTypeEnum.UNKNOWN) {
+            throw new BusinessException("业务类型暂不支持");
+        }
     }
 }
