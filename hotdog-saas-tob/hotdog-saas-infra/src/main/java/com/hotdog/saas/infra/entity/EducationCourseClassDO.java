@@ -92,7 +92,7 @@ public class EducationCourseClassDO implements Serializable {
     private String updater;
 
     /**
-     * 创建时间
+     * 更新时间
      */
     private LocalDateTime updateTime;
 }
