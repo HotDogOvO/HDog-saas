@@ -39,7 +39,7 @@ public class EducationCourseTypeDO implements Serializable {
     /**
      * 课程分类名
      */
-    private String typeName;
+    private String name;
 
     /**
      * 分类备注

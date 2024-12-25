@@ -31,7 +31,7 @@ public class EducationCourseTypeCreateProcessor extends AbstractEducationTypePro
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(CreateEducationCourseTypeRequest request, BaseResponse<Boolean> response) {
         Long wechatId = request.getWechatId();
-        valid(wechatId, request.getTypeName());
+        valid(wechatId, request.getName());
         EducationCourseType educationCourseType = EducationCourseTypeAssembler.INSTANCE.convert(request);
         Integer saveFlag = educationCourseTypeRepository.save(educationCourseType);
         response.setData(checkFlag(saveFlag));

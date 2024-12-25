@@ -1,11 +1,12 @@
 package com.hotdog.saas.application.assembler;
 
 import com.hotdog.saas.application.entity.request.education.type.CreateEducationCourseTypeRequest;
-import com.hotdog.saas.application.entity.request.education.type.EducationCourseTypeListRequest;
+import com.hotdog.saas.application.entity.request.education.type.EducationCourseTypeOptionsRequest;
 import com.hotdog.saas.application.entity.request.education.type.EducationCourseTypePageRequest;
 import com.hotdog.saas.application.entity.request.education.type.UpdateEducationCourseTypeRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseTypeDTO;
+import com.hotdog.saas.application.entity.response.education.EducationCourseTypeOptionsDTO;
 import com.hotdog.saas.domain.model.EducationCourseType;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
@@ -25,11 +26,11 @@ public interface EducationCourseTypeAssembler {
 
     EducationCourseType convert(UpdateEducationCourseTypeRequest updateEducationCourseTypeRequest);
 
-    EducationCourseType convert(EducationCourseTypeListRequest educationCourseTypeListRequest);
+    EducationCourseType convert(EducationCourseTypeOptionsRequest educationCourseTypeOptionsRequest);
 
     PageResponseDTO<EducationCourseTypeDTO> convertPage(PageResponse<List<EducationCourseType>> pageResponse);
 
-    List<EducationCourseTypeDTO> convertList(List<EducationCourseType> list);
+    List<EducationCourseTypeOptionsDTO> convertOptions(List<EducationCourseType> list);
 
     EducationCourseTypeDTO convertToDTO(EducationCourseType EducationCourseType);
 }

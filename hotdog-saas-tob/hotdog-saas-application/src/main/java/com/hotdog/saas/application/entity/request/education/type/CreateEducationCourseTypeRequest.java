@@ -21,7 +21,7 @@ public class CreateEducationCourseTypeRequest extends BaseRequestParam {
 
     @NotBlank(message = "课程类型名称不能为空")
     @Schema(description = "课程类型名称")
-    private String typeName;
+    private String name;
 
     @Schema(description = "课程类型备注")
     private String remark;

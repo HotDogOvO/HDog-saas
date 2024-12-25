@@ -27,16 +27,16 @@ public abstract class AbstractEducationTypeProcessor<Req extends BaseRequestPara
             return;
         }
         Long nameCount = educationCourseTypeRepository.exists(id);
-        if (nameCount > 0) {
+        if (nameCount == 0) {
             throw new BusinessException(ResultCodeEnum.FAIL, "课程分类不存在");
         }
     }
 
-    protected void existsByTypeName(String typeName, Long wechatId) {
-        if (StringUtils.isEmpty(typeName)) {
+    protected void existsByTypeName(String name, Long wechatId) {
+        if (StringUtils.isEmpty(name)) {
             return;
         }
-        Long nameCount = educationCourseTypeRepository.existByTypeName(typeName, wechatId);
+        Long nameCount = educationCourseTypeRepository.existByTypeName(name, wechatId);
         if (nameCount > 0) {
             throw new BusinessException(ResultCodeEnum.FAIL, "课程分类名重复");
         }

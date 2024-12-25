@@ -15,7 +15,7 @@ import lombok.Data;
 @Schema(name = "更新课程类型DTO", description = "更新课程类型DTO")
 public class UpdateEducationCourseTypeRequest extends BaseRequestParam {
 
-    @NotBlank(message = "课程类型ID不能为空")
+    @NotNull(message = "课程类型ID不能为空")
     @Schema(description = "课程类型ID")
     private Long id;
 
@@ -25,7 +25,7 @@ public class UpdateEducationCourseTypeRequest extends BaseRequestParam {
 
     @NotBlank(message = "课程类型名称不能为空")
     @Schema(description = "课程类型名称")
-    private String typeName;
+    private String name;
 
     @Schema(description = "课程类型备注")
     private String remark;

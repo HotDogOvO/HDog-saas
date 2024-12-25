@@ -76,7 +76,7 @@ public class EducationCourseTypeRepositoryImpl extends AbstractBaseRepository im
     @Override
     public Long existByTypeName(String typeName, Long wechatId) {
         LambdaQueryWrapper<EducationCourseTypeDO> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(EducationCourseTypeDO::getTypeName, typeName);
+        queryWrapper.eq(EducationCourseTypeDO::getName, typeName);
         queryWrapper.eq(EducationCourseTypeDO::getWechatId, wechatId);
         queryWrapper.eq(EducationCourseTypeDO::getDeleted, DeleteEnum.NO.getCode());
         return educationCourseTypeMapper.selectCount(queryWrapper);
