@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -18,6 +19,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 @TableName("c_education_course_type")
 public class EducationCourseTypeDO implements Serializable {
 
@@ -28,6 +30,11 @@ public class EducationCourseTypeDO implements Serializable {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
+
+    /**
+     * 微信ID
+     */
+    private Long wechatId;
 
     /**
      * 课程分类名

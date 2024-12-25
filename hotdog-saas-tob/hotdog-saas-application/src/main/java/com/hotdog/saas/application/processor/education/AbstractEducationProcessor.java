@@ -12,6 +12,7 @@ import com.hotdog.saas.domain.model.UserRole;
 import com.hotdog.saas.domain.repository.EducationCourseRepository;
 import com.hotdog.saas.domain.repository.RoleRepository;
 import com.hotdog.saas.domain.repository.UserRoleRepository;
+import com.hotdog.saas.domain.repository.WechatAppRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +26,9 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
     @Autowired
     protected EducationCourseRepository educationCourseRepository;
 
+    @Autowired
+    protected WechatAppRepository wechatAppRepository;
+
     protected void existsByName(String name) {
         if (StringUtils.isEmpty(name)) {
             return;
@@ -36,12 +40,22 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
     }
 
     protected void exists(String courseNo) {
-        if (Objects.isNull(courseNo)) {
+        if (StringUtils.isEmpty(courseNo)) {
             return;
         }
         Long count = educationCourseRepository.exists(courseNo, getTenantId());
         if (count == 0) {
             throw new BusinessException(ResultCodeEnum.FAIL, "课程不存在");
+        }
+    }
+
+    protected void existsByWechatId(Long wechatId){
+        if (Objects.isNull(wechatId)) {
+            return;
+        }
+        Long count = wechatAppRepository.exists(wechatId);
+        if (count == 0) {
+            throw new BusinessException(ResultCodeEnum.FAIL, "微信小程序不存在");
         }
     }
 
