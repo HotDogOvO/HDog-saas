@@ -49,6 +49,7 @@
         <kafka.version>3.3.0</kafka.version>
         <okhttp.version>4.12.0</okhttp.version>
         <feign.okhttp.version>13.5</feign.okhttp.version>
+        <minio.version>8.5.14</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -237,6 +238,13 @@
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${kafka.version}</version>
+            </dependency>
+
+            <!-- minio -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
         </dependencies>
