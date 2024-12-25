@@ -83,8 +83,10 @@ spring:
 
 minio:
   url: http://124.221.85.208:9000
-  access-key: WHG1IJSLSq2NhT0qYrk1
-  secret-key: 3q7yrS3OriCtBmexV9XX8HSH5r7wTCAr4mm6VuJY
+  access-key: admin
+  secret-key: cyfe67373
+#  access-key: WHG1IJSLSq2NhT0qYrk1
+#  secret-key: 3q7yrS3OriCtBmexV9XX8HSH5r7wTCAr4mm6VuJY
   bucket-name: hdog-saas
 
 knife4j:
