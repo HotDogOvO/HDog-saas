@@ -19,19 +19,6 @@ import io.micrometer.common.util.StringUtils;
 
 public abstract class AbstractEducationTypeProcessor<Req extends BaseRequestParam, Resp extends BaseResponse<?>> extends AbstractEducationProcessor<Req, Resp> implements BizProcessorTemplate<Req, Resp> {
 
-    @Autowired
-    protected EducationCourseTypeRepository educationCourseTypeRepository;
-
-    protected void exists(Long id) {
-        if (Objects.isNull(id)) {
-            return;
-        }
-        Long nameCount = educationCourseTypeRepository.exists(id);
-        if (nameCount == 0) {
-            throw new BusinessException(ResultCodeEnum.FAIL, "课程分类不存在");
-        }
-    }
-
     protected void existsByTypeName(String name, Long wechatId) {
         if (StringUtils.isEmpty(name)) {
             return;

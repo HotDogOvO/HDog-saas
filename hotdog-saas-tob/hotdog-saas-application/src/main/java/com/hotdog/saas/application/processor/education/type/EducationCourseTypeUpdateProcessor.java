@@ -30,7 +30,7 @@ public class EducationCourseTypeUpdateProcessor extends AbstractEducationTypePro
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(UpdateEducationCourseTypeRequest request, BaseResponse<Boolean> response) {
-        super.exists(request.getId());
+        super.existsByCourseTypeId(request.getId());
         EducationCourseType educationCourseType = EducationCourseTypeAssembler.INSTANCE.convert(request);
         Integer modifyFlag = educationCourseTypeRepository.modify(educationCourseType);
         response.setData(checkFlag(modifyFlag));

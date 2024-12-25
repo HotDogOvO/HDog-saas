@@ -27,6 +27,12 @@ public class EducationCourseDTO {
     @Schema(description = "课程价格")
     private BigDecimal coursePrice;
 
+    @Schema(description = "课程分类ID")
+    private Long courseTypeId;
+
+    @Schema(description = "课程分类名")
+    private String courseTypeName;
+
     @Schema(description = "状态（0正常 1停用）")
     private Integer status;
 

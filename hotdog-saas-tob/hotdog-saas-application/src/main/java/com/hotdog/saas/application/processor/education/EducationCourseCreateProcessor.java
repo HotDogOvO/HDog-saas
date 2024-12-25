@@ -5,6 +5,7 @@ import com.hotdog.saas.application.entity.request.education.CreateEducationCours
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
+import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,11 +27,19 @@ public class EducationCourseCreateProcessor extends AbstractEducationProcessor<C
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(CreateEducationCourseRequest request, BaseResponse<Boolean> response) {
-        super.existsByName(request.getName());
+        valid(request);
 
+        // 保存课程
         EducationCourse educationCourse = buildEducationCourse(request);
-
         Integer saveFlag = educationCourseRepository.save(educationCourse);
+
+        // 保存课程分类
+        EducationCourseTypeRelation educationCourseTypeRelation = EducationCourseTypeRelation.builder()
+                .courseNo(educationCourse.getCourseNo())
+                .typeId(request.getCourseTypeId())
+                .build();
+        educationCourseTypeRelationRepository.save(educationCourseTypeRelation);
+
         response.setData(checkFlag(saveFlag));
     }
 
@@ -40,6 +49,12 @@ public class EducationCourseCreateProcessor extends AbstractEducationProcessor<C
         educationCourse.generateBusinessNo();
         educationCourse.setTenantId(getTenantId());
         return educationCourse;
+    }
+
+    private void valid(CreateEducationCourseRequest request){
+        super.existsByName(request.getName());
+        // 校验课程类型
+        super.existsByCourseTypeId(request.getCourseTypeId());
     }
 
 }

@@ -26,9 +26,9 @@ public class EducationCourseDetailProcessor extends AbstractEducationProcessor<Q
     @Override
     public void doExecute(QueryEducationCourseRequest request, BaseResponse<EducationCourseDTO> response) {
         String courseNo = request.getCourseNo();
-        super.exists(courseNo);
+        super.existsCourseNo(courseNo);
         EducationCourse educationCourse = educationCourseRepository.findByCourseNo(courseNo);
-        EducationCourseDTO educationCourseDTO = EducationCourseAssembler.INSTANCE.convertToDTO(educationCourse);
+        EducationCourseDTO educationCourseDTO = super.convertEducationCourseDTO(educationCourse);
         response.setData(educationCourseDTO);
     }
 

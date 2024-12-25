@@ -7,6 +7,7 @@ import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
+import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
@@ -35,9 +36,10 @@ public class EducationCourseListProcessor extends AbstractEducationProcessor<Edu
         PageRequest pageRequest = reqToPage(request);
 
         PageResponse<List<EducationCourse>> listPageResponse = educationCourseRepository.listPage(educationCourse, pageRequest);
-
+        List<EducationCourseDTO> list = listPageResponse.getData().stream().map(super::convertEducationCourseDTO).toList();
         PageResponseDTO<EducationCourseDTO> educationCoursePageResponseDTO = EducationCourseAssembler.INSTANCE.convertPage(listPageResponse);
 
+        educationCoursePageResponseDTO.setData(list);
         response.setData(educationCoursePageResponseDTO);
     }
 

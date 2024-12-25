@@ -24,7 +24,7 @@ public class EducationCourseDeleteProcessor extends AbstractEducationProcessor<D
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(DeleteEducationCourseRequest request, BaseResponse<Boolean> response) {
-        super.exists(request.getCourseNo());
+        super.existsCourseNo(request.getCourseNo());
         Integer removeFlag = educationCourseRepository.remove(request.getCourseNo(), request.getOperator());
         response.setData(checkFlag(removeFlag));
     }

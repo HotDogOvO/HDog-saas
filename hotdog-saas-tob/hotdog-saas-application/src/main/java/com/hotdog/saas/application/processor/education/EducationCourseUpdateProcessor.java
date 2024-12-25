@@ -5,9 +5,12 @@ import com.hotdog.saas.application.entity.request.education.UpdateEducationCours
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
+import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,10 +29,15 @@ public class EducationCourseUpdateProcessor extends AbstractEducationProcessor<U
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(UpdateEducationCourseRequest request, BaseResponse<Boolean> response) {
-        super.exists(request.getCourseNo());
-        // 保存
+        String courseNo = request.getCourseNo();
+        super.existsCourseNo(courseNo);
+
+        // 尝试修改课程类型
+        super.modifyCourseType(courseNo, request.getCourseTypeId());
+
         EducationCourse educationCourse = EducationCourseAssembler.INSTANCE.convert(request);
         educationCourse.setTenantId(getTenantId());
+
         Integer modifyFlag = educationCourseRepository.modify(educationCourse);
         response.setData(checkFlag(modifyFlag));
     }

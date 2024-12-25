@@ -34,6 +34,10 @@ public class UpdateEducationCourseRequest extends BaseRequestParam {
     @Schema(description = "课程价格")
     private BigDecimal coursePrice;
 
+    @NotNull(message = "课程分类不能为空")
+    @Schema(description = "课程分类ID")
+    private Long courseTypeId;
+
     @Override
     public void validate() {
         CourseTypeEnum courseTypeEnum = CourseTypeEnum.codeToEnum(courseType);

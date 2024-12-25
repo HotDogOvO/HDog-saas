@@ -15,6 +15,8 @@ public interface EducationCourseTypeRepository {
 
     List<EducationCourseType> list(EducationCourseType educationCourseType);
 
+    EducationCourseType findById(Long id);
+
     Long exists(Long id);
 
     Long existByTypeName(String typeName, Long wechatId);

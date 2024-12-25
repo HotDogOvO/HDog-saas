@@ -27,7 +27,7 @@ public class EducationCourseTypeDeleteProcessor extends AbstractEducationTypePro
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(DeleteEducationCourseTypeRequest request, BaseResponse<Boolean> response) {
         Long typeId = request.getId();
-        super.exists(typeId);
+        super.existsByCourseTypeId(typeId);
         Integer removeFlag = educationCourseTypeRepository.remove(typeId, request.getOperator());
         response.setData(checkFlag(removeFlag));
     }

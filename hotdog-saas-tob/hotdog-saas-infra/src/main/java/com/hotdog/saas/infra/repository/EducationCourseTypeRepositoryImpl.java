@@ -1,19 +1,15 @@
 package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
-import com.hotdog.saas.domain.model.EducationCourse;
 import com.hotdog.saas.domain.model.EducationCourseType;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 import com.hotdog.saas.domain.repository.EducationCourseTypeRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
-import com.hotdog.saas.infra.converter.EducationCourseConverter;
 import com.hotdog.saas.infra.converter.EducationCourseTypeConverter;
 import com.hotdog.saas.infra.dao.EducationCourseTypeMapper;
-import com.hotdog.saas.infra.entity.EducationCourseDO;
 import com.hotdog.saas.infra.entity.EducationCourseTypeDO;
 
 import org.springframework.stereotype.Repository;
@@ -64,6 +60,14 @@ public class EducationCourseTypeRepositoryImpl extends AbstractBaseRepository im
 
         List<EducationCourseTypeDO> educationCourseTypeDOList = educationCourseTypeMapper.selectList(queryWrapper);
         return educationCourseTypeDOList.stream().map(EducationCourseTypeConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
+    public EducationCourseType findById(Long id) {
+        LambdaQueryWrapper<EducationCourseTypeDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EducationCourseTypeDO::getId, id);
+        EducationCourseTypeDO educationCourseTypeDO = educationCourseTypeMapper.selectOne(queryWrapper);
+        return EducationCourseTypeConverter.INSTANCE.convert(educationCourseTypeDO);
     }
 
     @Override
