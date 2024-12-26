@@ -15,7 +15,7 @@ public class EducationCourseAttach {
     private String courseNo;
 
     /**
-     * 附件类型（1：图片 2：视频）
+     * 附件类型
      * @see com.hotdog.saas.domain.enums.education.CourseAttachTypeEnum
      */
     private Integer attachType;

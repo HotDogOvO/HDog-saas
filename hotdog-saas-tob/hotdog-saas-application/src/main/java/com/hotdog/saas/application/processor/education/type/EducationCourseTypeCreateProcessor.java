@@ -1,13 +1,9 @@
 package com.hotdog.saas.application.processor.education.type;
 
-import com.hotdog.saas.application.assembler.EducationCourseAssembler;
 import com.hotdog.saas.application.assembler.EducationCourseTypeAssembler;
-import com.hotdog.saas.application.entity.request.education.CreateEducationCourseRequest;
 import com.hotdog.saas.application.entity.request.education.type.CreateEducationCourseTypeRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.processor.education.AbstractEducationProcessor;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
-import com.hotdog.saas.domain.model.EducationCourse;
 import com.hotdog.saas.domain.model.EducationCourseType;
 
 import org.springframework.stereotype.Component;

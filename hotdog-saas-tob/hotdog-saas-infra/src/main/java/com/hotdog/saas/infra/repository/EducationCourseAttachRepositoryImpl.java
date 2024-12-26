@@ -25,12 +25,11 @@ public class EducationCourseAttachRepositoryImpl extends AbstractBaseRepository 
     }
 
     @Override
-    public Integer save(EducationCourseAttach educationCourseAttach) {
-        EducationCourseAttachDO educationCourseAttachDO = EducationCourseAttachConverter.INSTANCE.convert2DO(educationCourseAttach);
+    public Integer batchSave(List<EducationCourseAttach> list) {
+        List<EducationCourseAttachDO> educationCourseAttachDOList = EducationCourseAttachConverter.INSTANCE.convert2DOList(list);
         LocalDateTime now = DateUtils.now();
-        educationCourseAttachDO.setCreator(educationCourseAttach.getOperator()).setCreateTime(now)
-                .setUpdater(educationCourseAttach.getOperator()).setUpdateTime(now);
-        return educationCourseAttachMapper.insert(educationCourseAttachDO);
+        educationCourseAttachDOList.forEach(educationCourseAttachDO -> educationCourseAttachDO.setCreateTime(now).setUpdateTime(now));
+        return educationCourseAttachMapper.insert(educationCourseAttachDOList).size();
     }
 
     @Override

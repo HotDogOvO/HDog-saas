@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EducationCourseAttachRepository {
 
-    Integer save(EducationCourseAttach educationCourseAttach);
+    Integer batchSave(List<EducationCourseAttach> list);
 
     List<EducationCourseAttach> findByCourseNo(String courseNo);
 

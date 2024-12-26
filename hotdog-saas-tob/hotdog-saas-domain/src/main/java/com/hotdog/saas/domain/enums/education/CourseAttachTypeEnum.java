@@ -12,8 +12,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum CourseAttachTypeEnum implements EnumInterface<Integer> {
     UNKNOWN(0, "未知"),
-    PICTURE(1, "图片"),
-    VIDEO(2, "视频"),
+    COVER(1, "封面图"),
+    OTHER(9, "其他附件"),
     ;
     private final Integer code;
     private final String desc;

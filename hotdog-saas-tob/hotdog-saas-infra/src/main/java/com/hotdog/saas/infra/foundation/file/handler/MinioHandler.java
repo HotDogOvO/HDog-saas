@@ -31,7 +31,7 @@ public class MinioHandler extends AbstractFileHandler {
     }
 
     @Override
-    protected void upload(InputStream inputStream, String filePath) {
+    public void upload(InputStream inputStream, String filePath) {
         try {
             minioClient.putObject(PutObjectArgs.builder()
                     .bucket(minioBucketName)
@@ -45,7 +45,7 @@ public class MinioHandler extends AbstractFileHandler {
     }
 
     @Override
-    protected void copy(String sourceFilePath, String targetFilePath) {
+    public void copy(String sourceFilePath, String targetFilePath) {
         try {
             minioClient.copyObject(CopyObjectArgs.builder()
                     .bucket(minioBucketName)
@@ -62,12 +62,12 @@ public class MinioHandler extends AbstractFileHandler {
     }
 
     @Override
-    protected String download(String filePath) {
+    public String download(String filePath) {
         return "";
     }
 
     @Override
-    protected String generatorFilePath(String fileName, FilePathEnum filePathEnum) {
+    public String generatorFilePath(String fileName, FilePathEnum filePathEnum) {
         String formatDate = DateUtils.getFormatDate(DateUtils.YYYY_MM_DD_SLASH);
         // 格式：tmp/2024/12/26/(uuid)-test.txt
         return filePathEnum.getDesc() + Constants.SLASH + formatDate + Constants.SLASH + fileName;
@@ -81,7 +81,7 @@ public class MinioHandler extends AbstractFileHandler {
      * @return 真实文件名
      */
     @Override
-    protected String getRealFileName(String filePath) {
+    public String getRealFileName(String filePath) {
         int firstDashIndex = filePath.indexOf('-');
         if (firstDashIndex != -1) {
             return filePath.substring(firstDashIndex + 1);

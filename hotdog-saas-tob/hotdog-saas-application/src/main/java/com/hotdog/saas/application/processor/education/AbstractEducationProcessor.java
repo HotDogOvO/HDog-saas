@@ -14,12 +14,7 @@ import com.hotdog.saas.domain.model.EducationCourseType;
 import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 import com.hotdog.saas.domain.model.Role;
 import com.hotdog.saas.domain.model.UserRole;
-import com.hotdog.saas.domain.repository.EducationCourseRepository;
-import com.hotdog.saas.domain.repository.EducationCourseTypeRelationRepository;
-import com.hotdog.saas.domain.repository.EducationCourseTypeRepository;
-import com.hotdog.saas.domain.repository.RoleRepository;
-import com.hotdog.saas.domain.repository.UserRoleRepository;
-import com.hotdog.saas.domain.repository.WechatAppRepository;
+import com.hotdog.saas.domain.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,6 +36,9 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
 
     @Autowired
     protected EducationCourseTypeRelationRepository educationCourseTypeRelationRepository;
+
+    @Autowired
+    protected EducationCourseAttachRepository educationCourseAttachRepository;
 
     /**
      * 校验课程名是否存在
