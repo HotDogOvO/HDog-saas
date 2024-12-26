@@ -1,4 +1,4 @@
-package com.hotdog.saas.infra.foundation.file;
+package com.hotdog.saas.infra.foundation.file.handler;
 
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.enums.common.FileMiddleEnum;

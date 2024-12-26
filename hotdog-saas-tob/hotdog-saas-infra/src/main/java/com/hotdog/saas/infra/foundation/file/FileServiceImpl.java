@@ -4,6 +4,8 @@ import com.hotdog.saas.domain.enums.common.FilePathEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.foundation.FileService;
 import com.hotdog.saas.domain.model.common.FileUpload;
+import com.hotdog.saas.infra.foundation.file.handler.AbstractFileHandler;
+import com.hotdog.saas.infra.foundation.file.handler.FileHandlerFactory;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
