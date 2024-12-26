@@ -1,6 +1,7 @@
 project:
   version: @project.version@
   database: mysql
+  file: minio
   secret: 1234567890abcdef
   valid:
     sign: false

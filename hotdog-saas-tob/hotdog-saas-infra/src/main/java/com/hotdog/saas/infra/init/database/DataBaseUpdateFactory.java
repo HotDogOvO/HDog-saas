@@ -24,7 +24,7 @@ public class DataBaseUpdateFactory {
         DataBaseEnum dataBaseEnum = DataBaseEnum.descToEnum(StringUtils.lowerCase(DATABASE_TYPE));
         return switch (dataBaseEnum) {
             case MYSQL -> mysqlUpdateExecute;
-            case UNKNOWN -> throw new BusinessException(ResultCodeEnum.DATABASE_UPDATE_FAIL, "Unknown animal type: " + dataBaseEnum);
+            case UNKNOWN -> throw new BusinessException(ResultCodeEnum.DATABASE_UPDATE_FAIL, "未知的数据库类型: " + dataBaseEnum);
         };
     }
 

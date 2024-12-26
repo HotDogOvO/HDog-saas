@@ -75,4 +75,14 @@ public class Constants {
     public static final String CN_COMMA = "，";
 
     public static final String EN_COMMA = ",";
+
+    public static final String SLASH = "/";
+
+    public static final String DECIMAL_POINT = ".";
+
+    public static final String MIDDLE_LINE = "-";
+
+    // ======================= 文件后缀 =======================
+    public static final String FILE_PREFIX_MP4 = ".mp4";
+    public static final String FILE_PREFIX_VIDEO = ".iso";
 }

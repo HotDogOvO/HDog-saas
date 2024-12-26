@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class DateUtils {
 
@@ -13,6 +12,8 @@ public class DateUtils {
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
     public static final String YYYYMMDD = "yyyyMMdd";
+
+    public static final String YYYY_MM_DD_SLASH = "yyyy/MM/dd";
 
     public static LocalDateTime now() {
         return LocalDateTime.now();

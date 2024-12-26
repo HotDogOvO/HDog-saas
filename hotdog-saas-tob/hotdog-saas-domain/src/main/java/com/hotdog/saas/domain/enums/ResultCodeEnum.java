@@ -16,6 +16,7 @@ public enum ResultCodeEnum {
     TOKEN_FAIL("token_fail", "令牌非法"),
 
     // 系统异常
+    FILE_MIDDLE_FAIL("file_middle_fail", "文件中间件异常"),
     DATABASE_UPDATE_FAIL("database_update_fail", "数据库升级异常"),
     TIMESTAMP_INVALID("timestamp_invalid", "时间戳非法"),
     TIMESTAMP_EMPTY("timestamp_empty", "时间戳为空"),

@@ -1,51 +1,44 @@
 package com.hotdog.saas.web.controller;
 
-import com.hotdog.saas.application.entity.request.education.CreateEducationCourseRequest;
-import com.hotdog.saas.application.entity.request.education.DeleteEducationCourseRequest;
-import com.hotdog.saas.application.entity.request.education.EducationCoursePageRequest;
-import com.hotdog.saas.application.entity.request.education.QueryEducationCourseRequest;
-import com.hotdog.saas.application.entity.request.education.UpdateEducationCourseRequest;
+import com.hotdog.saas.application.entity.request.common.FileUploadFormalRequest;
+import com.hotdog.saas.application.entity.request.common.FileUploadTmpRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.entity.response.PageResponseDTO;
-import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
-import com.hotdog.saas.application.facade.EducationCourseFacade;
-import com.hotdog.saas.domain.foundation.FileService;
+import com.hotdog.saas.application.entity.response.common.FileUploadDTO;
+import com.hotdog.saas.application.facade.CommonFacade;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name = "公用接口管理")
 @RestController
 @RequestMapping("/api/hotdog/v1/common")
 public class CommonController {
 
-    @Autowired
-    private FileService fileService;
+    private final CommonFacade commonFacade;
 
-    @Operation(summary = "创建课程")
-    @PostMapping("/file/upload")
-    public BaseResponse<Boolean> createEducationCourse() {
-        File  file = new File("/Users/donghe.wu.o/Downloads/1.txt");
-        try {
-            InputStream inputStream = new FileInputStream(file);
-            fileService.upload("test", inputStream, ".txt");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public CommonController(CommonFacade commonFacade) {
+        this.commonFacade = commonFacade;
+    }
 
-        return new BaseResponse();
+    @Operation(summary = "上传临时文件")
+    @PostMapping("/file/upload-tmp")
+    public BaseResponse<FileUploadDTO> fileUploadTmp(@RequestPart("file") MultipartFile file) {
+        FileUploadTmpRequest request = FileUploadTmpRequest.builder().file(file).build();
+        return commonFacade.fileUploadTmp(request);
+    }
+
+    @Operation(summary = "上传正式文件")
+    @PostMapping("/file/upload-formal")
+    public BaseResponse<FileUploadDTO> fileUploadFormal(@RequestBody @Valid FileUploadFormalRequest request) {
+        return commonFacade.fileUploadFormal(request);
     }
 
 }
