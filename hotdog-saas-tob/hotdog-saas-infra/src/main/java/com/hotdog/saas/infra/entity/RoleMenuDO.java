@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_role_menu")
+@TableName("b_role_menu")
 public class RoleMenuDO implements Serializable {
 
     @Serial

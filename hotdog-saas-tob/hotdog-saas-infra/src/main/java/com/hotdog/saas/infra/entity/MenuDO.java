@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_menu")
+@TableName("b_menu")
 public class MenuDO implements Serializable {
 
     @Serial
@@ -95,7 +95,7 @@ public class MenuDO implements Serializable {
     private String updater;
 
     /**
-     * 创建时间
+     * 更新时间
      */
     private LocalDateTime updateTime;
 }

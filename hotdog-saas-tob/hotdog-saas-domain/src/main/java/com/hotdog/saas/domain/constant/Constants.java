@@ -53,6 +53,15 @@ public class Constants {
             "t_tenant", "t_user", "t_role", "t_menu", "t_system_properties"
     );
 
+    // ======================= 业务 =======================
+    public static final Integer EDUCATION_COURSE_COVER_MAX_COUNT = 1;
+
+    // ======================= FEIGN =======================
+    public static final String DEFAULT_WECHAT_TOKEN_GRANT_TYPE = "client_credential";
+
+    public static final String DEFAULT_WECHAT_LOGIN_GRANT_TYPE = "authorization_code";
+
+
     // ======================= SYSTEM PATH =======================
     /** 工作目录 */
     public static final String PROJECT_WORK_PATH = System.getProperty("user.dir");
@@ -69,4 +78,14 @@ public class Constants {
     public static final String CN_COMMA = "，";
 
     public static final String EN_COMMA = ",";
+
+    public static final String SLASH = "/";
+
+    public static final String DECIMAL_POINT = ".";
+
+    public static final String MIDDLE_LINE = "-";
+
+    // ======================= 文件后缀 =======================
+    public static final String FILE_PREFIX_MP4 = ".mp4";
+    public static final String FILE_PREFIX_VIDEO = ".iso";
 }

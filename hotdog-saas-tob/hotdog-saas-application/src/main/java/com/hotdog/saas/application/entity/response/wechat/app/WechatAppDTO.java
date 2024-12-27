@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
+@Schema(name = "小程序返回DTO", description = "小程序返回DTO")
 public class WechatAppDTO {
 
     @Schema(description = "小程序ID")

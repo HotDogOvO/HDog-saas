@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName("t_tenant")
+@TableName("b_tenant")
 public class TenantDO implements Serializable {
 
     @Serial
@@ -94,7 +94,7 @@ public class TenantDO implements Serializable {
     private String updater;
 
     /**
-     * 创建时间
+     * 更新时间
      */
     private LocalDateTime updateTime;
 }

@@ -22,7 +22,7 @@ public abstract class AbstractRoleProcessor<Req extends BaseRequestParam, Resp e
         if (StringUtils.isEmpty(name)) {
             return;
         }
-        Long nameCount = roleRepository.existsByName(name);
+        Long nameCount = roleRepository.existsByName(name, getTenantId());
         if (nameCount > 0) {
             throw new BusinessException(ResultCodeEnum.FAIL, "角色名重复");
         }

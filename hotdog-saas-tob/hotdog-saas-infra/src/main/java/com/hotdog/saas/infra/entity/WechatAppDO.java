@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_wechat_app")
+@TableName("b_wechat_app")
 public class WechatAppDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -93,7 +93,7 @@ public class WechatAppDO implements Serializable {
     private String updater;
 
     /**
-     * 创建时间
+     * 更新时间
      */
     private LocalDateTime updateTime;
 }

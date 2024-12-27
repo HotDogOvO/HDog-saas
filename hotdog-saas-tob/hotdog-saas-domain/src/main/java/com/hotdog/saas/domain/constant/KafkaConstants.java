@@ -17,6 +17,11 @@ public class KafkaConstants {
      */
     public static final String DEAD_LETTER_QUEUE_TOPIC = "hdog-saas-dlt";
 
+    /**
+     * 教育类 - 班级开班
+     */
+    public static final String EDUCATION_COURSE_CLASS_START_TOPIC = "education-course-class-start";
+
     /** 补偿任务ID */
     public static final String RETRY_COMPENSATE_ID = "messageId";
 

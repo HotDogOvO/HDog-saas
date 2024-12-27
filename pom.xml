@@ -31,6 +31,7 @@
         <lombok.version>1.18.36</lombok.version>
         <spring.version>3.3.6</spring.version>
         <bootstrap.version>4.2.0</bootstrap.version>
+        <feign.version>4.2.0</feign.version>
         <alibaba.cloud.version>2023.0.3.2</alibaba.cloud.version>
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <velocity.version>2.3</velocity.version>
@@ -46,6 +47,9 @@
         <jwt.version>0.12.6</jwt.version>
         <guava.version>33.3.1-jre</guava.version>
         <kafka.version>3.3.0</kafka.version>
+        <okhttp.version>4.12.0</okhttp.version>
+        <feign.okhttp.version>13.5</feign.okhttp.version>
+        <minio.version>8.5.14</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -81,6 +85,26 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
                 <version>${alibaba.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+
+            <!-- okhttp -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <!-- feign okhttp -->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.okhttp.version}</version>
             </dependency>
 
             <!-- knife3j文档 -->
@@ -209,11 +233,20 @@
                 <version>${guava.version}</version>
             </dependency>
 
+            <!-- kafka -->
             <dependency>
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${kafka.version}</version>
             </dependency>
+
+            <!-- minio -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

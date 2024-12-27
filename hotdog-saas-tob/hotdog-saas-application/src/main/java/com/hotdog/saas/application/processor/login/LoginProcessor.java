@@ -128,7 +128,7 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
         if (StringUtils.isEmpty(username)) {
             return;
         }
-        Long nameCount = userRepository.existsByUsername(username);
+        Long nameCount = userRepository.existsByUsername(username, null);
         if (nameCount == 0) {
             log.error("登录失败，用户名不存在，用户名：{}", username);
             throw new BusinessException(ResultCodeEnum.FAIL, "用户名不存在");

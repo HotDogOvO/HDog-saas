@@ -1,6 +1,7 @@
 project:
   version: @project.version@
   database: mysql
+  file: minio
   secret: 1234567890abcdef
   valid:
     sign: false
@@ -9,6 +10,10 @@ project:
     subject: HDOG-SAAS
     secret: Uz9BsvWY9sEelGfgrtuvVwN1LUoto21I6QzsBJosue3PJqXxehABxY3uv1IHvViq
     ttl: 86400
+  wechat:
+    app:
+      appid: wxd0f227c05d2ba737
+      secret: 727289df6aac05743ab42fe5c2e392fd
 
 server:
   port: 12306
@@ -19,6 +24,7 @@ spring:
   cloud:
     nacos:
       server-addr: 124.221.85.208:8848
+  # mysql
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -42,6 +48,7 @@ spring:
       stat-view-servlet:
         enabled: true
         url-pattern: /druid/*
+  # redis
   data:
     redis:
       host: 124.221.85.208
@@ -74,6 +81,14 @@ spring:
       ack-mode: manual
       poll-timeout: 3000
       missing-topics-fatal: false
+
+minio:
+  url: http://124.221.85.208:9000
+  access-key: admin
+  secret-key: cyfe67373
+#  access-key: WHG1IJSLSq2NhT0qYrk1
+#  secret-key: 3q7yrS3OriCtBmexV9XX8HSH5r7wTCAr4mm6VuJY
+  bucket-name: hdog-saas
 
 knife4j:
   enable: true

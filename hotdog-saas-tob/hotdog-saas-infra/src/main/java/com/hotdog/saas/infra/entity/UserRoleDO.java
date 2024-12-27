@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("t_user_role")
+@TableName("b_user_role")
 public class UserRoleDO implements Serializable {
 
     @Serial
