@@ -63,6 +63,16 @@ public class EducationCourseClassDO implements Serializable {
     private String classTime;
 
     /**
+     * 班级开班日期
+     */
+    private LocalDateTime classStartTime;
+
+    /**
+     * 班级结束日期
+     */
+    private LocalDateTime classFinishTime;
+
+    /**
      * 报名截止日期
      */
     private LocalDateTime registrationDeadline;

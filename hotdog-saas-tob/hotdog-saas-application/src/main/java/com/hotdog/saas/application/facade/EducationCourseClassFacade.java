@@ -4,6 +4,7 @@ import com.hotdog.saas.application.entity.request.education.clazz.CreateEducatio
 import com.hotdog.saas.application.entity.request.education.clazz.DeleteEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.QueryEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.EducationCourseClassPageRequest;
+import com.hotdog.saas.application.entity.request.education.clazz.StartEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.UpdateEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
@@ -18,6 +19,8 @@ public interface EducationCourseClassFacade {
     BaseResponse<EducationCourseClassDTO> educationCourseClassDetail(QueryEducationCourseClassRequest queryEducationCourseClassRequest);
 
     BaseResponse<Boolean> updateEducationCourseClass(UpdateEducationCourseClassRequest updateEducationCourseClassRequest);
+
+    BaseResponse<Boolean> startEducationCourseClass(StartEducationCourseClassRequest startEducationCourseClassRequest);
 
     BaseResponse<Boolean> deleteEducationCourseClass(DeleteEducationCourseClassRequest deleteEducationCourseClassRequest);
 

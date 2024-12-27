@@ -4,24 +4,20 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
-import com.hotdog.saas.domain.model.EducationCourse;
+import com.hotdog.saas.domain.enums.education.CourseClassStatusEnum;
 import com.hotdog.saas.domain.model.EducationCourseClass;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 import com.hotdog.saas.domain.repository.EducationCourseClassRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.EducationCourseClassConverter;
-import com.hotdog.saas.infra.converter.EducationCourseConverter;
 import com.hotdog.saas.infra.dao.EducationCourseClassMapper;
 import com.hotdog.saas.infra.entity.EducationCourseClassDO;
-import com.hotdog.saas.infra.entity.EducationCourseDO;
 
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import lombok.Data;
 
 @Repository
 public class EducationCourseClassRepositoryImpl extends AbstractBaseRepository implements EducationCourseClassRepository {
@@ -71,6 +67,16 @@ public class EducationCourseClassRepositoryImpl extends AbstractBaseRepository i
         LambdaQueryWrapper<EducationCourseClassDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassDO::getCourseNo, courseNo);
         queryWrapper.eq(EducationCourseClassDO::getDeleted, DeleteEnum.NO.getCode());
+        List<EducationCourseClassDO> educationCourseClassDOList = educationCourseClassMapper.selectList(queryWrapper);
+        return EducationCourseClassConverter.INSTANCE.convert2List(educationCourseClassDOList);
+    }
+
+    @Override
+    public List<EducationCourseClass> findBeforeStartTimeAndStatus(LocalDateTime startTime, CourseClassStatusEnum statusEnum) {
+        LambdaQueryWrapper<EducationCourseClassDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EducationCourseClassDO::getStatus, statusEnum.getCode());
+        queryWrapper.eq(EducationCourseClassDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.lt(EducationCourseClassDO::getClassStartTime, startTime);
         List<EducationCourseClassDO> educationCourseClassDOList = educationCourseClassMapper.selectList(queryWrapper);
         return EducationCourseClassConverter.INSTANCE.convert2List(educationCourseClassDOList);
     }

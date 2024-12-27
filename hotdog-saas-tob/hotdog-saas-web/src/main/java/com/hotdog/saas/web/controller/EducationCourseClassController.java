@@ -4,6 +4,7 @@ import com.hotdog.saas.application.entity.request.education.clazz.CreateEducatio
 import com.hotdog.saas.application.entity.request.education.clazz.DeleteEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.QueryEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.EducationCourseClassPageRequest;
+import com.hotdog.saas.application.entity.request.education.clazz.StartEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.UpdateEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
@@ -52,6 +53,12 @@ public class EducationCourseClassController {
     @PostMapping("/update")
     public BaseResponse<Boolean> updateEducationCourseClass(@RequestBody @Validated UpdateEducationCourseClassRequest updateEducationCourseClassRequest) {
         return educationCourseClassFacade.updateEducationCourseClass(updateEducationCourseClassRequest);
+    }
+
+    @Operation(summary = "开班")
+    @PostMapping("/start")
+    public BaseResponse<Boolean> startEducationCourseClass(@RequestBody @Validated StartEducationCourseClassRequest startEducationCourseClassRequest) {
+        return educationCourseClassFacade.startEducationCourseClass(startEducationCourseClassRequest);
     }
 
     @Operation(summary = "删除班级")

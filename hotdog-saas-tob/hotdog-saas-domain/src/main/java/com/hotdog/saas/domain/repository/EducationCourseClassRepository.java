@@ -1,8 +1,11 @@
 package com.hotdog.saas.domain.repository;
 
+import com.hotdog.saas.domain.enums.education.CourseClassStatusEnum;
 import com.hotdog.saas.domain.model.EducationCourseClass;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EducationCourseClassRepository {
@@ -14,6 +17,8 @@ public interface EducationCourseClassRepository {
     EducationCourseClass findByClassNo(String classNo);
 
     List<EducationCourseClass> findByCourseNo(String courseNo);
+
+    List<EducationCourseClass> findBeforeStartTimeAndStatus(LocalDateTime startTime, CourseClassStatusEnum statusEnum);
 
     Long exists(String classNo);
 

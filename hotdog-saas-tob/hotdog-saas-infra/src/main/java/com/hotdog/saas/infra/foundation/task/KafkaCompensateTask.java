@@ -33,7 +33,7 @@ public class KafkaCompensateTask {
         this.kafkaProducer = kafkaProducer;
     }
 
-//    @Scheduled(cron = "0 */10 * * * ?")
+    @Scheduled(cron = "0 */10 * * * ?")
     public void kafkaCompensateTask() {
         List<KafkaDeadMessage> list = kafkaDeadMessageRepository.list(KafkaDeadMessageStatusEnum.needRetryStatus());
         // 异步执行消息重试

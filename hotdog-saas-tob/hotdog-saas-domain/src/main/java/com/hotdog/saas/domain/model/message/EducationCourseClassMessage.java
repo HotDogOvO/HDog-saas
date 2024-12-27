@@ -1,7 +1,6 @@
-package com.hotdog.saas.domain.model;
+package com.hotdog.saas.domain.model.message;
 
 import com.hotdog.saas.domain.enums.education.EducationBusinessTypeEnum;
-import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
 import com.hotdog.saas.domain.utils.BusinessNoUtils;
 
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class EducationCourseClass {
+public class EducationCourseClassMessage extends BaseMessage {
 
     /**
      * 微信ID

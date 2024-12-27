@@ -38,6 +38,16 @@ public enum CourseClassStatusEnum implements EnumInterface<Integer> {
     }
 
     /**
+     * 校验班级信息是否可以修改
+     * @param code 班级状态
+     * @return 是否可以修改
+     */
+    public static boolean canUpdateClass(Integer code){
+        CourseClassStatusEnum courseClassStatusEnum = codeToEnum(code);
+        return !courseClassStatusEnum.equals(WAITING_START);
+    }
+
+    /**
      * 校验课程下的班级状态，用于验证课程是否可以删除
      * @param code 班级状态
      * @return 能否删除
