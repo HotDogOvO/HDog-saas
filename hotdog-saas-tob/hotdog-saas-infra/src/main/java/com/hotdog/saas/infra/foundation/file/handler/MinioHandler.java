@@ -15,6 +15,7 @@ import io.minio.CopySource;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import io.minio.RemoveObjectArgs;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -64,6 +65,19 @@ public class MinioHandler extends AbstractFileHandler {
     @Override
     public String download(String filePath) {
         return "";
+    }
+
+    @Override
+    public void delete(String filePath) {
+        try {
+            minioClient.removeObject(RemoveObjectArgs.builder()
+                    .bucket(minioBucketName)
+                    .object(filePath)
+                    .build());
+        } catch (Exception e) {
+            log.error("minio文件删除失败，原因是：{}", e.getMessage(), e);
+            throw new BusinessException("minio文件删除失败");
+        }
     }
 
     @Override

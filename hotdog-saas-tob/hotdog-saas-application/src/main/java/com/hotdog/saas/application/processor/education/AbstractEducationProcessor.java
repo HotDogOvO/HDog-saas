@@ -1,22 +1,26 @@
 package com.hotdog.saas.application.processor.education;
 
 import com.hotdog.saas.application.assembler.EducationCourseAssembler;
+import com.hotdog.saas.application.assembler.EducationCourseAttachAssembler;
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
+import com.hotdog.saas.application.entity.request.education.attach.EducationCourseAttachRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
+import com.hotdog.saas.application.entity.response.education.EducationCourseAttachDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
-import com.hotdog.saas.application.entity.response.user.UserDTO;
 import com.hotdog.saas.application.processor.AbstractBaseProcessor;
 import com.hotdog.saas.application.template.BizProcessorTemplate;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
+import com.hotdog.saas.domain.foundation.FileService;
 import com.hotdog.saas.domain.model.EducationCourse;
+import com.hotdog.saas.domain.model.EducationCourseAttach;
 import com.hotdog.saas.domain.model.EducationCourseType;
 import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
-import com.hotdog.saas.domain.model.Role;
-import com.hotdog.saas.domain.model.UserRole;
+import com.hotdog.saas.domain.model.common.FileUpload;
 import com.hotdog.saas.domain.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +43,9 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
 
     @Autowired
     protected EducationCourseAttachRepository educationCourseAttachRepository;
+
+    @Autowired
+    protected FileService fileService;
 
     /**
      * 校验课程名是否存在
@@ -108,12 +115,20 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
      */
     protected EducationCourseDTO convertEducationCourseDTO(EducationCourse educationCourse) {
         EducationCourseDTO educationCourseDTO = EducationCourseAssembler.INSTANCE.convertToDTO(educationCourse);
-        EducationCourseTypeRelation educationCourseTypeRelation = educationCourseTypeRelationRepository.findByCourseNo(educationCourse.getCourseNo());
+        // 课程分类
+        String courseNo = educationCourse.getCourseNo();
+        EducationCourseTypeRelation educationCourseTypeRelation = educationCourseTypeRelationRepository.findByCourseNo(courseNo);
         if (Objects.nonNull(educationCourseTypeRelation)) {
             EducationCourseType educationCourseType = educationCourseTypeRepository.findById(educationCourseTypeRelation.getTypeId());
             educationCourseDTO.setCourseTypeId(educationCourseType.getId());
             educationCourseDTO.setCourseTypeName(educationCourseType.getName());
         }
+        List<EducationCourseAttach> attachList = educationCourseAttachRepository.findByCourseNo(courseNo);
+        if(!CollectionUtils.isEmpty(attachList)){
+            List<EducationCourseAttachDTO> educationCourseAttachDTOList = EducationCourseAttachAssembler.INSTANCE.convert2DTOList(attachList);
+            educationCourseDTO.setAttachList(educationCourseAttachDTOList);
+        }
+
         return educationCourseDTO;
     }
 
@@ -132,7 +147,17 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
             educationCourseTypeRelation.setTypeId(courseTypeId);
             educationCourseTypeRelationRepository.save(educationCourseTypeRelation);
         }
+    }
 
+    protected EducationCourseAttach uploadAttach(EducationCourseAttachRequest attachRequest, String courseNo, String operator){
+        FileUpload fileUpload = fileService.uploadFormal(attachRequest.getAttachUrl());
+
+        return EducationCourseAttach.builder()
+                .courseNo(courseNo)
+                .attachUrl(fileUpload.getFilePath())
+                .attachType(attachRequest.getAttachType())
+                .operator(operator)
+                .build();
     }
 
 }

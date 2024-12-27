@@ -14,6 +14,8 @@ public interface FileService {
 
     InputStream downloadFile(String fileName);
 
+    Boolean deleteFile(String filePath);
+
     /**
      * 构建文件上传领域对象
      * @param fileName 文件名

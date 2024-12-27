@@ -57,4 +57,15 @@ public class FileServiceImpl implements FileService {
         return null;
     }
 
+    @Override
+    public Boolean deleteFile(String filePath) {
+        try {
+            fileHandler.delete(filePath);
+            return Boolean.TRUE;
+        } catch (Exception e) {
+            log.error("删除文件失败：", e);
+            throw new BusinessException("删除文件失败");
+        }
+    }
+
 }

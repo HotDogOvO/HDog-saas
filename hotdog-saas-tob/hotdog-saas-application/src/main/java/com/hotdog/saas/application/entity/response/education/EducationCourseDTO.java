@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -32,6 +33,9 @@ public class EducationCourseDTO {
 
     @Schema(description = "课程分类名")
     private String courseTypeName;
+
+    @Schema(description = "课程附件")
+    private List<EducationCourseAttachDTO> attachList;
 
     @Schema(description = "状态（0正常 1停用）")
     private Integer status;

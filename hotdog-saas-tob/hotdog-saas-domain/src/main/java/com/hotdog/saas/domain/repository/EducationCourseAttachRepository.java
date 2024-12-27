@@ -10,5 +10,5 @@ public interface EducationCourseAttachRepository {
 
     List<EducationCourseAttach> findByCourseNo(String courseNo);
 
-    Integer remove(Long id,String operator);
+    Integer batchRemove(List<Long> idList, String operator);
 }

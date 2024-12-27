@@ -9,7 +9,9 @@ import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
 import com.hotdog.saas.domain.model.EducationCourseAttach;
 import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
+import com.hotdog.saas.domain.model.common.FileUpload;
 
+import org.apache.commons.compress.utils.Lists;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,13 +47,8 @@ public class EducationCourseCreateProcessor extends AbstractEducationProcessor<C
         educationCourseTypeRelationRepository.save(educationCourseTypeRelation);
 
         // 3. 保存课程附件
-        List<EducationCourseAttachRequest> attachList = request.getAttachList();
-        List<EducationCourseAttach> educationCourseAttachList = EducationCourseAttachAssembler.INSTANCE.convert2List(attachList);
-        educationCourseAttachList = educationCourseAttachList.stream().peek(x -> {
-            x.setCourseNo(courseNo);
-            x.setOperator(request.getOperator());
-        }).collect(Collectors.toList());
-        educationCourseAttachRepository.batchSave(educationCourseAttachList);
+        List<EducationCourseAttach> attachList = buildEducationCourseAttachList(request.getAttachList(), courseNo, request.getOperator());
+        educationCourseAttachRepository.batchSave(attachList);
 
         response.setData(checkFlag(saveFlag));
     }
@@ -62,6 +59,23 @@ public class EducationCourseCreateProcessor extends AbstractEducationProcessor<C
         educationCourse.generateBusinessNo();
         educationCourse.setTenantId(getTenantId());
         return educationCourse;
+    }
+
+    /**
+     * 构建文件附件集合
+     * @param requestAttachList 请求中的文件附件
+     * @param courseNo 课程编号
+     * @param operator 操作人
+     * @return 课程文件集合
+     */
+    private List<EducationCourseAttach> buildEducationCourseAttachList(List<EducationCourseAttachRequest> requestAttachList, String courseNo, String operator) {
+        List<EducationCourseAttach> attachList = Lists.newArrayList();
+        requestAttachList.forEach(attach -> {
+            // 临时文件转移到正式目录
+            EducationCourseAttach educationCourseAttach = uploadAttach(attach, courseNo, operator);
+            attachList.add(educationCourseAttach);
+        });
+        return attachList;
     }
 
     private void valid(CreateEducationCourseRequest request) {

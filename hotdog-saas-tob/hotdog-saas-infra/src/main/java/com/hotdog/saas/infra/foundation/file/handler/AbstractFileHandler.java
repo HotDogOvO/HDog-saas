@@ -34,6 +34,8 @@ public abstract class AbstractFileHandler {
 
     public abstract String download(String filePath);
 
+    public abstract void delete(String filePath);
+
     /**
      * 生成文件路径
      *

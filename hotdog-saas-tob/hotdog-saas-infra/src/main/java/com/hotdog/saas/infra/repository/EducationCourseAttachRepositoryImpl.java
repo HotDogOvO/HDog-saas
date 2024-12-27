@@ -1,6 +1,7 @@
 package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.EducationCourseAttach;
 import com.hotdog.saas.domain.repository.EducationCourseAttachRepository;
@@ -43,12 +44,12 @@ public class EducationCourseAttachRepositoryImpl extends AbstractBaseRepository 
     }
 
     @Override
-    public Integer remove(Long id, String operator) {
-        EducationCourseAttachDO educationCourseAttachDO = new EducationCourseAttachDO()
-                .setId(id)
-                .setDeleted(DeleteEnum.YES.getCode())
-                .setUpdater(operator)
-                .setUpdateTime(DateUtils.now());
-        return educationCourseAttachMapper.updateById(educationCourseAttachDO);
+    public Integer batchRemove(List<Long> idList, String operator) {
+        LambdaUpdateWrapper<EducationCourseAttachDO> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(EducationCourseAttachDO::getDeleted, DeleteEnum.YES.getCode())
+                .set(EducationCourseAttachDO::getUpdater, operator)
+                .set(EducationCourseAttachDO::getUpdateTime, DateUtils.now());
+        updateWrapper.in(EducationCourseAttachDO::getId, idList);
+        return educationCourseAttachMapper.update(updateWrapper);
     }
 }
