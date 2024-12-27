@@ -1,7 +1,6 @@
 package com.hotdog.saas.application.processor.menu;
 
 import com.hotdog.saas.application.entity.request.menu.DeleteMenuRequest;
-import com.hotdog.saas.application.entity.request.role.DeleteRoleRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 

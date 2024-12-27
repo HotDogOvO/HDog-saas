@@ -1,13 +1,10 @@
 package com.hotdog.saas.application.processor.menu;
 
 import com.hotdog.saas.application.assembler.MenuAssembler;
-import com.hotdog.saas.application.assembler.RoleAssembler;
 import com.hotdog.saas.application.entity.request.menu.CreateMenuRequest;
-import com.hotdog.saas.application.entity.request.role.CreateRoleRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.Menu;
-import com.hotdog.saas.domain.model.Role;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

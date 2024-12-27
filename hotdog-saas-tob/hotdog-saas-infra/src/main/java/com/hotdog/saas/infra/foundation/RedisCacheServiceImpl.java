@@ -8,6 +8,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -30,7 +31,8 @@ public class RedisCacheServiceImpl implements RedisCacheService {
     public <T> void set(String key, T value, Long seconds) {
         String jsonString = JSONObject.toJSONString(value);
         RBucket<String> bucket = redissonClient.getBucket(key);
-        bucket.set(jsonString, seconds, TimeUnit.SECONDS);
+        Duration duration = Duration.ofSeconds(seconds);
+        bucket.set(jsonString, duration);
     }
 
     @Override

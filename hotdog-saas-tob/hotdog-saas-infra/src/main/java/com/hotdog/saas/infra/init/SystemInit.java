@@ -7,7 +7,6 @@ import com.hotdog.saas.infra.init.database.DataBaseUpdateFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.ZoneId;
 import java.util.TimeZone;
 
 @Component

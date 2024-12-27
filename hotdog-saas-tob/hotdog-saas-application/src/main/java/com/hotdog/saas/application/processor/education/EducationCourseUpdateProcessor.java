@@ -1,7 +1,5 @@
 package com.hotdog.saas.application.processor.education;
 
-import com.google.common.collect.Lists;
-
 import com.hotdog.saas.application.assembler.EducationCourseAssembler;
 import com.hotdog.saas.application.entity.request.education.UpdateEducationCourseRequest;
 import com.hotdog.saas.application.entity.request.education.attach.EducationCourseAttachRequest;
@@ -9,21 +7,16 @@ import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
 import com.hotdog.saas.domain.model.EducationCourseAttach;
-import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 import com.hotdog.saas.domain.utils.SystemUtils;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,10 +1,6 @@
 package com.hotdog.saas.application.entity.request.education.type;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
-import com.hotdog.saas.domain.enums.education.CourseTypeEnum;
-import com.hotdog.saas.domain.exception.BusinessException;
-
-import java.math.BigDecimal;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

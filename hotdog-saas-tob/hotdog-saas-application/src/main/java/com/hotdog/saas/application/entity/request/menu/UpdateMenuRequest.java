@@ -31,6 +31,5 @@ public class UpdateMenuRequest extends BaseMenuRequest {
 
     @Override
     public void validate() {
-        super.validate();
     }
 }

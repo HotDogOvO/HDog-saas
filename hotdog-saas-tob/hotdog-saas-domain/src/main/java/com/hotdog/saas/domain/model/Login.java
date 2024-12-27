@@ -1,9 +1,5 @@
 package com.hotdog.saas.domain.model;
 
-import com.hotdog.saas.domain.utils.SignUtils;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.time.LocalDateTime;
 
 import lombok.Builder;

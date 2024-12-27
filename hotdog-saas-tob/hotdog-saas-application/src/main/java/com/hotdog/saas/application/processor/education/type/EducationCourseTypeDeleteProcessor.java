@@ -1,9 +1,7 @@
 package com.hotdog.saas.application.processor.education.type;
 
-import com.hotdog.saas.application.entity.request.education.DeleteEducationCourseRequest;
 import com.hotdog.saas.application.entity.request.education.type.DeleteEducationCourseTypeRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.processor.education.AbstractEducationProcessor;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 
 import org.springframework.stereotype.Component;

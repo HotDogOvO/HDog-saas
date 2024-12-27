@@ -2,7 +2,6 @@ package com.hotdog.saas.web.controller;
 
 import com.hotdog.saas.application.entity.request.login.LoginRequest;
 import com.hotdog.saas.application.entity.request.login.LogoutRequest;
-import com.hotdog.saas.application.entity.request.user.CreateUserRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.login.LoginDTO;
 import com.hotdog.saas.application.facade.LoginFacade;

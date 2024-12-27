@@ -1,7 +1,6 @@
 package com.hotdog.saas.infra.foundation.kafka.consumer;
 
 import com.hotdog.saas.domain.constant.Constants;
-import com.hotdog.saas.domain.constant.KafkaConstants;
 import com.hotdog.saas.domain.enums.log.LogOperationEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.OperationLog;
@@ -9,14 +8,10 @@ import com.hotdog.saas.domain.model.message.CanalLogMessage;
 import com.hotdog.saas.domain.repository.OperationLogRepository;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.RetryableTopic;
 import org.springframework.kafka.support.Acknowledgment;
-import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;

@@ -93,7 +93,6 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
                 .setDeleted(DeleteEnum.YES.getCode())
                 .setUpdater(operator)
                 .setUpdateTime(DateUtils.now());
-        ;
         return userMapper.updateById(userDO);
     }
 }

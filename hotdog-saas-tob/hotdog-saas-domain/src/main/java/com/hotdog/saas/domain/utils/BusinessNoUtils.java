@@ -1,7 +1,6 @@
 package com.hotdog.saas.domain.utils;
 
 import com.hotdog.saas.domain.enums.education.EducationBusinessTypeEnum;
-import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
 
 /**
  * 生成业务单号工具类

@@ -3,12 +3,9 @@ package com.hotdog.saas.infra.foundation.task.education;
 import com.alibaba.fastjson2.JSONObject;
 import com.hotdog.saas.domain.constant.KafkaConstants;
 import com.hotdog.saas.domain.enums.education.CourseClassStatusEnum;
-import com.hotdog.saas.domain.enums.kafka.KafkaDeadMessageStatusEnum;
 import com.hotdog.saas.domain.foundation.KafkaProducer;
 import com.hotdog.saas.domain.model.EducationCourseClass;
-import com.hotdog.saas.domain.model.KafkaDeadMessage;
 import com.hotdog.saas.domain.repository.EducationCourseClassRepository;
-import com.hotdog.saas.domain.repository.KafkaDeadMessageRepository;
 import com.hotdog.saas.domain.utils.ConcurrentUtils;
 import com.hotdog.saas.domain.utils.DateUtils;
 

@@ -12,7 +12,6 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.RoleConverter;
 import com.hotdog.saas.infra.dao.RoleMapper;
 import com.hotdog.saas.infra.entity.RoleDO;
-import com.hotdog.saas.infra.entity.UserDO;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -113,7 +112,7 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
                 .setId(id)
                 .setDeleted(DeleteEnum.YES.getCode())
                 .setUpdater(operator)
-                .setUpdateTime(DateUtils.now());;
+                .setUpdateTime(DateUtils.now());
         return roleMapper.updateById(roleDO);
     }
 }

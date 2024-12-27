@@ -3,7 +3,6 @@ package com.hotdog.saas.application.entity.response.user;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.hotdog.saas.application.entity.response.role.RoleDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;

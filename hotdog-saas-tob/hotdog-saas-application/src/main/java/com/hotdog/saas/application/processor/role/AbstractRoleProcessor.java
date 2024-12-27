@@ -7,7 +7,6 @@ import com.hotdog.saas.application.template.BizProcessorTemplate;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.repository.RoleRepository;
-import com.hotdog.saas.domain.repository.UserRepository;
 import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -2,9 +2,6 @@ package com.hotdog.saas.application.service.impl;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.hotdog.saas.application.service.LoginService;
-import com.hotdog.saas.domain.enums.log.LogSuccessEnum;
-import com.hotdog.saas.domain.enums.log.LogTypeEnum;
-import com.hotdog.saas.domain.foundation.AuthService;
 import com.hotdog.saas.domain.model.LoginLog;
 import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.repository.LoginLogRepository;
@@ -14,11 +11,8 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.domain.utils.NetworkUtils;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
 

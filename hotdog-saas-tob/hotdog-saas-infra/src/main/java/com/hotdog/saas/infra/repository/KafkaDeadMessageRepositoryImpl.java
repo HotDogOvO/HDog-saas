@@ -1,7 +1,6 @@
 package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.hotdog.saas.domain.enums.kafka.KafkaDeadMessageStatusEnum;
 import com.hotdog.saas.domain.model.KafkaDeadMessage;
 import com.hotdog.saas.domain.repository.KafkaDeadMessageRepository;

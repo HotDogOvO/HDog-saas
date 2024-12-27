@@ -1,7 +1,5 @@
 package com.hotdog.saas.infra.foundation.kafka.consumer;
 
-import com.alibaba.fastjson2.JSONObject;
-import com.hotdog.saas.domain.constant.KafkaConstants;
 import com.hotdog.saas.domain.enums.kafka.KafkaDeadMessageStatusEnum;
 import com.hotdog.saas.domain.model.KafkaDeadMessage;
 import com.hotdog.saas.domain.repository.KafkaDeadMessageRepository;
@@ -10,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.Headers;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 

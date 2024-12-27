@@ -1,15 +1,11 @@
 package com.hotdog.saas.application.processor.education.clazz;
 
-import com.hotdog.saas.application.assembler.EducationCourseAssembler;
 import com.hotdog.saas.application.assembler.EducationCourseClassAssembler;
-import com.hotdog.saas.application.entity.request.education.EducationCoursePageRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.EducationCourseClassPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassDTO;
-import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
-import com.hotdog.saas.domain.model.EducationCourse;
 import com.hotdog.saas.domain.model.EducationCourseClass;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;

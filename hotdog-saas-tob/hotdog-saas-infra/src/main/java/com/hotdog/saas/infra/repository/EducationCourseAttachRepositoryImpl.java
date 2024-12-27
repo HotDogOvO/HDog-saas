@@ -7,7 +7,6 @@ import com.hotdog.saas.domain.model.EducationCourseAttach;
 import com.hotdog.saas.domain.repository.EducationCourseAttachRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.EducationCourseAttachConverter;
-import com.hotdog.saas.infra.converter.EducationCourseConverter;
 import com.hotdog.saas.infra.dao.EducationCourseAttachMapper;
 import com.hotdog.saas.infra.entity.EducationCourseAttachDO;
 
@@ -39,8 +38,7 @@ public class EducationCourseAttachRepositoryImpl extends AbstractBaseRepository 
         queryWrapper.eq(EducationCourseAttachDO::getCourseNo, courseNo);
         queryWrapper.eq(EducationCourseAttachDO::getDeleted, DeleteEnum.NO.getCode());
         List<EducationCourseAttachDO> educationCourseAttachList = educationCourseAttachMapper.selectList(queryWrapper);
-        List<EducationCourseAttach> list = educationCourseAttachList.stream().map(EducationCourseAttachConverter.INSTANCE::convert).toList();
-        return list;
+        return educationCourseAttachList.stream().map(EducationCourseAttachConverter.INSTANCE::convert).toList();
     }
 
     @Override

@@ -1,13 +1,11 @@
 package com.hotdog.saas.application.entity.request.user;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
-import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 
 import org.apache.commons.lang3.StringUtils;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

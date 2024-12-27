@@ -3,22 +3,13 @@ package com.hotdog.saas.infra.foundation.kafka.consumer;
 import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.constant.KafkaConstants;
 import com.hotdog.saas.domain.enums.education.CourseClassStatusEnum;
-import com.hotdog.saas.domain.enums.log.LogOperationEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.EducationCourseClass;
-import com.hotdog.saas.domain.model.OperationLog;
-import com.hotdog.saas.domain.model.message.CanalLogMessage;
 import com.hotdog.saas.domain.model.message.EducationCourseClassMessage;
 import com.hotdog.saas.domain.repository.EducationCourseClassRepository;
-import com.hotdog.saas.domain.repository.OperationLogRepository;
-
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.Acknowledgment;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 

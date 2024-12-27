@@ -10,13 +10,11 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.MenuConverter;
 import com.hotdog.saas.infra.dao.MenuMapper;
 import com.hotdog.saas.infra.entity.MenuDO;
-import com.hotdog.saas.infra.entity.RoleDO;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 

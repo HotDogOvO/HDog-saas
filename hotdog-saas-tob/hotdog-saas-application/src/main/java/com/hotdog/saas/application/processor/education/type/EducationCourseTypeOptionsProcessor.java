@@ -3,7 +3,6 @@ package com.hotdog.saas.application.processor.education.type;
 import com.hotdog.saas.application.assembler.EducationCourseTypeAssembler;
 import com.hotdog.saas.application.entity.request.education.type.EducationCourseTypeOptionsRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.entity.response.education.EducationCourseTypeDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseTypeOptionsDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourseType;

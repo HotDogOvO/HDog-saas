@@ -94,7 +94,7 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
                 .setId(id)
                 .setDeleted(DeleteEnum.YES.getCode())
                 .setUpdater(operator)
-                .setUpdateTime(DateUtils.now());;
+                .setUpdateTime(DateUtils.now());
         return tenantMapper.updateById(tenantDO);
     }
 

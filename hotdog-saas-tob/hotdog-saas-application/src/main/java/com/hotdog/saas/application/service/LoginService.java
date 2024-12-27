@@ -1,7 +1,5 @@
 package com.hotdog.saas.application.service;
 
-import com.hotdog.saas.domain.enums.log.LogSuccessEnum;
-import com.hotdog.saas.domain.enums.log.LogTypeEnum;
 import com.hotdog.saas.domain.model.LoginLog;
 
 public interface LoginService {
