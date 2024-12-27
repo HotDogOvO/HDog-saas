@@ -3,6 +3,9 @@ package com.hotdog.saas.infra.dao;
 import com.hotdog.saas.infra.entity.EducationCourseClassDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import org.apache.ibatis.annotations.Mapper;
+
+
 /**
  * <p>
  * 课程班级表 Mapper 接口
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author hotdog
  * @since 2024-12-24 15:07:54
  */
+@Mapper
 public interface EducationCourseClassMapper extends BaseMapper<EducationCourseClassDO> {
 
 }

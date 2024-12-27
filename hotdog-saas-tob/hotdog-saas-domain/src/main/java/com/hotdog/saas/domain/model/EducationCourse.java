@@ -1,6 +1,7 @@
 package com.hotdog.saas.domain.model;
 
 
+import com.hotdog.saas.domain.enums.education.EducationBusinessTypeEnum;
 import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
 import com.hotdog.saas.domain.utils.BusinessNoUtils;
 
@@ -90,6 +91,6 @@ public class EducationCourse {
      * 生成业务编号
      */
     public void generateBusinessNo(){
-        this.courseNo = BusinessNoUtils.generateBusinessNo(BusinessTypeEnum.EDUCATION);
+        this.courseNo = BusinessNoUtils.generateEducationBusinessNo(EducationBusinessTypeEnum.EDUCATION_COURSE);
     }
 }

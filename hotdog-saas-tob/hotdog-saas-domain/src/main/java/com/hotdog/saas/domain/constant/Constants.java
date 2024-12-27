@@ -53,6 +53,9 @@ public class Constants {
             "t_tenant", "t_user", "t_role", "t_menu", "t_system_properties"
     );
 
+    // ======================= 业务 =======================
+    public static final Integer EDUCATION_COURSE_COVER_MAX_COUNT = 1;
+
     // ======================= FEIGN =======================
     public static final String DEFAULT_WECHAT_TOKEN_GRANT_TYPE = "client_credential";
 

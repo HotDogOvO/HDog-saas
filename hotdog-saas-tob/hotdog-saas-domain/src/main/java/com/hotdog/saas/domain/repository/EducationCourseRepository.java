@@ -12,6 +12,8 @@ public interface EducationCourseRepository {
 
     PageResponse<List<EducationCourse>> listPage(EducationCourse educationCourse, PageRequest pageRequest);
 
+    List<EducationCourse> list(EducationCourse educationCourse);
+
     EducationCourse findByCourseNo(String courseNo);
 
     Long exists(String courseNo, Long tenantId);

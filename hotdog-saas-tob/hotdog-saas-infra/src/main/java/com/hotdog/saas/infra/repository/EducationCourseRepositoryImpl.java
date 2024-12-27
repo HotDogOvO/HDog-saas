@@ -11,9 +11,11 @@ import com.hotdog.saas.domain.model.page.PageResponse;
 import com.hotdog.saas.domain.repository.EducationCourseRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.EducationCourseConverter;
+import com.hotdog.saas.infra.converter.EducationCourseTypeConverter;
 import com.hotdog.saas.infra.converter.UserConverter;
 import com.hotdog.saas.infra.dao.EducationCourseMapper;
 import com.hotdog.saas.infra.entity.EducationCourseDO;
+import com.hotdog.saas.infra.entity.EducationCourseTypeDO;
 import com.hotdog.saas.infra.entity.UserDO;
 
 import org.springframework.stereotype.Repository;
@@ -57,6 +59,17 @@ public class EducationCourseRepositoryImpl extends AbstractBaseRepository implem
     }
 
     @Override
+    public List<EducationCourse> list(EducationCourse educationCourse) {
+        LambdaQueryWrapper<EducationCourseDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EducationCourseDO::getWechatId, educationCourse.getWechatId());
+        queryWrapper.eq(EducationCourseDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.orderByDesc(EducationCourseDO::getCreateTime);
+
+        List<EducationCourseDO> educationCourseDOList = educationCourseMapper.selectList(queryWrapper);
+        return educationCourseDOList.stream().map(EducationCourseConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
     public EducationCourse findByCourseNo(String courseNo) {
         LambdaQueryWrapper<EducationCourseDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseDO::getCourseNo, courseNo);
@@ -72,7 +85,6 @@ public class EducationCourseRepositoryImpl extends AbstractBaseRepository implem
                 .eq(EducationCourseDO::getTenantId, tenantId)
                 .eq(EducationCourseDO::getCourseNo, courseNo);
         return educationCourseMapper.selectCount(queryWrapper);
-
     }
 
     @Override

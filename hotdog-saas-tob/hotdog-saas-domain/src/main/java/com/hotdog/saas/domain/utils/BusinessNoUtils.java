@@ -1,5 +1,6 @@
 package com.hotdog.saas.domain.utils;
 
+import com.hotdog.saas.domain.enums.education.EducationBusinessTypeEnum;
 import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
 
 /**
@@ -15,11 +16,15 @@ public class BusinessNoUtils {
      * <li>业务前缀（2位）+ 雪花ID（20位）</li>
      * <li>线程安全</li>
      *
-     * @param businessType 业务类型
+     * @param businessTypeEnum 教育业务类型
      * @return 业务编号
      */
-    public static synchronized String generateBusinessNo(BusinessTypeEnum businessType) {
-        String bizPrefix = businessType.getBusinessNoPrefix();
+    public static String generateEducationBusinessNo(EducationBusinessTypeEnum businessTypeEnum) {
+        String bizPrefix = businessTypeEnum.getBusinessPrefix();
+        return generateBusinessNo(bizPrefix);
+    }
+
+    private static synchronized String generateBusinessNo(String bizPrefix) {
         return bizPrefix + SnowFlakeIdGenerator.nextId();
     }
 

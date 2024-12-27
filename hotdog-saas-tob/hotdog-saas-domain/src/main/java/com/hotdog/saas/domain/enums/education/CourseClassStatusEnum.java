@@ -1,7 +1,10 @@
 package com.hotdog.saas.domain.enums.education;
 
+import com.google.common.collect.Lists;
+
 import com.hotdog.saas.domain.enums.EnumInterface;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -32,6 +35,20 @@ public enum CourseClassStatusEnum implements EnumInterface<Integer> {
             }
         }
         return UNKNOWN;
+    }
+
+    /**
+     * 校验课程下的班级状态，用于验证课程是否可以删除
+     * @param code 班级状态
+     * @return 能否删除
+     */
+    public static boolean cantDeleteCourse(Integer code){
+        CourseClassStatusEnum courseClassStatusEnum = codeToEnum(code);
+        return cantDeleteCourseStatusList().contains(courseClassStatusEnum);
+    }
+
+    public static List<CourseClassStatusEnum> cantDeleteCourseStatusList(){
+        return Lists.newArrayList(WAITING_START, STARTING);
     }
 
 }

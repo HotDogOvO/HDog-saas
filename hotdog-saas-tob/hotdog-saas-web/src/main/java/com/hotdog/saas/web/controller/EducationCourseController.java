@@ -2,12 +2,14 @@ package com.hotdog.saas.web.controller;
 
 import com.hotdog.saas.application.entity.request.education.CreateEducationCourseRequest;
 import com.hotdog.saas.application.entity.request.education.DeleteEducationCourseRequest;
+import com.hotdog.saas.application.entity.request.education.EducationCourseOptionsRequest;
 import com.hotdog.saas.application.entity.request.education.EducationCoursePageRequest;
 import com.hotdog.saas.application.entity.request.education.QueryEducationCourseRequest;
 import com.hotdog.saas.application.entity.request.education.UpdateEducationCourseRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
+import com.hotdog.saas.application.entity.response.education.EducationCourseOptionsDTO;
 import com.hotdog.saas.application.facade.EducationCourseFacade;
 
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,13 +42,19 @@ public class EducationCourseController {
 
     @Operation(summary = "查询课程分页列表")
     @PostMapping("/list/page")
-    public BaseResponse<PageResponseDTO<EducationCourseDTO>> EducationCourseListPage(@RequestBody @Validated EducationCoursePageRequest EducationCoursePageRequest) {
+    public BaseResponse<PageResponseDTO<EducationCourseDTO>> educationCourseListPage(@RequestBody @Validated EducationCoursePageRequest EducationCoursePageRequest) {
         return educationCourseFacade.educationCourseListPage(EducationCoursePageRequest);
+    }
+
+    @Operation(summary = "查询课程下拉框")
+    @PostMapping("/options")
+    public BaseResponse<List<EducationCourseOptionsDTO>> educationCourseOptions(@RequestBody @Validated EducationCourseOptionsRequest educationCourseOptionsRequest) {
+        return educationCourseFacade.educationCourseOptions(educationCourseOptionsRequest);
     }
 
     @Operation(summary = "查询课程详情")
     @PostMapping("/detail")
-    public BaseResponse<EducationCourseDTO> EducationCourseDetail(@RequestBody @Validated QueryEducationCourseRequest queryEducationCourseRequest) {
+    public BaseResponse<EducationCourseDTO> educationCourseDetail(@RequestBody @Validated QueryEducationCourseRequest queryEducationCourseRequest) {
         return educationCourseFacade.educationCourseDetail(queryEducationCourseRequest);
     }
 

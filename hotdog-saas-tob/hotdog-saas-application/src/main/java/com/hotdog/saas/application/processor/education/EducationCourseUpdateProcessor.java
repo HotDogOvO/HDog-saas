@@ -43,7 +43,7 @@ public class EducationCourseUpdateProcessor extends AbstractEducationProcessor<U
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(UpdateEducationCourseRequest request, BaseResponse<Boolean> response) {
         String courseNo = request.getCourseNo();
-        super.existsCourseNo(courseNo);
+        super.existsByCourseNo(courseNo);
 
         // 1. 尝试修改课程类型
         super.modifyCourseType(courseNo, request.getCourseTypeId());

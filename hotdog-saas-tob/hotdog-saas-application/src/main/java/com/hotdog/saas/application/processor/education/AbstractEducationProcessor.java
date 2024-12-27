@@ -45,6 +45,9 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
     protected EducationCourseAttachRepository educationCourseAttachRepository;
 
     @Autowired
+    protected EducationCourseClassRepository educationCourseClassRepository;
+
+    @Autowired
     protected FileService fileService;
 
     /**
@@ -67,7 +70,7 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
      *
      * @param courseNo 课程编号
      */
-    protected void existsCourseNo(String courseNo) {
+    protected void existsByCourseNo(String courseNo) {
         if (StringUtils.isEmpty(courseNo)) {
             return;
         }
