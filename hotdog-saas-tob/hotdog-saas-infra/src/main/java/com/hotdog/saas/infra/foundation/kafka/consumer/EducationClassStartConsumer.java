@@ -8,6 +8,9 @@ import com.hotdog.saas.domain.model.EducationCourseClass;
 import com.hotdog.saas.domain.model.message.EducationCourseClassMessage;
 import com.hotdog.saas.domain.repository.EducationCourseClassRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 

@@ -5,6 +5,7 @@ import com.hotdog.saas.application.entity.request.education.clazz.EducationCours
 import com.hotdog.saas.application.entity.request.education.clazz.UpdateEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassDTO;
+import com.hotdog.saas.application.entity.response.education.EducationCourseClassOptionsDTO;
 import com.hotdog.saas.domain.model.EducationCourseClass;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
@@ -32,4 +33,7 @@ public interface EducationCourseClassAssembler {
             @Mapping(source = "name", target = "className")
     })
     EducationCourseClassDTO convertToDTO(EducationCourseClass educationCourseClass);
+
+    List<EducationCourseClassOptionsDTO> convertOptions(List<EducationCourseClass> list);
+
 }
