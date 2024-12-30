@@ -5,6 +5,7 @@ import com.hotdog.saas.application.entity.request.BaseRequestParam;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassDTO;
 import com.hotdog.saas.application.processor.education.AbstractEducationProcessor;
+import com.hotdog.saas.application.processor.education.clazz.AbstractEducationClassProcessor;
 import com.hotdog.saas.application.template.BizProcessorTemplate;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 import io.micrometer.common.util.StringUtils;
 
-public abstract class AbstractEducationClassScheduleProcessor<Req extends BaseRequestParam, Resp extends BaseResponse<?>> extends AbstractEducationProcessor<Req, Resp> implements BizProcessorTemplate<Req, Resp> {
+public abstract class AbstractEducationClassScheduleProcessor<Req extends BaseRequestParam, Resp extends BaseResponse<?>> extends AbstractEducationClassProcessor<Req, Resp> implements BizProcessorTemplate<Req, Resp> {
 
     /**
      * 校验课程表是否存在

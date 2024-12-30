@@ -1,11 +1,13 @@
 package com.hotdog.saas.web.controller;
 
+import com.hotdog.saas.application.entity.request.education.clazz.schedule.CalendarEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.CreateEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.DeleteEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.EducationCourseClassSchedulePageRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.UpdateEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
+import com.hotdog.saas.application.entity.response.education.EducationCourseClassScheduleCalendarDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassScheduleDTO;
 import com.hotdog.saas.application.facade.EducationCourseClassScheduleFacade;
 
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -36,8 +41,14 @@ public class EducationCourseClassScheduleController {
 
     @Operation(summary = "查询课程表分页列表")
     @PostMapping("/list/page")
-    public BaseResponse<PageResponseDTO<EducationCourseClassScheduleDTO>> EducationCourseClassScheduleListPage(@RequestBody @Validated EducationCourseClassSchedulePageRequest educationCourseClassSchedulePageRequest) {
+    public BaseResponse<PageResponseDTO<EducationCourseClassScheduleDTO>> educationCourseClassScheduleListPage(@RequestBody @Validated EducationCourseClassSchedulePageRequest educationCourseClassSchedulePageRequest) {
         return educationCourseClassScheduleFacade.educationCourseClassScheduleListPage(educationCourseClassSchedulePageRequest);
+    }
+
+    @Operation(summary = "查询课程表日历")
+    @PostMapping("/calendar")
+    public BaseResponse<List<EducationCourseClassScheduleCalendarDTO>> educationCourseClassScheduleCalendar(@RequestBody @Validated CalendarEducationCourseClassScheduleRequest calendarEducationCourseClassScheduleRequest) {
+        return educationCourseClassScheduleFacade.educationCourseClassScheduleCalendar(calendarEducationCourseClassScheduleRequest);
     }
 
     @Operation(summary = "更新课程表")

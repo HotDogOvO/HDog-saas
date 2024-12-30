@@ -4,6 +4,7 @@ import com.hotdog.saas.application.entity.request.education.clazz.schedule.Creat
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.EducationCourseClassSchedulePageRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.UpdateEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
+import com.hotdog.saas.application.entity.response.education.EducationCourseClassScheduleCalendarDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassScheduleDTO;
 import com.hotdog.saas.domain.model.EducationCourseClassSchedule;
 import com.hotdog.saas.domain.model.page.PageResponse;
@@ -25,5 +26,7 @@ public interface EducationCourseClassScheduleAssembler {
     EducationCourseClassSchedule convert(UpdateEducationCourseClassScheduleRequest updateEducationCourseClassScheduleRequest);
 
     PageResponseDTO<EducationCourseClassScheduleDTO> convertPage(PageResponse<List<EducationCourseClassSchedule>> pageResponse);
+
+    List<EducationCourseClassScheduleDTO> convertList(List<EducationCourseClassSchedule> EducationCourseClassScheduleList);
 
 }
