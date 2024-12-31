@@ -12,6 +12,7 @@ import com.hotdog.saas.application.template.BizProcessorTemplate;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.foundation.FileService;
+import com.hotdog.saas.domain.foundation.RedisCacheService;
 import com.hotdog.saas.domain.model.EducationCourse;
 import com.hotdog.saas.domain.model.EducationCourseAttach;
 import com.hotdog.saas.domain.model.EducationCourseType;
@@ -55,6 +56,9 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
 
     @Autowired
     protected FileService fileService;
+
+    @Autowired
+    protected RedisCacheService redisCacheService;
 
     /**
      * 校验课程名是否存在

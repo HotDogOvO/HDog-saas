@@ -22,6 +22,11 @@ public class KafkaConstants {
      */
     public static final String EDUCATION_COURSE_CLASS_START_TOPIC = "education-course-class-start";
 
+    /**
+     * 教育类 - 课程（上课 & 下课）
+     */
+    public static final String EDUCATION_COURSE_TASK_TOPIC = "education-course-task";
+
     /** 补偿任务ID */
     public static final String RETRY_COMPENSATE_ID = "messageId";
 

@@ -45,4 +45,13 @@ public class DateUtils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         return localDateTime.format(formatter);
     }
+
+    public static Long getTimestamp(){
+        return getTimestamp(DateUtils.now());
+    }
+
+    public static Long getTimestamp(LocalDateTime localDateTime){
+        ZoneId zoneId = ZoneId.systemDefault();
+        return localDateTime.atZone(zoneId).toInstant().toEpochMilli();
+    }
 }

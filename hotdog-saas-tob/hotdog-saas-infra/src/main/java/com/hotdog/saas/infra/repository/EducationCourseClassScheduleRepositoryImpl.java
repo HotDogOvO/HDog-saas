@@ -1,8 +1,11 @@
 package com.hotdog.saas.infra.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
+import com.hotdog.saas.domain.enums.education.CourseClassScheduleStatusEnum;
 import com.hotdog.saas.domain.model.EducationCourseClassSchedule;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
@@ -27,12 +30,13 @@ public class EducationCourseClassScheduleRepositoryImpl extends AbstractBaseRepo
     }
 
     @Override
-    public Integer save(EducationCourseClassSchedule educationCourseClassSchedule) {
+    public Long save(EducationCourseClassSchedule educationCourseClassSchedule) {
         EducationCourseClassScheduleDO educationCourseClassScheduleDO = EducationCourseClassScheduleConverter.INSTANCE.convert2DO(educationCourseClassSchedule);
         LocalDateTime now = DateUtils.now();
         educationCourseClassScheduleDO.setCreator(educationCourseClassSchedule.getOperator()).setCreateTime(now)
                 .setUpdater(educationCourseClassSchedule.getOperator()).setUpdateTime(now);
-        return educationCourseClassScheduleMapper.insert(educationCourseClassScheduleDO);
+        educationCourseClassScheduleMapper.insert(educationCourseClassScheduleDO);
+        return educationCourseClassScheduleDO.getId();
     }
 
     @Override
@@ -49,6 +53,15 @@ public class EducationCourseClassScheduleRepositoryImpl extends AbstractBaseRepo
         PageResponse<List<EducationCourseClassSchedule>> listPageResponse = pageConverter(pageResult);
         listPageResponse.setData(list);
         return listPageResponse;
+    }
+
+    @Override
+    public EducationCourseClassSchedule findById(Long id) {
+        LambdaQueryWrapper<EducationCourseClassScheduleDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EducationCourseClassScheduleDO::getId, id);
+        queryWrapper.eq(EducationCourseClassScheduleDO::getDeleted, DeleteEnum.NO.getCode());
+        EducationCourseClassScheduleDO educationCourseClassScheduleDO = educationCourseClassScheduleMapper.selectOne(queryWrapper);
+        return EducationCourseClassScheduleConverter.INSTANCE.convert(educationCourseClassScheduleDO);
     }
 
     @Override
@@ -88,6 +101,17 @@ public class EducationCourseClassScheduleRepositoryImpl extends AbstractBaseRepo
                 .setUpdater(educationCourseClassSchedule.getOperator())
                 .setUpdateTime(DateUtils.now());
         return educationCourseClassScheduleMapper.updateById(educationCourseClassScheduleDO);
+    }
+
+    @Override
+    public Integer modifyStatusInIdList(List<Long> idList, CourseClassScheduleStatusEnum statusEnum) {
+        LambdaUpdateWrapper<EducationCourseClassScheduleDO> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.in(EducationCourseClassScheduleDO::getId, idList);
+        EducationCourseClassScheduleDO educationCourseClassScheduleDO = new EducationCourseClassScheduleDO()
+                .setStatus(statusEnum.getCode())
+                .setUpdater(Constants.SYSTEM_OPERATOR)
+                .setUpdateTime(DateUtils.now());
+        return educationCourseClassScheduleMapper.update(educationCourseClassScheduleDO, updateWrapper);
     }
 
     @Override

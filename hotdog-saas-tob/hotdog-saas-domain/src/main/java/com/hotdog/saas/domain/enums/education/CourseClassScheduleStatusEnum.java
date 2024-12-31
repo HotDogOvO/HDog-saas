@@ -33,4 +33,13 @@ public enum CourseClassScheduleStatusEnum implements EnumInterface<Integer> {
         return UNKNOWN;
     }
 
+    /**
+     * 校验课程表信息是否可以修改
+     * @param code 课程表状态
+     * @return 是否可以修改
+     */
+    public static boolean canUpdateClassSchedule(Integer code){
+        CourseClassScheduleStatusEnum courseClassScheduleStatusEnum = codeToEnum(code);
+        return !courseClassScheduleStatusEnum.equals(WAITING_START);
+    }
 }

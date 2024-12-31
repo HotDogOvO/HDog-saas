@@ -1,14 +1,11 @@
 package com.hotdog.saas.application.processor.education.clazz.schedule;
 
-import com.hotdog.saas.application.assembler.EducationCourseClassAssembler;
 import com.hotdog.saas.application.assembler.EducationCourseClassScheduleAssembler;
-import com.hotdog.saas.application.entity.request.education.clazz.UpdateEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.UpdateEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
-import com.hotdog.saas.domain.enums.education.CourseClassStatusEnum;
+import com.hotdog.saas.domain.enums.education.CourseClassScheduleStatusEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
-import com.hotdog.saas.domain.model.EducationCourseClass;
 import com.hotdog.saas.domain.model.EducationCourseClassSchedule;
 
 import org.springframework.stereotype.Component;
@@ -31,10 +28,23 @@ public class EducationCourseClassScheduleUpdateProcessor extends AbstractEducati
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(UpdateEducationCourseClassScheduleRequest request, BaseResponse<Boolean> response) {
-        super.existsByClassScheduleId(request.getId());
+        Long id = request.getId();
+        valid(id);
+        super.removeCourseTaskDelayQueue(id);
+
         EducationCourseClassSchedule educationCourseClassSchedule = EducationCourseClassScheduleAssembler.INSTANCE.convert(request);
         Integer modifyFlag = educationCourseClassScheduleRepository.modify(educationCourseClassSchedule);
+
+        super.pushCourseTaskDelayQueue(id, educationCourseClassSchedule.getClassBeginTime(), educationCourseClassSchedule.getClassEndTime());
         response.setData(checkFlag(modifyFlag));
+    }
+
+    private void valid(Long id){
+        super.existsByClassScheduleId(id);
+        EducationCourseClassSchedule educationCourseClassSchedule = educationCourseClassScheduleRepository.findById(id);
+        if(CourseClassScheduleStatusEnum.canUpdateClassSchedule(educationCourseClassSchedule.getStatus())){
+            throw new BusinessException("当前课程表状态不允许修改");
+        }
     }
 
 }

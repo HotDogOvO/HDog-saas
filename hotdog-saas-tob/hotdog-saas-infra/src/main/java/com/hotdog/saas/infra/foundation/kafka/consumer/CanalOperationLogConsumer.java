@@ -40,7 +40,7 @@ public class CanalOperationLogConsumer extends AbstractKafkaConsumer<CanalLogMes
             LogOperationEnum logOperationEnum = LogOperationEnum.getByAction(canalLogMessage.getType());
             List<OperationLog> operationLogList = logOperationEnum.execute(canalLogMessage);
 
-            log.info("监听canal-kafka消息，请求原串：{}", message);
+            log.info("监听canal-kafka消息，解析原串：{}", operationLogList);
             Integer saveCount = operationLogRepository.batchSave(operationLogList);
 
             // 如果是补偿任务，需要更新补偿任务表的状态

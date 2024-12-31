@@ -1,6 +1,5 @@
 package com.hotdog.saas.application.processor.education.clazz.schedule;
 
-import com.hotdog.saas.application.entity.request.education.clazz.DeleteEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.DeleteEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
@@ -25,8 +24,11 @@ public class EducationCourseClassScheduleDeleteProcessor extends AbstractEducati
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(DeleteEducationCourseClassScheduleRequest request, BaseResponse<Boolean> response) {
-        super.existsByClassScheduleId(request.getId());
-        Integer removeFlag = educationCourseClassScheduleRepository.remove(request.getId(), request.getOperator());
+        Long id = request.getId();
+        super.existsByClassScheduleId(id);
+        Integer removeFlag = educationCourseClassScheduleRepository.remove(id, request.getOperator());
+
+        super.removeCourseTaskDelayQueue(id);
         response.setData(checkFlag(removeFlag));
     }
 

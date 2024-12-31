@@ -2,6 +2,8 @@ package com.hotdog.saas.domain.foundation;
 
 import org.redisson.api.RLock;
 
+import java.util.List;
+
 public interface RedisCacheService {
 
     /**
@@ -47,5 +49,15 @@ public interface RedisCacheService {
      * @return 锁
      */
     RLock getLock(String lockName);
+
+    <T> List<T> zGet(String key, Class<T> clazz);
+
+    <T> List<T> zGetRange(String key, Long startScore, Long endScore);
+
+    <T> void zSet(String key, T value, Long score);
+
+    <T> void zDelete(String key, T value);
+
+    <T> void zDeleteRange(String key, Long startScore, Long endScore);
 
 }
