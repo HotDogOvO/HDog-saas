@@ -6,20 +6,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(name = "班级人员返回DTO", description = "班级人员返回DTO")
-public class EducationCourseClassPersonDTO {
-
-    @Schema(description = "课程表ID")
-    private Long id;
+@Schema(name = "授课记录返回DTO", description = "授课记录返回DTO")
+public class EducationCourseClassRecordDTO {
 
     @Schema(description = "班级编号")
     private String classNo;
 
-    @Schema(description = "人员类型（1：教师 2：学员）")
-    private Integer type;
+    @Schema(description = "课程开始时间")
+    private LocalDateTime classBeginTime;
 
-    @Schema(description = "人员OpenId")
-    private String peopleOpenId;
+    @Schema(description = "课程结束时间")
+    private LocalDateTime classEndTime;
+
+    @Schema(description = "授课教师")
+    private String teacher;
+
+    @Schema(description = "上课人数")
+    private Integer studentCount;
 
     @Schema(description = "创建人")
     private String creator;

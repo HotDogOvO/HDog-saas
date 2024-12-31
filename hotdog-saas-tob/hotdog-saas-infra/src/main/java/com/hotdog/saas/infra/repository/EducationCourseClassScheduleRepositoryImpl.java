@@ -65,6 +65,15 @@ public class EducationCourseClassScheduleRepositoryImpl extends AbstractBaseRepo
     }
 
     @Override
+    public List<EducationCourseClassSchedule> findInIdList(List<Long> idList) {
+        LambdaQueryWrapper<EducationCourseClassScheduleDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(EducationCourseClassScheduleDO::getId, idList);
+        queryWrapper.eq(EducationCourseClassScheduleDO::getDeleted, DeleteEnum.NO.getCode());
+        List<EducationCourseClassScheduleDO> educationCourseClassScheduleDOList = educationCourseClassScheduleMapper.selectList(queryWrapper);
+        return educationCourseClassScheduleDOList.stream().map(EducationCourseClassScheduleConverter.INSTANCE::convert).toList();
+    }
+
+    @Override
     public List<EducationCourseClassSchedule> findByClassNo(String classNo) {
         LambdaQueryWrapper<EducationCourseClassScheduleDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassScheduleDO::getClassNo, classNo);

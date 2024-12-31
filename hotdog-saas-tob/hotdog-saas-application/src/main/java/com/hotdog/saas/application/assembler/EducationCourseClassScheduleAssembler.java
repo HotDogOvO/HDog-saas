@@ -20,12 +20,12 @@ public interface EducationCourseClassScheduleAssembler {
 
     EducationCourseClassSchedule convert(CreateEducationCourseClassScheduleRequest createEducationCourseClassScheduleRequest);
 
-    EducationCourseClassSchedule convert(EducationCourseClassSchedulePageRequest EducationCourseClassSchedulePageRequest);
+    EducationCourseClassSchedule convert(EducationCourseClassSchedulePageRequest educationCourseClassSchedulePageRequest);
 
     EducationCourseClassSchedule convert(UpdateEducationCourseClassScheduleRequest updateEducationCourseClassScheduleRequest);
 
     PageResponseDTO<EducationCourseClassScheduleDTO> convertPage(PageResponse<List<EducationCourseClassSchedule>> pageResponse);
 
-    List<EducationCourseClassScheduleDTO> convertList(List<EducationCourseClassSchedule> EducationCourseClassScheduleList);
+    List<EducationCourseClassScheduleDTO> convertList(List<EducationCourseClassSchedule> educationCourseClassScheduleList);
 
 }

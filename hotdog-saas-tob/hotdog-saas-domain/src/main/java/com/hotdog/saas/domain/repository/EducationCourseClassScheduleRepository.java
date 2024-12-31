@@ -16,6 +16,8 @@ public interface EducationCourseClassScheduleRepository {
 
     EducationCourseClassSchedule findById(Long id);
 
+    List<EducationCourseClassSchedule> findInIdList(List<Long> idList);
+
     List<EducationCourseClassSchedule> findByClassNo(String classNo);
 
     Long exists(Long id);
