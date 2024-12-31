@@ -1,7 +1,6 @@
 package com.hotdog.saas.domain.model;
 
 import com.hotdog.saas.domain.enums.education.EducationBusinessTypeEnum;
-import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
 import com.hotdog.saas.domain.utils.BusinessNoUtils;
 
 import java.math.BigDecimal;

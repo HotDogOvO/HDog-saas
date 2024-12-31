@@ -1,7 +1,6 @@
 package com.hotdog.saas.domain.repository;
 
 import com.hotdog.saas.domain.model.Role;
-import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
@@ -9,7 +8,7 @@ import java.util.List;
 
 public interface RoleRepository {
 
-    Integer save(Role role);
+    Long save(Role role);
 
     PageResponse<List<Role>> listPage(Role role, PageRequest pageRequest);
 

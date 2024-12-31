@@ -1,7 +1,6 @@
 package com.hotdog.saas.application.processor.role;
 
 import com.hotdog.saas.application.entity.request.role.DeleteRoleRequest;
-import com.hotdog.saas.application.entity.request.user.DeleteUserRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import lombok.extern.slf4j.Slf4j;

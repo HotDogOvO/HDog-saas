@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserRepository {
 
-    Integer save(User user);
+    Long save(User user);
 
     PageResponse<List<User>> listPage(User user, PageRequest pageRequest);
 

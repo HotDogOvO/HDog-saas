@@ -26,13 +26,12 @@ public class LoginLogRepositoryImpl extends AbstractBaseRepository implements Lo
     }
 
     @Override
-    public Integer save(LoginLog loginLog) {
+    public Long save(LoginLog loginLog) {
         LoginLogDO loginLogDO = LoginLogConverter.INSTANCE.convert2DO(loginLog);
         LocalDateTime now = DateUtils.now();
         loginLogDO.setCreator(loginLog.getOperator()).setCreateTime(now);
-
-        return loginLogMapper.insert(loginLogDO);
-
+        loginLogMapper.insert(loginLogDO);
+        return loginLogDO.getId();
     }
 
     @Override

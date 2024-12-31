@@ -1,7 +1,6 @@
 package com.hotdog.saas.web.controller;
 
 import com.hotdog.saas.application.entity.request.role.*;
-import com.hotdog.saas.application.entity.request.user.PermissionUserRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.role.RoleDTO;

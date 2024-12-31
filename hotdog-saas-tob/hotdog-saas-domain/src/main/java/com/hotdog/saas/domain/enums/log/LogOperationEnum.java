@@ -1,26 +1,19 @@
 package com.hotdog.saas.domain.enums.log;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
-import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.enums.EnumInterface;
 import com.hotdog.saas.domain.model.OperationLog;
 import com.hotdog.saas.domain.model.message.CanalLogMessage;
 import com.hotdog.saas.domain.utils.DateUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 

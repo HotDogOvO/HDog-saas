@@ -1,6 +1,5 @@
 package com.hotdog.saas.infra.foundation.kafka.consumer;
 
-import com.alibaba.fastjson2.JSONObject;
 import com.hotdog.saas.domain.constant.KafkaConstants;
 import com.hotdog.saas.domain.enums.kafka.KafkaDeadMessageStatusEnum;
 import com.hotdog.saas.domain.model.KafkaDeadMessage;
@@ -28,7 +27,7 @@ public class DeadLetterQueueConsumer {
         this.kafkaDeadMessageRepository = kafkaDeadMessageRepository;
     }
 
-//    @KafkaListener(topics = KafkaConstants.DEAD_LETTER_QUEUE_TOPIC)
+    @KafkaListener(topics = KafkaConstants.DEAD_LETTER_QUEUE_TOPIC)
     public void handleDltMessage(ConsumerRecord<String, String> record, Acknowledgment acknowledgment) {
         try{
             KafkaDeadMessage kafkaDeadMessage = KafkaDeadMessage.builder()

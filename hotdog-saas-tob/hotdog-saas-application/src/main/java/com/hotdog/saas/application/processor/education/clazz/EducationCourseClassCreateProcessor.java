@@ -1,23 +1,15 @@
 package com.hotdog.saas.application.processor.education.clazz;
 
-import com.hotdog.saas.application.assembler.EducationCourseAssembler;
 import com.hotdog.saas.application.assembler.EducationCourseClassAssembler;
-import com.hotdog.saas.application.entity.request.education.CreateEducationCourseRequest;
-import com.hotdog.saas.application.entity.request.education.attach.EducationCourseAttachRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.CreateEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
-import com.hotdog.saas.domain.model.EducationCourseAttach;
 import com.hotdog.saas.domain.model.EducationCourseClass;
-import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 
-import org.apache.commons.compress.utils.Lists;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +31,8 @@ public class EducationCourseClassCreateProcessor extends AbstractEducationClassP
     public void doExecute(CreateEducationCourseClassRequest request, BaseResponse<Boolean> response) {
         valid(request);
         EducationCourseClass educationCourseClass = buildEducationCourseClass(request);
-        Integer saveFlag = educationCourseClassRepository.save(educationCourseClass);
-        response.setData(checkFlag(saveFlag));
+        educationCourseClassRepository.save(educationCourseClass);
+        response.setData(Boolean.TRUE);
     }
 
     private EducationCourseClass buildEducationCourseClass(CreateEducationCourseClassRequest request) {

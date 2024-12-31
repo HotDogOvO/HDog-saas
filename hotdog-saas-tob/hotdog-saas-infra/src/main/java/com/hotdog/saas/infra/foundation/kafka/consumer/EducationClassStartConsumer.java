@@ -3,22 +3,15 @@ package com.hotdog.saas.infra.foundation.kafka.consumer;
 import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.constant.KafkaConstants;
 import com.hotdog.saas.domain.enums.education.CourseClassStatusEnum;
-import com.hotdog.saas.domain.enums.log.LogOperationEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.EducationCourseClass;
-import com.hotdog.saas.domain.model.OperationLog;
-import com.hotdog.saas.domain.model.message.CanalLogMessage;
 import com.hotdog.saas.domain.model.message.EducationCourseClassMessage;
 import com.hotdog.saas.domain.repository.EducationCourseClassRepository;
-import com.hotdog.saas.domain.repository.OperationLogRepository;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,12 +27,12 @@ public class EducationClassStartConsumer extends AbstractKafkaConsumer<Education
 
     @Transactional(rollbackFor = Exception.class)
     @KafkaListener(topics = KafkaConstants.EDUCATION_COURSE_CLASS_START_TOPIC)
-    public void operationLogListener(String message, Acknowledgment acknowledgment) {
+    public void educationClassStartListener(String message, Acknowledgment acknowledgment) {
         try {
             log.debug("监听班级开班-kafka消息，请求原串：{}", message);
             EducationCourseClassMessage educationCourseClassMessage = super.decodeMessage(message, EducationCourseClassMessage.class);
 
-            log.info("监听班级开班-kafka消息，请求原串：{}", message);
+            log.info("监听班级开班-kafka消息，解析原串：{}", educationCourseClassMessage);
             EducationCourseClass educationCourseClass = EducationCourseClass.builder()
                     .classNo(educationCourseClassMessage.getClassNo())
                     .status(CourseClassStatusEnum.STARTING.getCode())
@@ -57,19 +50,6 @@ public class EducationClassStartConsumer extends AbstractKafkaConsumer<Education
         } finally {
             acknowledgment.acknowledge();
         }
-    }
-
-    /**
-     * 是否需要保存操作日志
-     *
-     * @param tableName 表名
-     * @return boolean
-     */
-    private boolean checkTable(String tableName) {
-        if (StringUtils.isEmpty(tableName)) {
-            return false;
-        }
-        return Constants.NEED_RECORD_OPERATION_LOG_TABLE.contains(tableName);
     }
 
 }

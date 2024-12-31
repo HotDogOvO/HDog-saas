@@ -1,16 +1,11 @@
 package com.hotdog.saas.application.processor.wechat.app;
 
-import com.hotdog.saas.application.assembler.UserAssembler;
 import com.hotdog.saas.application.assembler.WechatAppAssembler;
-import com.hotdog.saas.application.entity.request.user.UserPageRequest;
 import com.hotdog.saas.application.entity.request.wechat.app.WechatAppPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
-import com.hotdog.saas.application.entity.response.user.UserDTO;
 import com.hotdog.saas.application.entity.response.wechat.app.WechatAppDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
-import com.hotdog.saas.domain.model.Role;
-import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.WechatApp;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;

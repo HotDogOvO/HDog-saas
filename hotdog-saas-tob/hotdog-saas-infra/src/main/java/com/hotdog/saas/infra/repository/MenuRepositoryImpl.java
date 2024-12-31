@@ -10,13 +10,11 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.MenuConverter;
 import com.hotdog.saas.infra.dao.MenuMapper;
 import com.hotdog.saas.infra.entity.MenuDO;
-import com.hotdog.saas.infra.entity.RoleDO;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -38,13 +36,13 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
     }
 
     @Override
-    public Integer save(Menu menu) {
+    public Long save(Menu menu) {
         MenuDO menuDO = MenuConverter.INSTANCE.convert2DO(menu);
         LocalDateTime now = DateUtils.now();
         menuDO.setCreator(menu.getOperator()).setCreateTime(now)
                 .setUpdater(menu.getOperator()).setUpdateTime(now);
-
-        return menuMapper.insert(menuDO);
+        menuMapper.insert(menuDO);
+        return menuDO.getId();
     }
 
     @Override

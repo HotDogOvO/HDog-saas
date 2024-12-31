@@ -6,15 +6,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.hotdog.saas.domain.model.RoleMenu;
 import com.hotdog.saas.domain.repository.RoleMenuRepository;
 import com.hotdog.saas.infra.converter.RoleMenuConverter;
-import com.hotdog.saas.infra.converter.UserRoleConverter;
 import com.hotdog.saas.infra.dao.RoleMenuMapper;
 import com.hotdog.saas.infra.entity.RoleMenuDO;
-import com.hotdog.saas.infra.entity.UserRoleDO;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

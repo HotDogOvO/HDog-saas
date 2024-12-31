@@ -1,21 +1,14 @@
 package com.hotdog.saas.application.processor.menu;
 
-import com.google.common.collect.Lists;
-
 import com.hotdog.saas.application.assembler.MenuAssembler;
-import com.hotdog.saas.application.assembler.RoleAssembler;
 import com.hotdog.saas.application.entity.request.menu.QueryMenuRequest;
-import com.hotdog.saas.application.entity.request.role.QueryRoleRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.menu.MenuDTO;
-import com.hotdog.saas.application.entity.response.role.RoleDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.Menu;
-import com.hotdog.saas.domain.model.Role;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,5 @@
 package com.hotdog.saas.domain.model;
 
-import com.hotdog.saas.domain.enums.kafka.KafkaDeadMessageStatusEnum;
-
 import java.time.LocalDateTime;
 
 import lombok.Builder;

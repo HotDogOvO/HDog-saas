@@ -28,13 +28,13 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
     }
 
     @Override
-    public Integer save(User user) {
+    public Long save(User user) {
         UserDO userDO = UserConverter.INSTANCE.convert2DO(user);
         LocalDateTime now = DateUtils.now();
         userDO.setCreator(user.getOperator()).setCreateTime(now)
                 .setUpdater(user.getOperator()).setUpdateTime(now);
-
-        return userMapper.insert(userDO);
+        userMapper.insert(userDO);
+        return userDO.getId();
     }
 
     @Override
@@ -93,7 +93,6 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
                 .setDeleted(DeleteEnum.YES.getCode())
                 .setUpdater(operator)
                 .setUpdateTime(DateUtils.now());
-        ;
         return userMapper.updateById(userDO);
     }
 }

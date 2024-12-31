@@ -1,6 +1,5 @@
 package com.hotdog.saas.application.processor.education.clazz;
 
-import com.hotdog.saas.application.assembler.EducationCourseClassAssembler;
 import com.hotdog.saas.application.entity.request.education.clazz.StartEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
@@ -30,21 +29,18 @@ public class EducationCourseClassStartProcessor extends AbstractEducationClassPr
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(StartEducationCourseClassRequest request, BaseResponse<Boolean> response) {
-//        String classNo = request.getClassNo();
-//        valid(classNo);
-//
-//        EducationCourseClass educationCourseClass = EducationCourseClass.builder()
-//                .classNo(classNo)
-//                .status(CourseClassStatusEnum.STARTING.getCode())
-//                .operator(request.getOperator())
-//                .build();
-//        Integer modifyFlag = educationCourseClassRepository.modify(educationCourseClass);
+        String classNo = request.getClassNo();
+        valid(classNo);
 
-//        response.setData(checkFlag(modifyFlag));
-        educationClassStartTask.educationClassStartTask();
+        EducationCourseClass educationCourseClass = EducationCourseClass.builder()
+                .classNo(classNo)
+                .status(CourseClassStatusEnum.STARTING.getCode())
+                .operator(request.getOperator())
+                .build();
+        Integer modifyFlag = educationCourseClassRepository.modify(educationCourseClass);
+
+        response.setData(checkFlag(modifyFlag));
     }
-    @Autowired
-    private EducationClassStartTask educationClassStartTask;
 
     private void valid(String classNo){
         super.existsByClassNo(classNo);

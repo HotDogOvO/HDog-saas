@@ -1,6 +1,5 @@
 package com.hotdog.saas.application.processor.education;
 
-import com.hotdog.saas.application.assembler.EducationCourseAssembler;
 import com.hotdog.saas.application.entity.request.education.QueryEducationCourseRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;

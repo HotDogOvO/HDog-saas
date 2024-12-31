@@ -1,8 +1,6 @@
 package com.hotdog.saas.domain.model;
 
 
-import java.time.LocalDateTime;
-
 import lombok.Builder;
 import lombok.Data;
 

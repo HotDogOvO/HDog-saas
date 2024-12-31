@@ -3,10 +3,8 @@ package com.hotdog.saas.infra.repository;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.Login;
-import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.repository.LoginRepository;
 import com.hotdog.saas.infra.converter.LoginConverter;
-import com.hotdog.saas.infra.converter.UserConverter;
 import com.hotdog.saas.infra.dao.UserMapper;
 import com.hotdog.saas.infra.entity.UserDO;
 

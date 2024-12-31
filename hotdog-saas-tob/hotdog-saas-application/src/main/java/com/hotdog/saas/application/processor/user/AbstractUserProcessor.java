@@ -10,7 +10,6 @@ import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.model.Role;
 import com.hotdog.saas.domain.model.UserRole;
 import com.hotdog.saas.domain.repository.RoleRepository;
-import com.hotdog.saas.domain.repository.UserRepository;
 import com.hotdog.saas.domain.repository.UserRoleRepository;
 
 import io.micrometer.common.util.StringUtils;

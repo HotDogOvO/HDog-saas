@@ -2,6 +2,7 @@ package com.hotdog.saas.web.controller;
 
 import com.hotdog.saas.application.entity.request.education.clazz.CreateEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.DeleteEducationCourseClassRequest;
+import com.hotdog.saas.application.entity.request.education.clazz.EducationCourseClassOptionsRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.QueryEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.EducationCourseClassPageRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.StartEducationCourseClassRequest;
@@ -9,6 +10,7 @@ import com.hotdog.saas.application.entity.request.education.clazz.UpdateEducatio
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassDTO;
+import com.hotdog.saas.application.entity.response.education.EducationCourseClassOptionsDTO;
 import com.hotdog.saas.application.facade.EducationCourseClassFacade;
 
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,6 +45,12 @@ public class EducationCourseClassController {
     @PostMapping("/list/page")
     public BaseResponse<PageResponseDTO<EducationCourseClassDTO>> educationCourseClassListPage(@RequestBody @Validated EducationCourseClassPageRequest educationCourseClassPageRequest) {
         return educationCourseClassFacade.educationCourseClassListPage(educationCourseClassPageRequest);
+    }
+
+    @Operation(summary = "查询班级下拉框")
+    @PostMapping("/options")
+    public BaseResponse<List<EducationCourseClassOptionsDTO>> educationCourseClassOptions(@RequestBody @Validated EducationCourseClassOptionsRequest educationCourseClassOptionsRequest) {
+        return educationCourseClassFacade.educationCourseClassOptions(educationCourseClassOptionsRequest);
     }
 
     @Operation(summary = "查询课程详情")

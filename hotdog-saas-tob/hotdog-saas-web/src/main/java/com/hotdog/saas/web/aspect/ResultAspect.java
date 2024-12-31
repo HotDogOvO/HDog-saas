@@ -3,7 +3,6 @@ package com.hotdog.saas.web.aspect;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;

@@ -4,7 +4,7 @@ import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 
 public interface EducationCourseTypeRelationRepository {
 
-    Integer save(EducationCourseTypeRelation educationCourseTypeRelation);
+    Long save(EducationCourseTypeRelation educationCourseTypeRelation);
 
     EducationCourseTypeRelation findByCourseNo(String courseNo);
 

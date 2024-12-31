@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TenantRepository {
 
-    Integer save(Tenant tenant);
+    Long save(Tenant tenant);
 
     PageResponse<List<Tenant>> listPage(Tenant tenant, PageRequest pageRequest);
 

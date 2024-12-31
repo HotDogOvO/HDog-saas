@@ -1,28 +1,20 @@
 package com.hotdog.saas.application.processor.role;
 
 import com.hotdog.saas.application.assembler.RoleMenuAssembler;
-import com.hotdog.saas.application.assembler.UserRoleAssembler;
 import com.hotdog.saas.application.entity.request.role.PermissionRoleRequest;
-import com.hotdog.saas.application.entity.request.user.PermissionUserRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
-import com.hotdog.saas.application.processor.user.AbstractUserProcessor;
-import com.hotdog.saas.domain.constant.RedisConstants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
-import com.hotdog.saas.domain.foundation.RedisCacheService;
 import com.hotdog.saas.domain.model.RoleMenu;
-import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.UserRole;
 import com.hotdog.saas.domain.repository.MenuRepository;
 import com.hotdog.saas.domain.repository.RoleMenuRepository;
-import com.hotdog.saas.domain.repository.RoleRepository;
 import com.hotdog.saas.domain.repository.UserRoleRepository;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 

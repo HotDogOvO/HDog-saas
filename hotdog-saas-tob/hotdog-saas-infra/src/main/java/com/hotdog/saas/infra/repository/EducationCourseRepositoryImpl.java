@@ -5,18 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
-import com.hotdog.saas.domain.model.User;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 import com.hotdog.saas.domain.repository.EducationCourseRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.EducationCourseConverter;
-import com.hotdog.saas.infra.converter.EducationCourseTypeConverter;
-import com.hotdog.saas.infra.converter.UserConverter;
 import com.hotdog.saas.infra.dao.EducationCourseMapper;
 import com.hotdog.saas.infra.entity.EducationCourseDO;
-import com.hotdog.saas.infra.entity.EducationCourseTypeDO;
-import com.hotdog.saas.infra.entity.UserDO;
 
 import org.springframework.stereotype.Repository;
 
@@ -33,13 +28,13 @@ public class EducationCourseRepositoryImpl extends AbstractBaseRepository implem
     }
 
     @Override
-    public Integer save(EducationCourse educationCourse) {
+    public Long save(EducationCourse educationCourse) {
         EducationCourseDO educationCourseDO = EducationCourseConverter.INSTANCE.convert2DO(educationCourse);
         LocalDateTime now = DateUtils.now();
         educationCourseDO.setCreator(educationCourse.getOperator()).setCreateTime(now)
                 .setUpdater(educationCourse.getOperator()).setUpdateTime(now);
-
-        return educationCourseMapper.insert(educationCourseDO);
+        educationCourseMapper.insert(educationCourseDO);
+        return educationCourseDO.getId();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.hotdog.saas.application.processor.education.clazz;
 
-import com.hotdog.saas.application.entity.request.education.DeleteEducationCourseRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.DeleteEducationCourseClassRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;

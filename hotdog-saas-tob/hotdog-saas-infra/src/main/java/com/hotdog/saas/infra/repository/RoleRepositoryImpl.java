@@ -12,7 +12,6 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.RoleConverter;
 import com.hotdog.saas.infra.dao.RoleMapper;
 import com.hotdog.saas.infra.entity.RoleDO;
-import com.hotdog.saas.infra.entity.UserDO;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -30,13 +29,13 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
     }
 
     @Override
-    public Integer save(Role role) {
+    public Long save(Role role) {
         RoleDO roleDO = RoleConverter.INSTANCE.convert2DO(role);
         LocalDateTime now = DateUtils.now();
         roleDO.setCreator(role.getOperator()).setCreateTime(now)
                 .setUpdater(role.getOperator()).setUpdateTime(now);
-
-        return roleMapper.insert(roleDO);
+        roleMapper.insert(roleDO);
+        return roleDO.getId();
     }
 
     @Override
@@ -113,7 +112,7 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
                 .setId(id)
                 .setDeleted(DeleteEnum.YES.getCode())
                 .setUpdater(operator)
-                .setUpdateTime(DateUtils.now());;
+                .setUpdateTime(DateUtils.now());
         return roleMapper.updateById(roleDO);
     }
 }

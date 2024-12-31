@@ -2,8 +2,6 @@ package com.hotdog.saas.application.entity.request.user;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
 
-import java.time.LocalDateTime;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

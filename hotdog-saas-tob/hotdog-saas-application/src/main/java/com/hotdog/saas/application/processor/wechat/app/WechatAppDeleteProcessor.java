@@ -1,6 +1,5 @@
 package com.hotdog.saas.application.processor.wechat.app;
 
-import com.hotdog.saas.application.entity.request.user.DeleteUserRequest;
 import com.hotdog.saas.application.entity.request.wechat.app.DeleteWechatAppRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;

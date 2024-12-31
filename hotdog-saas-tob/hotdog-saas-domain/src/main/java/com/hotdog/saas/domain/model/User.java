@@ -2,8 +2,6 @@ package com.hotdog.saas.domain.model;
 
 import com.hotdog.saas.domain.utils.SignUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import lombok.Builder;
 import lombok.Data;
 

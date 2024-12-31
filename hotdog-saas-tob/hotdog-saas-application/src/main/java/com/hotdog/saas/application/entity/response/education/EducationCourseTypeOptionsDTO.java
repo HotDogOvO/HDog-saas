@@ -1,7 +1,5 @@
 package com.hotdog.saas.application.entity.response.education;
 
-import java.time.LocalDateTime;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;

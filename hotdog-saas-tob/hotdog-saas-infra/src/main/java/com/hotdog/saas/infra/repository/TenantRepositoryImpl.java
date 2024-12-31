@@ -27,12 +27,13 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
     }
 
     @Override
-    public Integer save(Tenant tenant) {
+    public Long save(Tenant tenant) {
         TenantDO tenantDO = TenantConverter.INSTANCE.convert2DO(tenant);
         LocalDateTime now = DateUtils.now();
         tenantDO.setCreator(tenant.getOperator()).setCreateTime(now)
                 .setUpdater(tenant.getOperator()).setUpdateTime(now);
-        return tenantMapper.insert(tenantDO);
+        tenantMapper.insert(tenantDO);
+        return tenantDO.getId();
     }
 
     @Override
@@ -94,7 +95,7 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
                 .setId(id)
                 .setDeleted(DeleteEnum.YES.getCode())
                 .setUpdater(operator)
-                .setUpdateTime(DateUtils.now());;
+                .setUpdateTime(DateUtils.now());
         return tenantMapper.updateById(tenantDO);
     }
 

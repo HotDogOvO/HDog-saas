@@ -5,9 +5,13 @@ import com.hotdog.saas.domain.foundation.RedisCacheService;
 
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
+import org.redisson.api.RScoredSortedSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -30,7 +34,8 @@ public class RedisCacheServiceImpl implements RedisCacheService {
     public <T> void set(String key, T value, Long seconds) {
         String jsonString = JSONObject.toJSONString(value);
         RBucket<String> bucket = redissonClient.getBucket(key);
-        bucket.set(jsonString, seconds, TimeUnit.SECONDS);
+        Duration duration = Duration.ofSeconds(seconds);
+        bucket.set(jsonString, duration);
     }
 
     @Override
@@ -48,6 +53,42 @@ public class RedisCacheServiceImpl implements RedisCacheService {
     @Override
     public RLock getLock(String lockName) {
         return redissonClient.getLock(lockName);
+    }
+
+    private <T> RScoredSortedSet<T> zGetSortedSet(String key) {
+        return redissonClient.getScoredSortedSet(key);
+    }
+
+    @Override
+    public <T> List<T> zGet(String key, Class<T> clazz) {
+        RScoredSortedSet<T> sortedSet = zGetSortedSet(key);
+        Collection<T> collection = sortedSet.valueRange(0, -1);
+        return collection.stream().toList();
+    }
+
+    @Override
+    public <T> List<T> zGetRange(String key, Long startScore, Long endScore) {
+        RScoredSortedSet<T> sortedSet = zGetSortedSet(key);
+        Collection<T> collection = sortedSet.valueRange(startScore, true, endScore, true);
+        return collection.stream().toList();
+    }
+
+    @Override
+    public <T> void zSet(String key, T value, Long score) {
+        RScoredSortedSet<T> zset = zGetSortedSet(key);
+        zset.add(score, value);
+    }
+
+    @Override
+    public <T> void zDelete(String key, T value) {
+        RScoredSortedSet<T> sortedSet = zGetSortedSet(key);
+        sortedSet.remove(value);
+    }
+
+    @Override
+    public <T> void zDeleteRange(String key, Long startScore, Long endScore) {
+        RScoredSortedSet<T> sortedSet = zGetSortedSet(key);
+        sortedSet.removeRangeByScore(startScore, true, endScore, true);
     }
 
 }

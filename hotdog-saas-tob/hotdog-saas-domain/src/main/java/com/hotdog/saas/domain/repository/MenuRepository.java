@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface MenuRepository {
 
-    Integer save(Menu menu);
+    Long save(Menu menu);
 
     Menu findById(Long id);
 

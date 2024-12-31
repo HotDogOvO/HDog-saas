@@ -2,10 +2,7 @@ package com.hotdog.saas.domain.model;
 
 
 import com.hotdog.saas.domain.enums.education.EducationBusinessTypeEnum;
-import com.hotdog.saas.domain.enums.wechat.app.BusinessTypeEnum;
 import com.hotdog.saas.domain.utils.BusinessNoUtils;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
