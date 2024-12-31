@@ -30,8 +30,8 @@ public class EducationCourseClassPersonCreateProcessor extends AbstractEducation
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(CreateEducationCourseClassPersonRequest request, BaseResponse<Boolean> response) {
         EducationCourseClassPerson educationCourseClassPerson = EducationCourseClassPersonAssembler.INSTANCE.convert(request);
-        Integer saveFlag = educationCourseClassPersonRepository.save(educationCourseClassPerson);
-        response.setData(checkFlag(saveFlag));
+        educationCourseClassPersonRepository.save(educationCourseClassPerson);
+        response.setData(Boolean.TRUE);
     }
 
 }

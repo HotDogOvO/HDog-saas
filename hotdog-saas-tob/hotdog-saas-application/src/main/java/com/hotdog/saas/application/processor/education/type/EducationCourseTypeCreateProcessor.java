@@ -29,8 +29,8 @@ public class EducationCourseTypeCreateProcessor extends AbstractEducationTypePro
         Long wechatId = request.getWechatId();
         valid(wechatId, request.getName());
         EducationCourseType educationCourseType = EducationCourseTypeAssembler.INSTANCE.convert(request);
-        Integer saveFlag = educationCourseTypeRepository.save(educationCourseType);
-        response.setData(checkFlag(saveFlag));
+        educationCourseTypeRepository.save(educationCourseType);
+        response.setData(Boolean.TRUE);
     }
 
     private void valid(Long wechatId, String typeName) {

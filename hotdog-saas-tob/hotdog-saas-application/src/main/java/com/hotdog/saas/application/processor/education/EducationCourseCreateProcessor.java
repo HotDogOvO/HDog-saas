@@ -36,7 +36,7 @@ public class EducationCourseCreateProcessor extends AbstractEducationProcessor<C
 
         // 1. 保存课程
         EducationCourse educationCourse = buildEducationCourse(request);
-        Integer saveFlag = educationCourseRepository.save(educationCourse);
+        educationCourseRepository.save(educationCourse);
 
         // 2. 保存课程分类
         String courseNo = educationCourse.getCourseNo();
@@ -47,7 +47,7 @@ public class EducationCourseCreateProcessor extends AbstractEducationProcessor<C
         List<EducationCourseAttach> attachList = buildEducationCourseAttachList(request.getAttachList(), courseNo, request.getOperator());
         educationCourseAttachRepository.batchSave(attachList);
 
-        response.setData(checkFlag(saveFlag));
+        response.setData(Boolean.TRUE);
     }
 
     private EducationCourse buildEducationCourse(CreateEducationCourseRequest request) {

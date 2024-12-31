@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LoginLogRepository {
 
-    Integer save(LoginLog loginLog);
+    Long save(LoginLog loginLog);
 
     PageResponse<List<LoginLog>> listPage(LoginLog loginLog, PageRequest pageRequest);
 }

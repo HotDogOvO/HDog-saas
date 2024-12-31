@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RoleRepository {
 
-    Integer save(Role role);
+    Long save(Role role);
 
     PageResponse<List<Role>> listPage(Role role, PageRequest pageRequest);
 

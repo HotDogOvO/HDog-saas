@@ -37,8 +37,8 @@ public class UserCreateProcessor extends AbstractUserProcessor<CreateUserRequest
         super.existsByUsername(request.getUsername());
         // 保存
         User user = buildUser(request);
-        Integer saveFlag = userRepository.save(user);
-        response.setData(checkFlag(saveFlag));
+        userRepository.save(user);
+        response.setData(Boolean.TRUE);
     }
 
     private User buildUser(CreateUserRequest request) {

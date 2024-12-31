@@ -30,8 +30,8 @@ public class WechatAppCreateProcessor extends AbstractWechatAppProcessor<CreateW
         super.existsByWechatAppId(request.getWechatAppId());
         // 保存
         WechatApp wechatApp = WechatAppAssembler.INSTANCE.convert(request);
-        Integer saveFlag = wechatAppRepository.save(wechatApp);
-        response.setData(checkFlag(saveFlag));
+        wechatAppRepository.save(wechatApp);
+        response.setData(Boolean.TRUE);
     }
 
 }

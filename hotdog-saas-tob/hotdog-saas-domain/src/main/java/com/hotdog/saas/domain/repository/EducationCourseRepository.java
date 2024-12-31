@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EducationCourseRepository {
 
-    Integer save(EducationCourse educationCourse);
+    Long save(EducationCourse educationCourse);
 
     PageResponse<List<EducationCourse>> listPage(EducationCourse educationCourse, PageRequest pageRequest);
 

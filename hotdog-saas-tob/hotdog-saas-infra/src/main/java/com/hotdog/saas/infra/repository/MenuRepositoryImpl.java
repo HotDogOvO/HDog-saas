@@ -36,13 +36,13 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
     }
 
     @Override
-    public Integer save(Menu menu) {
+    public Long save(Menu menu) {
         MenuDO menuDO = MenuConverter.INSTANCE.convert2DO(menu);
         LocalDateTime now = DateUtils.now();
         menuDO.setCreator(menu.getOperator()).setCreateTime(now)
                 .setUpdater(menu.getOperator()).setUpdateTime(now);
-
-        return menuMapper.insert(menuDO);
+        menuMapper.insert(menuDO);
+        return menuDO.getId();
     }
 
     @Override

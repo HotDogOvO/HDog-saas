@@ -29,13 +29,13 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
     }
 
     @Override
-    public Integer save(Role role) {
+    public Long save(Role role) {
         RoleDO roleDO = RoleConverter.INSTANCE.convert2DO(role);
         LocalDateTime now = DateUtils.now();
         roleDO.setCreator(role.getOperator()).setCreateTime(now)
                 .setUpdater(role.getOperator()).setUpdateTime(now);
-
-        return roleMapper.insert(roleDO);
+        roleMapper.insert(roleDO);
+        return roleDO.getId();
     }
 
     @Override

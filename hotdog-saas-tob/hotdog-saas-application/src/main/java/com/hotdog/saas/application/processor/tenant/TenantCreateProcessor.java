@@ -34,8 +34,8 @@ public class TenantCreateProcessor extends AbstractTenantProcessor<CreateTenantR
         // 校验AppId是否存在
         super.existsByAppId(request.getAppId());
         // 保存
-        Integer saveFlag = tenantRepository.save(buildTenant(request));
-        response.setData(checkFlag(saveFlag));
+        tenantRepository.save(buildTenant(request));
+        response.setData(Boolean.TRUE);
     }
 
     private Tenant buildTenant(CreateTenantRequest createTenantRequest) {

@@ -27,12 +27,13 @@ public class WechatAppRepositoryImpl extends AbstractBaseRepository implements W
     }
 
     @Override
-    public Integer save(WechatApp wechatApp) {
+    public Long save(WechatApp wechatApp) {
         WechatAppDO wechatAppDO = WechatAppConverter.INSTANCE.convert2DO(wechatApp);
         LocalDateTime now = DateUtils.now();
         wechatAppDO.setCreator(wechatApp.getOperator()).setCreateTime(now)
                 .setUpdater(wechatApp.getOperator()).setUpdateTime(now);
-        return wechatAppMapper.insert(wechatAppDO);
+        wechatAppMapper.insert(wechatAppDO);
+        return wechatAppDO.getId();
     }
 
     @Override

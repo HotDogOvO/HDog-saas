@@ -31,8 +31,8 @@ public class EducationCourseClassCreateProcessor extends AbstractEducationClassP
     public void doExecute(CreateEducationCourseClassRequest request, BaseResponse<Boolean> response) {
         valid(request);
         EducationCourseClass educationCourseClass = buildEducationCourseClass(request);
-        Integer saveFlag = educationCourseClassRepository.save(educationCourseClass);
-        response.setData(checkFlag(saveFlag));
+        educationCourseClassRepository.save(educationCourseClass);
+        response.setData(Boolean.TRUE);
     }
 
     private EducationCourseClass buildEducationCourseClass(CreateEducationCourseClassRequest request) {

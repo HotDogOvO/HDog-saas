@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface WechatAppRepository {
 
-    Integer save(WechatApp wechatApp);
+    Long save(WechatApp wechatApp);
 
     PageResponse<List<WechatApp>> listPage(WechatApp wechatApp, PageRequest pageRequest);
 

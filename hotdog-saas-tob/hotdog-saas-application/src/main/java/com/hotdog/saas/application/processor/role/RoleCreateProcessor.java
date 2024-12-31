@@ -26,8 +26,8 @@ public class RoleCreateProcessor extends AbstractRoleProcessor<CreateRoleRequest
     public void doExecute(CreateRoleRequest request, BaseResponse<Boolean> response) {
         super.existsByName(request.getName());
         Role role = RoleAssembler.INSTANCE.convert(request);
-        Integer saveFlag = roleRepository.save(role);
-        response.setData(checkFlag(saveFlag));
+        roleRepository.save(role);
+        response.setData(Boolean.TRUE);
     }
 
 }

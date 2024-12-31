@@ -19,9 +19,10 @@ public class EducationCourseTypeRelationRepositoryImpl extends AbstractBaseRepos
     }
 
     @Override
-    public Integer save(EducationCourseTypeRelation educationCourseTypeRelation) {
+    public Long save(EducationCourseTypeRelation educationCourseTypeRelation) {
         EducationCourseTypeRelationDO educationCourseTypeRelationDO = EducationCourseTypeRelationConverter.INSTANCE.convert2DO(educationCourseTypeRelation);
-        return educationCourseTypeRelationMapper.insert(educationCourseTypeRelationDO);
+        educationCourseTypeRelationMapper.insert(educationCourseTypeRelationDO);
+        return educationCourseTypeRelationDO.getId();
     }
 
     @Override

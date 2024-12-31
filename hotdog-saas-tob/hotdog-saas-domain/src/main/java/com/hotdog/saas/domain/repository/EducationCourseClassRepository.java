@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface EducationCourseClassRepository {
 
-    Integer save(EducationCourseClass educationCourseClass);
+    Long save(EducationCourseClass educationCourseClass);
 
     PageResponse<List<EducationCourseClass>> listPage(EducationCourseClass educationCourseClass, PageRequest pageRequest);
 

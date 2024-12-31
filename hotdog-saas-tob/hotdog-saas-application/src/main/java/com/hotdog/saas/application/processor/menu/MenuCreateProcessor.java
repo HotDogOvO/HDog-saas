@@ -30,8 +30,8 @@ public class MenuCreateProcessor extends AbstractMenuProcessor<CreateMenuRequest
         super.existsByPermission(request.getPermission());
         Menu menu = MenuAssembler.INSTANCE.convert(request);
 
-        Integer saveFlag = menuRepository.save(menu);
-        response.setData(checkFlag(saveFlag));
+        menuRepository.save(menu);
+        response.setData(Boolean.TRUE);
     }
 
 }

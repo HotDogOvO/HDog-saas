@@ -27,12 +27,13 @@ public class EducationCourseTypeRepositoryImpl extends AbstractBaseRepository im
     }
 
     @Override
-    public Integer save(EducationCourseType educationCourseType) {
+    public Long save(EducationCourseType educationCourseType) {
         EducationCourseTypeDO educationCourseTypeDO = EducationCourseTypeConverter.INSTANCE.convert2DO(educationCourseType);
         LocalDateTime now = DateUtils.now();
         educationCourseTypeDO.setCreator(educationCourseType.getOperator()).setCreateTime(now)
                 .setUpdater(educationCourseType.getOperator()).setUpdateTime(now);
-        return educationCourseTypeMapper.insert(educationCourseTypeDO);
+        educationCourseTypeMapper.insert(educationCourseTypeDO);
+        return educationCourseTypeDO.getId();
     }
 
     @Override
