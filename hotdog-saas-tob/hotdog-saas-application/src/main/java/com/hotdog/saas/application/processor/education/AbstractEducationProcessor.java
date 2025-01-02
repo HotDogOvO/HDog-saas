@@ -58,6 +58,9 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
     protected EducationCourseClassRecordRepository educationCourseClassRecordRepository;
 
     @Autowired
+    protected EducationCourseClassTrailRepository educationCourseClassTrailRepository;
+
+    @Autowired
     protected FileService fileService;
 
     @Autowired
