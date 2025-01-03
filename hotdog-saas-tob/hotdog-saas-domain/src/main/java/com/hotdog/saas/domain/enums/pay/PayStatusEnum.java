@@ -1,4 +1,4 @@
-package com.hotdog.saas.domain.enums.log;
+package com.hotdog.saas.domain.enums.pay;
 
 import com.hotdog.saas.domain.enums.EnumInterface;
 
@@ -10,9 +10,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum LogTypeEnum implements EnumInterface<Integer> {
+public enum PayStatusEnum implements EnumInterface<Integer> {
     UNKNOWN(-1, "未知"),
-    WEB(100, "WEB"),
+    NOT_PAY(0, "未支付"),
+    PAY_SUCCESS(1, "支付成功"),
+    PAY_FAIL(9, "支付失败"),
     ;
     private final Integer code;
     private final String desc;
@@ -22,10 +24,10 @@ public enum LogTypeEnum implements EnumInterface<Integer> {
         return Stream.of(values()).anyMatch(s -> s.getCode().equals(code));
     }
 
-    public static LogTypeEnum codeToEnum(Integer code) {
-        for (LogTypeEnum logTypeEnum : values()) {
-            if (Objects.equals(logTypeEnum.getCode(), code)) {
-                return logTypeEnum;
+    public static PayStatusEnum codeToEnum(Integer code) {
+        for (PayStatusEnum menuEnum : values()) {
+            if (Objects.equals(menuEnum.getCode(), code)) {
+                return menuEnum;
             }
         }
         return UNKNOWN;

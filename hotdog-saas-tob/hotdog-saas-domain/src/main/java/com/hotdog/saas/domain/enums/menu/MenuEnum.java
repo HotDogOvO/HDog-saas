@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum MenuEnum implements EnumInterface<Integer> {
-    UNKNOWN(0, "未知"),
+    UNKNOWN(-1, "未知"),
     MENU(1, "菜单"),
     ACTION(2, "按钮"),
     ;

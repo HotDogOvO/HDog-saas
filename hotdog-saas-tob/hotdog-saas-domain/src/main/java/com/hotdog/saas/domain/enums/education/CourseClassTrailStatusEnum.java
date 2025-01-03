@@ -16,7 +16,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CourseClassTrailStatusEnum implements EnumInterface<Integer> {
-    UNKNOWN(0, "未知"),
+    UNKNOWN(-1, "未知"),
     REGISTERED(1, "已报名"),
     ATTEND_CLASS(2,"已上课"),
     UN_ATTEND_CLASS(3,"未上课"),

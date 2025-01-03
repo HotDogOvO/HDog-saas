@@ -1,4 +1,4 @@
-package com.hotdog.saas.domain.enums.log;
+package com.hotdog.saas.domain.enums.education;
 
 import com.hotdog.saas.domain.enums.EnumInterface;
 
@@ -10,9 +10,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum LogTypeEnum implements EnumInterface<Integer> {
+public enum CourseClassAssignStatusEnum implements EnumInterface<Integer> {
     UNKNOWN(-1, "未知"),
-    WEB(100, "WEB"),
+    NOT_ASSIGN(0, "未分配"),
+    ASSIGN(1, "已分配"),
     ;
     private final Integer code;
     private final String desc;
@@ -22,10 +23,10 @@ public enum LogTypeEnum implements EnumInterface<Integer> {
         return Stream.of(values()).anyMatch(s -> s.getCode().equals(code));
     }
 
-    public static LogTypeEnum codeToEnum(Integer code) {
-        for (LogTypeEnum logTypeEnum : values()) {
-            if (Objects.equals(logTypeEnum.getCode(), code)) {
-                return logTypeEnum;
+    public static CourseClassAssignStatusEnum codeToEnum(Integer code) {
+        for (CourseClassAssignStatusEnum menuEnum : values()) {
+            if (Objects.equals(menuEnum.getCode(), code)) {
+                return menuEnum;
             }
         }
         return UNKNOWN;

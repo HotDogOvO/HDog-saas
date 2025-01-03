@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CourseClassScheduleStatusEnum implements EnumInterface<Integer> {
-    UNKNOWN(0, "未知"),
+    UNKNOWN(-1, "未知"),
     WAITING_START(1, "待开课"),
     STARTING(2, "开课中"),
     FINISH(3, "已下课"),
