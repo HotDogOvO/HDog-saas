@@ -10,10 +10,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum CourseAttachTypeEnum implements EnumInterface<Integer> {
+public enum CourseClassEnrollStatusEnum implements EnumInterface<Integer> {
     UNKNOWN(-1, "未知"),
-    COVER(1, "封面图"),
-    OTHER(9, "其他附件"),
+    ENROLL_SUCCESS(1, "报名成功"),
+    CLASS_ASSIGNING(2, "班级分配中"),
+    CLASS_ASSIGN_SUCCESS(3, "班级分配完成"),
     ;
     private final Integer code;
     private final String desc;
@@ -23,8 +24,8 @@ public enum CourseAttachTypeEnum implements EnumInterface<Integer> {
         return Stream.of(values()).anyMatch(s -> s.getCode().equals(code));
     }
 
-    public static CourseAttachTypeEnum codeToEnum(Integer code) {
-        for (CourseAttachTypeEnum menuEnum : values()) {
+    public static CourseClassEnrollStatusEnum codeToEnum(Integer code) {
+        for (CourseClassEnrollStatusEnum menuEnum : values()) {
             if (Objects.equals(menuEnum.getCode(), code)) {
                 return menuEnum;
             }

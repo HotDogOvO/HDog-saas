@@ -1,7 +1,10 @@
 package com.hotdog.saas.domain.enums.pay;
 
+import com.google.common.collect.Lists;
+
 import com.hotdog.saas.domain.enums.EnumInterface;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -33,4 +36,7 @@ public enum PayStatusEnum implements EnumInterface<Integer> {
         return UNKNOWN;
     }
 
+    public static List<PayStatusEnum> paySuccessList(){
+        return Lists.newArrayList(PAY_SUCCESS);
+    }
 }
