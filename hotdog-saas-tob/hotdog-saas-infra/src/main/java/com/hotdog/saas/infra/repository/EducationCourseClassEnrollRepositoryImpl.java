@@ -4,17 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.EducationCourseClassEnroll;
-import com.hotdog.saas.domain.model.EducationCourseClassPerson;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 import com.hotdog.saas.domain.repository.EducationCourseClassEnrollRepository;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.EducationCourseClassEnrollConverter;
-import com.hotdog.saas.infra.converter.EducationCourseClassPersonConverter;
 import com.hotdog.saas.infra.dao.EducationCourseClassEnrollMapper;
 import com.hotdog.saas.infra.entity.EducationCourseClassEnrollDO;
-import com.hotdog.saas.infra.entity.EducationCourseClassPersonDO;
-import com.hotdog.saas.infra.entity.EducationCourseClassScheduleDO;
 
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +39,15 @@ public class EducationCourseClassEnrollRepositoryImpl extends AbstractBaseReposi
         PageResponse<List<EducationCourseClassEnroll>> listPageResponse = pageConverter(pageResult);
         listPageResponse.setData(list);
         return listPageResponse;
+    }
+
+    @Override
+    public EducationCourseClassEnroll findById(Long id) {
+        LambdaQueryWrapper<EducationCourseClassEnrollDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EducationCourseClassEnrollDO::getId, id);
+        queryWrapper.eq(EducationCourseClassEnrollDO::getDeleted, DeleteEnum.NO.getCode());
+        EducationCourseClassEnrollDO educationCourseClassEnrollDO = educationCourseClassEnrollMapper.selectOne(queryWrapper);
+        return EducationCourseClassEnrollConverter.INSTANCE.convert(educationCourseClassEnrollDO);
     }
 
     @Override
