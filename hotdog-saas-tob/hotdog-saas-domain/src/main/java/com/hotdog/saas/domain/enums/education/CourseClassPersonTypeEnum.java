@@ -11,9 +11,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CourseClassPersonTypeEnum implements EnumInterface<Integer> {
-    UNKNOWN(0, "未知"),
+    UNKNOWN(-1, "未知"),
     TEACHER(1, "教师"),
-    STUDENT(2, "学员"),
+    STUDENT(2, "正式学员"),
+    TEMP_STUDENT(3, "试课学员"),
     ;
     private final Integer code;
     private final String desc;

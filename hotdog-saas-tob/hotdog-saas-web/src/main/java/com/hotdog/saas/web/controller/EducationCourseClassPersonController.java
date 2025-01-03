@@ -37,7 +37,7 @@ public class EducationCourseClassPersonController {
 
     @Operation(summary = "查询班级人员分页列表")
     @PostMapping("/list/page")
-    public BaseResponse<PageResponseDTO<EducationCourseClassPersonDTO>> EducationCourseClassPersonListPage(@RequestBody @Validated EducationCourseClassPersonPageRequest educationCourseClassPersonPageRequest) {
+    public BaseResponse<PageResponseDTO<EducationCourseClassPersonDTO>> educationCourseClassPersonListPage(@RequestBody @Validated EducationCourseClassPersonPageRequest educationCourseClassPersonPageRequest) {
         return educationCourseClassPersonFacade.educationCourseClassPersonListPage(educationCourseClassPersonPageRequest);
     }
 

@@ -24,7 +24,7 @@ public class BaseResponse<T> implements Serializable {
     @Schema(description = "请求信息")
     private String message;
 
-    @Schema(description = "相应时间戳")
+    @Schema(description = "响应时间戳")
     private Long timestamp;
 
     @Schema(description = "请求url")

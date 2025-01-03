@@ -25,8 +25,7 @@ public class MybatisPlusGenerator {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addInclude("c_education_course_attach", "c_education_course_type", "c_education_course_type_relation",
-                                "c_education_course_class", "c_education_course_class_person", "c_education_course_class_record", "c_education_course_class_schedule")
+                        .addInclude("c_education_course_class_sign_in")
                         .addTablePrefix("c_")
                         .entityBuilder().enableLombok().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel).formatFileName("%sDO")
                         .serviceBuilder().disable()
