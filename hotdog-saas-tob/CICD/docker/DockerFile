@@ -1,0 +1,9 @@
+FROM openjdk:17
+
+WORKDIR /app
+ADD . /app
+ENV WORKSPACE=/app
+
+WORKDIR /app
+RUN chmod +x /app/run.sh
+CMD ["/bin/sh", "./run.sh" ]
