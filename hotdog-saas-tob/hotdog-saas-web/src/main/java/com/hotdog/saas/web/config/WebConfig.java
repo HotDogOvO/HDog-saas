@@ -8,6 +8,7 @@ import com.hotdog.saas.web.interceptor.TokenInterceptor;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -42,4 +43,15 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns(Constants.TOKEN_EXCLUDE_PATTERN_URL);
     }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // 匹配所有路径
+                .allowedOriginPatterns("*") // 允许所有来源
+                .allowedMethods("POST") // 允许的方法
+                .allowedHeaders("*") // 允许的请求头
+                .allowCredentials(true) // 是否允许发送Cookie
+                .maxAge(3600); // 缓存时间
+    }
+
 }

@@ -31,6 +31,9 @@ public class UpdateUserRequest extends BaseRequestParam {
     @Schema(description = "头像")
     private String avatar;
 
+    @Schema(description = "状态")
+    private Integer status;
+
     @Override
     public void validate() {
 
