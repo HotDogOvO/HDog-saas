@@ -18,6 +18,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+
+import io.micrometer.common.util.StringUtils;
 
 @Repository
 public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRepository {
@@ -44,6 +47,8 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(RoleDO::getTenantId, role.getTenantId());
         queryWrapper.eq(RoleDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(StringUtils.isNotEmpty(role.getName()), RoleDO::getName, role.getName());
+        queryWrapper.eq(Objects.nonNull(role.getStatus()), RoleDO::getStatus, role.getStatus());
         queryWrapper.orderByDesc(RoleDO::getCreateTime);
 
         Page<RoleDO> pageResult = roleMapper.selectPage(page, queryWrapper);
@@ -59,6 +64,15 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
     public Role findById(Long id) {
         RoleDO roleDO = roleMapper.selectById(id);
         return RoleConverter.INSTANCE.convert(roleDO);
+    }
+
+    @Override
+    public List<Role> findList(Role role) {
+        LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(RoleDO::getTenantId, role.getTenantId());
+        queryWrapper.eq(RoleDO::getDeleted, DeleteEnum.NO.getCode());
+        List<RoleDO> roleDOList = roleMapper.selectList(queryWrapper);
+        return roleDOList.stream().map(RoleConverter.INSTANCE::convert).toList();
     }
 
     @Override
