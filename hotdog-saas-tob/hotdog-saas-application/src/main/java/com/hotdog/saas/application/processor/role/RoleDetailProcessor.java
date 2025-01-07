@@ -51,7 +51,7 @@ public class RoleDetailProcessor extends AbstractRoleProcessor<QueryRoleRequest,
         List<Menu> menuList = menuRepository.findByIdList(menuIdSet);
 
         List<RoleDTO.RoleMenuDTO> resultRoleMenuList = menuList.stream()
-                .map(x -> RoleDTO.RoleMenuDTO.builder().name(x.getName()).permission(x.getPermission()).build()).toList();
+                .map(x -> RoleDTO.RoleMenuDTO.builder().name(x.getName()).id(x.getId()).build()).toList();
 
         roleDTO.setRoleMenuList(resultRoleMenuList);
         response.setData(roleDTO);

@@ -29,4 +29,6 @@ public interface MenuRepository {
 
     Integer remove(Long id, String operator);
 
+    Integer removeByParentId(Long parentId, String operator);
+
 }

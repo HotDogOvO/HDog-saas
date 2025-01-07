@@ -1,6 +1,7 @@
 package com.hotdog.saas.application.entity.request.menu;
 
 import com.hotdog.saas.domain.constant.Constants;
+import com.hotdog.saas.domain.enums.menu.MenuEnum;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,7 +33,7 @@ public class CreateMenuRequest extends BaseMenuRequest {
     public void validate() {
         super.validate();
 
-        if(StringUtils.isEmpty(icon)){
+        if(StringUtils.isEmpty(icon) && MenuEnum.MENU.getCode().equals(super.getType())){
             this.icon = Constants.DEFAULT_MENU_ICON;
         }
     }
