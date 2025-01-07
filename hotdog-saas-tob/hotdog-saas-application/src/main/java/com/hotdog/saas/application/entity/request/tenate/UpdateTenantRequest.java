@@ -1,8 +1,12 @@
 package com.hotdog.saas.application.entity.request.tenate;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
+import com.hotdog.saas.domain.constant.Constants;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -22,9 +26,11 @@ public class UpdateTenantRequest extends BaseRequestParam {
     private String contactName;
 
     @Schema(description = "租户联系人手机号")
+    @Pattern(regexp = Constants.PHONE_REGULAR_EXPRESSION, message = "手机号格式不正确")
     private String contractPhone;
 
     @Schema(description = "租户联系人邮箱")
+    @Email(message = "邮箱格式不正确")
     private String contractEmail;
 
     @Schema(description = "租户过期时间")

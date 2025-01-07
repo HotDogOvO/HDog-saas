@@ -12,6 +12,8 @@ public interface TenantRepository {
 
     PageResponse<List<Tenant>> listPage(Tenant tenant, PageRequest pageRequest);
 
+    List<Tenant> findList(Tenant tenant);
+
     Tenant findById(Long id);
 
     Long exists(Long id);

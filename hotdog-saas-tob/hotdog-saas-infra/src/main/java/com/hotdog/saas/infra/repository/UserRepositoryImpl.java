@@ -45,10 +45,10 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserDO::getTenantId, user.getTenantId());
         queryWrapper.eq(UserDO::getDeleted, DeleteEnum.NO.getCode());
-        queryWrapper.eq(StringUtils.isNotEmpty(user.getUsername()), UserDO::getUsername, user.getUsername());
-        queryWrapper.eq(StringUtils.isNotEmpty(user.getNickname()), UserDO::getNickname, user.getNickname());
-        queryWrapper.eq(StringUtils.isNotEmpty(user.getMobile()), UserDO::getMobile, user.getMobile());
         queryWrapper.eq(Objects.nonNull(user.getStatus()), UserDO::getStatus, user.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(user.getUsername()), UserDO::getUsername, user.getUsername());
+        queryWrapper.like(StringUtils.isNotEmpty(user.getNickname()), UserDO::getNickname, user.getNickname());
+        queryWrapper.like(StringUtils.isNotEmpty(user.getMobile()), UserDO::getMobile, user.getMobile());
         queryWrapper.orderByDesc(UserDO::getCreateTime);
 
         Page<UserDO> pageResult = userMapper.selectPage(page, queryWrapper);

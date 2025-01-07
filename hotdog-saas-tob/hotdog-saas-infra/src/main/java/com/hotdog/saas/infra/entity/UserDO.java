@@ -94,6 +94,11 @@ public class UserDO implements Serializable {
     private Integer status;
 
     /**
+     * 超级管理员（0：否 1：是）
+     */
+    private Integer superAdmin;
+
+    /**
      * 是否删除（0 正常 1 删除）
      */
     private Integer deleted;

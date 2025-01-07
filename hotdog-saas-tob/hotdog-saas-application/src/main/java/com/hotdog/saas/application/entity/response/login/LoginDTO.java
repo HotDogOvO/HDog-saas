@@ -29,6 +29,9 @@ public class LoginDTO {
     @Schema(description = "token")
     private String token;
 
+    @Schema(description = "超级管理员（0：否 1：是）")
+    private Integer superAdmin;
+
     @Schema(description = "角色集合")
     private List<UserRoleDTO> roleList;
 

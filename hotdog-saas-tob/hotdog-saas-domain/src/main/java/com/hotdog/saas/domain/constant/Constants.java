@@ -88,4 +88,8 @@ public class Constants {
     // ======================= 文件后缀 =======================
     public static final String FILE_PREFIX_MP4 = ".mp4";
     public static final String FILE_PREFIX_VIDEO = ".iso";
+
+    // ======================= 正则表达式 =======================
+    public static final String PHONE_REGULAR_EXPRESSION = "^1[3-9]\\d{9}$";
+
 }

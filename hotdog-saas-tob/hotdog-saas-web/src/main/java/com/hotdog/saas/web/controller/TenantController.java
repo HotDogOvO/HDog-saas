@@ -3,10 +3,12 @@ package com.hotdog.saas.web.controller;
 import com.hotdog.saas.application.entity.request.tenate.CreateTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.DeleteTenantRequest;
 import com.hotdog.saas.application.entity.request.tenate.QueryTenantRequest;
+import com.hotdog.saas.application.entity.request.tenate.TenantOptionsRequest;
 import com.hotdog.saas.application.entity.request.tenate.TenantPageRequest;
 import com.hotdog.saas.application.entity.request.tenate.UpdateTenantRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.tenate.TenantDTO;
+import com.hotdog.saas.application.entity.response.tenate.TenantOptionsDTO;
 import com.hotdog.saas.application.facade.TenantFacade;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,6 +43,12 @@ public class TenantController {
     @PostMapping("/list/page")
     public BaseResponse<PageResponseDTO<TenantDTO>> tenantListPage(@RequestBody @Validated TenantPageRequest tenantPageRequest) {
         return tenantFacade.tenantListPage(tenantPageRequest);
+    }
+
+    @Operation(summary = "查询租户下拉框")
+    @PostMapping("/options")
+    public BaseResponse<List<TenantOptionsDTO>> tenantOptions(@RequestBody TenantOptionsRequest tenantOptionsRequest) {
+        return tenantFacade.tenantOptions(tenantOptionsRequest);
     }
 
     @Operation(summary = "查询租户详情")

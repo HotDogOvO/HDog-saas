@@ -26,11 +26,7 @@ public class TenantUpdateProcessor extends AbstractTenantProcessor<UpdateTenantR
     @Transactional(rollbackFor = Exception.class)
     public void doExecute(UpdateTenantRequest request, BaseResponse<Boolean> response) {
         super.exists(request.getId());
-        // 校验租户名是否存在
-        super.existsByName(request.getName());
-
         Tenant tenant = TenantAssembler.INSTANCE.convert(request);
-
         Integer modifyFlag = tenantRepository.modify(tenant);
         response.setData(checkFlag(modifyFlag));
     }

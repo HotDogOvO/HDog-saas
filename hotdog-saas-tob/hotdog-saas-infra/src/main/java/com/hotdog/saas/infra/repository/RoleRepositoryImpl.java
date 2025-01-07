@@ -47,8 +47,8 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
         LambdaQueryWrapper<RoleDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(RoleDO::getTenantId, role.getTenantId());
         queryWrapper.eq(RoleDO::getDeleted, DeleteEnum.NO.getCode());
-        queryWrapper.eq(StringUtils.isNotEmpty(role.getName()), RoleDO::getName, role.getName());
         queryWrapper.eq(Objects.nonNull(role.getStatus()), RoleDO::getStatus, role.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(role.getName()), RoleDO::getName, role.getName());
         queryWrapper.orderByDesc(RoleDO::getCreateTime);
 
         Page<RoleDO> pageResult = roleMapper.selectPage(page, queryWrapper);
@@ -57,7 +57,6 @@ public class RoleRepositoryImpl extends AbstractBaseRepository implements RoleRe
         PageResponse<List<Role>> listPageResponse = pageConverter(pageResult);
         listPageResponse.setData(list);
         return listPageResponse;
-
     }
 
     @Override

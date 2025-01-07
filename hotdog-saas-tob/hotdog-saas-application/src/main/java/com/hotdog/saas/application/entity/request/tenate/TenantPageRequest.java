@@ -9,4 +9,16 @@ import lombok.Data;
 @Schema(name = "租户分页DTO", description = "租户分页DTO")
 public class TenantPageRequest extends PageRequestParam {
 
+    @Schema(description = "租户名")
+    private String name;
+
+    @Schema(description = "联系人姓名")
+    private String contactName;
+
+    @Schema(description = "联系人手机号")
+    private String contractPhone;
+
+    @Schema(description = "状态（0正常 1停用）")
+    private Integer status;
+
 }

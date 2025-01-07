@@ -12,10 +12,13 @@ import com.hotdog.saas.infra.converter.TenantConverter;
 import com.hotdog.saas.infra.dao.TenantMapper;
 import com.hotdog.saas.infra.entity.TenantDO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Repository
 public class TenantRepositoryImpl extends AbstractBaseRepository implements TenantRepository {
@@ -41,6 +44,10 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
         Page<TenantDO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
         LambdaQueryWrapper<TenantDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(TenantDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(tenant.getStatus()), TenantDO::getStatus, tenant.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(tenant.getName()), TenantDO::getName, tenant.getName());
+        queryWrapper.like(StringUtils.isNotEmpty(tenant.getContactName()), TenantDO::getContactName, tenant.getContactName());
+        queryWrapper.like(StringUtils.isNotEmpty(tenant.getContractPhone()), TenantDO::getContractPhone, tenant.getContractPhone());
         queryWrapper.orderByDesc(TenantDO::getCreateTime);
 
         Page<TenantDO> pageResult = tenantMapper.selectPage(page, queryWrapper);
@@ -49,6 +56,14 @@ public class TenantRepositoryImpl extends AbstractBaseRepository implements Tena
         PageResponse<List<Tenant>> listPageResponse = pageConverter(pageResult);
         listPageResponse.setData(list);
         return listPageResponse;
+    }
+
+    @Override
+    public List<Tenant> findList(Tenant tenant) {
+        LambdaQueryWrapper<TenantDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TenantDO::getDeleted, DeleteEnum.NO.getCode());
+        List<TenantDO> tenantDOList = tenantMapper.selectList(queryWrapper);
+        return tenantDOList.stream().map(TenantConverter.INSTANCE::convert).toList();
     }
 
     @Override
