@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class LoginLogRepositoryImpl extends AbstractBaseRepository implements LoginLogRepository {
@@ -39,6 +40,8 @@ public class LoginLogRepositoryImpl extends AbstractBaseRepository implements Lo
         Page<LoginLogDO> page = new Page<>(pageRequest.getPageIndex(), pageRequest.getPageSize());
         LambdaQueryWrapper<LoginLogDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(LoginLogDO::getTenantId, loginLog.getTenantId());
+        queryWrapper.eq(Objects.nonNull(loginLog.getSuccess()), LoginLogDO::getSuccess, loginLog.getSuccess());
+        queryWrapper.like(Objects.nonNull(loginLog.getUsername()), LoginLogDO::getUsername, loginLog.getUsername());
         queryWrapper.orderByDesc(LoginLogDO::getCreateTime);
 
         Page<LoginLogDO> pageResult = loginLogMapper.selectPage(page, queryWrapper);
