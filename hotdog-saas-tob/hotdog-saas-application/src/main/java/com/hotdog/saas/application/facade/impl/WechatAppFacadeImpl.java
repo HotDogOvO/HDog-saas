@@ -7,6 +7,7 @@ import com.hotdog.saas.application.entity.request.wechat.app.UpdateWechatAppRequ
 import com.hotdog.saas.application.entity.request.wechat.app.WechatAppPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
+import com.hotdog.saas.application.entity.response.wechat.app.WechatAppCardDTO;
 import com.hotdog.saas.application.entity.response.wechat.app.WechatAppDTO;
 import com.hotdog.saas.application.facade.WechatAppFacade;
 import com.hotdog.saas.application.processor.BaseProcessor;
@@ -41,7 +42,7 @@ public class WechatAppFacadeImpl extends BaseProcessor implements WechatAppFacad
     }
 
     @Override
-    public BaseResponse<PageResponseDTO<WechatAppDTO>> wechatAppListPage(WechatAppPageRequest wechatAppPageRequest) {
+    public BaseResponse<PageResponseDTO<WechatAppCardDTO>> wechatAppListPage(WechatAppPageRequest wechatAppPageRequest) {
         return this.doBiz(wechatAppPageRequest, wechatAppListProcessor);
     }
 

@@ -4,6 +4,7 @@ import com.hotdog.saas.application.entity.request.wechat.app.CreateWechatAppRequ
 import com.hotdog.saas.application.entity.request.wechat.app.UpdateWechatAppRequest;
 import com.hotdog.saas.application.entity.request.wechat.app.WechatAppPageRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
+import com.hotdog.saas.application.entity.response.wechat.app.WechatAppCardDTO;
 import com.hotdog.saas.application.entity.response.wechat.app.WechatAppDTO;
 import com.hotdog.saas.domain.model.WechatApp;
 import com.hotdog.saas.domain.model.page.PageResponse;
@@ -24,7 +25,7 @@ public interface WechatAppAssembler {
 
     WechatApp convert(UpdateWechatAppRequest updateWechatAppRequest);
 
-    PageResponseDTO<WechatAppDTO> convertPage(PageResponse<List<WechatApp>> pageResponse);
+    PageResponseDTO<WechatAppCardDTO> convertPage(PageResponse<List<WechatApp>> pageResponse);
 
     WechatAppDTO convertToDTO(WechatApp wechatApp);
 }
