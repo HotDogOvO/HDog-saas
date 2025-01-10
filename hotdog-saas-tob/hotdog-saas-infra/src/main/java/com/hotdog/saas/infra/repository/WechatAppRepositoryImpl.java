@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class WechatAppRepositoryImpl extends AbstractBaseRepository implements WechatAppRepository {
@@ -42,6 +43,7 @@ public class WechatAppRepositoryImpl extends AbstractBaseRepository implements W
         LambdaQueryWrapper<WechatAppDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(WechatAppDO::getTenantId, wechatApp.getTenantId());
         queryWrapper.eq(WechatAppDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.like(Objects.nonNull(wechatApp.getName()), WechatAppDO::getName, wechatApp.getName());
         queryWrapper.orderByDesc(WechatAppDO::getCreateTime);
 
         Page<WechatAppDO> pageResult = wechatAppMapper.selectPage(page, queryWrapper);

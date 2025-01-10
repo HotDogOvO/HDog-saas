@@ -10,7 +10,7 @@ import lombok.Data;
 public class EducationCourseAttachDTO {
 
     @Schema(description = "附件类型")
-    private String attachType;
+    private Integer attachType;
 
     @Schema(description = "附件路径")
     private String attachUrl;

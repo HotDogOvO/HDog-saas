@@ -14,4 +14,7 @@ public class WechatAppPageRequest extends PageRequestParam {
     @Schema(description = "租户ID")
     private Long tenantId;
 
+    @Schema(description = "小程序名称")
+    private String name;
+
 }
