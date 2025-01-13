@@ -5,6 +5,7 @@ import com.hotdog.saas.domain.enums.education.EducationBusinessTypeEnum;
 import com.hotdog.saas.domain.utils.BusinessNoUtils;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -83,6 +84,11 @@ public class EducationCourse {
      * 操作人
      */
     private String operator;
+
+    /**
+     * 课程编号集合
+     */
+    private List<String> courseNoList;
 
     /**
      * 生成业务编号
