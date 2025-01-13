@@ -45,10 +45,10 @@ public class RoleDTO {
     @Data
     @Builder
     public static class RoleMenuDTO {
+        @Schema(description = "权限id")
+        private Long id;
+
         @Schema(description = "权限名")
         private String name;
-
-        @Schema(description = "权限code")
-        private String permission;
     }
 }

@@ -5,6 +5,7 @@ import com.hotdog.saas.application.entity.request.tenate.TenantPageRequest;
 import com.hotdog.saas.application.entity.request.tenate.UpdateTenantRequest;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.tenate.TenantDTO;
+import com.hotdog.saas.application.entity.response.tenate.TenantOptionsDTO;
 import com.hotdog.saas.domain.model.Tenant;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
@@ -27,4 +28,6 @@ public interface TenantAssembler {
     PageResponseDTO<TenantDTO> convertPage(PageResponse<List<Tenant>> pageResponse);
 
     TenantDTO convertToDTO(Tenant tenant);
+
+    List<TenantOptionsDTO> convertOptions(List<Tenant> list);
 }

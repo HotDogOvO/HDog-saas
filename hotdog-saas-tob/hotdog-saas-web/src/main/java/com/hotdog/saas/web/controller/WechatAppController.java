@@ -7,6 +7,7 @@ import com.hotdog.saas.application.entity.request.wechat.app.UpdateWechatAppRequ
 import com.hotdog.saas.application.entity.request.wechat.app.WechatAppPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
+import com.hotdog.saas.application.entity.response.wechat.app.WechatAppCardDTO;
 import com.hotdog.saas.application.entity.response.wechat.app.WechatAppDTO;
 import com.hotdog.saas.application.facade.WechatAppFacade;
 
@@ -38,7 +39,7 @@ public class WechatAppController {
 
     @Operation(summary = "查询小程序分页列表")
     @PostMapping("/list/page")
-    public BaseResponse<PageResponseDTO<WechatAppDTO>> wechatAppListPage(@RequestBody @Validated WechatAppPageRequest WechatAppPageRequest) {
+    public BaseResponse<PageResponseDTO<WechatAppCardDTO>> wechatAppListPage(@RequestBody @Validated WechatAppPageRequest WechatAppPageRequest) {
         return wechatAppFacade.wechatAppListPage(WechatAppPageRequest);
     }
 

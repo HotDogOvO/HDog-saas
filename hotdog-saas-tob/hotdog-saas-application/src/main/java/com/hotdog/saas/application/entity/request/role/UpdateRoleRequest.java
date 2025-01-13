@@ -21,6 +21,9 @@ public class UpdateRoleRequest extends BaseRequestParam {
     @Schema(description = "备注")
     private String remark;
 
+    @Schema(description = "状态")
+    private Integer status;
+
     @Override
     public void validate() {
 

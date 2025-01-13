@@ -14,4 +14,16 @@ public class UserPageRequest extends PageRequestParam {
     @Schema(description = "租户ID")
     private Long tenantId;
 
+    @Schema(description = "用户名")
+    private String username;
+
+    @Schema(description = "昵称")
+    private String nickname;
+
+    @Schema(description = "手机号")
+    private String mobile;
+
+    @Schema(description = "状态")
+    private Integer status;
+
 }

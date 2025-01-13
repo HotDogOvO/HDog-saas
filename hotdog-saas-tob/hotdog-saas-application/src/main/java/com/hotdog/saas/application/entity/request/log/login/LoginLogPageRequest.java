@@ -14,4 +14,10 @@ public class LoginLogPageRequest extends PageRequestParam {
     @Schema(description = "租户ID")
     private Long tenantId;
 
+    @Schema(description = "用户名")
+    private String username;
+
+    @Schema(description = "是否成功（0：成功，1：失败）")
+    private Integer success;
+
 }

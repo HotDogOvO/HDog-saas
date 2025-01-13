@@ -14,6 +14,8 @@ public interface RoleRepository {
 
     Role findById(Long id);
 
+    List<Role> findList(Role role);
+
     List<Role> findByIdList(List<Long> idList);
 
     Long exists(Long id);

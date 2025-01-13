@@ -7,13 +7,14 @@ import com.hotdog.saas.application.entity.request.wechat.app.UpdateWechatAppRequ
 import com.hotdog.saas.application.entity.request.wechat.app.WechatAppPageRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
+import com.hotdog.saas.application.entity.response.wechat.app.WechatAppCardDTO;
 import com.hotdog.saas.application.entity.response.wechat.app.WechatAppDTO;
 
 public interface WechatAppFacade {
 
     BaseResponse<Boolean> createWechatApp(CreateWechatAppRequest createWechatAppRequest);
 
-    BaseResponse<PageResponseDTO<WechatAppDTO>> wechatAppListPage(WechatAppPageRequest WechatAppPageRequest);
+    BaseResponse<PageResponseDTO<WechatAppCardDTO>> wechatAppListPage(WechatAppPageRequest WechatAppPageRequest);
 
     BaseResponse<WechatAppDTO> wechatAppDetail(QueryWechatAppRequest queryWechatAppRequest);
 

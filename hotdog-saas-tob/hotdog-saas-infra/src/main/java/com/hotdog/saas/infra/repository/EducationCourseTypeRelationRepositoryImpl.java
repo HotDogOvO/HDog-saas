@@ -9,6 +9,8 @@ import com.hotdog.saas.infra.entity.EducationCourseTypeRelationDO;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class EducationCourseTypeRelationRepositoryImpl extends AbstractBaseRepository implements EducationCourseTypeRelationRepository {
 
@@ -31,6 +33,14 @@ public class EducationCourseTypeRelationRepositoryImpl extends AbstractBaseRepos
         lambdaQueryWrapper.eq(EducationCourseTypeRelationDO::getCourseNo, courseNo);
         EducationCourseTypeRelationDO educationCourseTypeRelationDO = educationCourseTypeRelationMapper.selectOne(lambdaQueryWrapper);
         return EducationCourseTypeRelationConverter.INSTANCE.convert(educationCourseTypeRelationDO);
+    }
+
+    @Override
+    public List<EducationCourseTypeRelation> findByTypeId(Long typeId) {
+        LambdaQueryWrapper<EducationCourseTypeRelationDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(EducationCourseTypeRelationDO::getTypeId, typeId);
+        List<EducationCourseTypeRelationDO> educationCourseTypeRelationDOList = educationCourseTypeRelationMapper.selectList(lambdaQueryWrapper);
+        return educationCourseTypeRelationDOList.stream().map(EducationCourseTypeRelationConverter.INSTANCE::convert).toList();
     }
 
     @Override

@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import io.micrometer.common.util.StringUtils;
+
 @Repository
 public class UserRepositoryImpl extends AbstractBaseRepository implements UserRepository {
 
@@ -43,6 +45,10 @@ public class UserRepositoryImpl extends AbstractBaseRepository implements UserRe
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserDO::getTenantId, user.getTenantId());
         queryWrapper.eq(UserDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(user.getStatus()), UserDO::getStatus, user.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(user.getUsername()), UserDO::getUsername, user.getUsername());
+        queryWrapper.like(StringUtils.isNotEmpty(user.getNickname()), UserDO::getNickname, user.getNickname());
+        queryWrapper.like(StringUtils.isNotEmpty(user.getMobile()), UserDO::getMobile, user.getMobile());
         queryWrapper.orderByDesc(UserDO::getCreateTime);
 
         Page<UserDO> pageResult = userMapper.selectPage(page, queryWrapper);

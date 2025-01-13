@@ -1,12 +1,15 @@
 package com.hotdog.saas.application.entity.request.tenate;
 
 import com.hotdog.saas.application.entity.request.BaseRequestParam;
+import com.hotdog.saas.domain.constant.Constants;
 
 import java.time.LocalDateTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
@@ -21,9 +24,11 @@ public class CreateTenantRequest extends BaseRequestParam {
     @Schema(description = "租户联系人姓名")
     private String contactName;
 
+    @Pattern(regexp = Constants.PHONE_REGULAR_EXPRESSION, message = "手机号格式不正确")
     @Schema(description = "租户联系人手机号")
     private String contractPhone;
 
+    @Email(message = "邮箱格式不正确")
     @Schema(description = "租户联系人邮箱")
     private String contractEmail;
 

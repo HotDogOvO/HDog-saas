@@ -7,12 +7,15 @@ import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
+import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
 
+import org.apache.commons.compress.utils.Lists;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +36,14 @@ public class EducationCourseListProcessor extends AbstractEducationProcessor<Edu
         request.initPage();
         EducationCourse educationCourse = EducationCourseAssembler.INSTANCE.convert(request);
         PageRequest pageRequest = reqToPage(request);
+
+        // 课程类型查询
+        List<String> courseNoList = Lists.newArrayList();
+        if(Objects.nonNull(request.getCourseTypeId())){
+            courseNoList = educationCourseTypeRelationRepository.findByTypeId(request.getCourseTypeId())
+                    .stream().map(EducationCourseTypeRelation::getCourseNo).toList();
+        }
+        educationCourse.setCourseNoList(courseNoList);
 
         PageResponse<List<EducationCourse>> listPageResponse = educationCourseRepository.listPage(educationCourse, pageRequest);
         List<EducationCourseDTO> list = listPageResponse.getData().stream().map(super::convertEducationCourseDTO).toList();

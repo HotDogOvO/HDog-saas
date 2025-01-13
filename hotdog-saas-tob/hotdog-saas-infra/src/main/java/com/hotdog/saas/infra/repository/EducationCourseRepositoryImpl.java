@@ -13,10 +13,13 @@ import com.hotdog.saas.infra.converter.EducationCourseConverter;
 import com.hotdog.saas.infra.dao.EducationCourseMapper;
 import com.hotdog.saas.infra.entity.EducationCourseDO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class EducationCourseRepositoryImpl extends AbstractBaseRepository implements EducationCourseRepository {
@@ -43,6 +46,10 @@ public class EducationCourseRepositoryImpl extends AbstractBaseRepository implem
         LambdaQueryWrapper<EducationCourseDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseDO::getWechatId, educationCourse.getWechatId());
         queryWrapper.eq(EducationCourseDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourse.getName()), EducationCourseDO::getName, educationCourse.getName());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourse.getCourseNo()), EducationCourseDO::getCourseNo, educationCourse.getCourseNo());
+        queryWrapper.eq(Objects.nonNull(educationCourse.getStatus()), EducationCourseDO::getStatus, educationCourse.getStatus());
+        queryWrapper.in(!CollectionUtils.isEmpty(educationCourse.getCourseNoList()), EducationCourseDO::getCourseNo, educationCourse.getCourseNoList());
         queryWrapper.orderByDesc(EducationCourseDO::getCreateTime);
 
         Page<EducationCourseDO> pageResult = educationCourseMapper.selectPage(page, queryWrapper);

@@ -3,6 +3,7 @@ package com.hotdog.saas.infra.repository;
 import com.google.common.collect.Lists;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.hotdog.saas.domain.enums.common.DeleteEnum;
 import com.hotdog.saas.domain.model.Menu;
 import com.hotdog.saas.domain.repository.MenuRepository;
@@ -17,6 +18,7 @@ import org.springframework.util.CollectionUtils;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRepository {
@@ -56,7 +58,7 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
         LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(MenuDO::getParentId, parentId);
         List<MenuDO> menuDOList = menuMapper.selectList(lambdaQueryWrapper);
-        return menuDOList.stream().map(MenuConverter.INSTANCE::convert).toList();
+        return menuDOList.stream().map(MenuConverter.INSTANCE::convert).collect(Collectors.toList());
     }
 
     @Override
@@ -81,6 +83,7 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
     public Long existsByName(String name) {
         LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(MenuDO::getName, name);
+        lambdaQueryWrapper.eq(MenuDO::getDeleted, DeleteEnum.NO.getCode());
         return menuMapper.selectCount(lambdaQueryWrapper);
     }
 
@@ -88,6 +91,7 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
     public Long existsByPermission(String permission) {
         LambdaQueryWrapper<MenuDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(MenuDO::getPermission, permission);
+        lambdaQueryWrapper.eq(MenuDO::getDeleted, DeleteEnum.NO.getCode());
         return menuMapper.selectCount(lambdaQueryWrapper);
     }
 
@@ -116,5 +120,15 @@ public class MenuRepositoryImpl extends AbstractBaseRepository implements MenuRe
                 .setUpdater(operator)
                 .setUpdateTime(DateUtils.now());
         return menuMapper.updateById(menuDO);
+    }
+
+    @Override
+    public Integer removeByParentId(Long parentId, String operator) {
+        LambdaUpdateWrapper<MenuDO> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(MenuDO::getParentId, parentId)
+                .set(MenuDO::getDeleted, DeleteEnum.YES.getCode())
+                .set(MenuDO::getUpdater, operator)
+                .set(MenuDO::getUpdateTime, DateUtils.now());
+        return menuMapper.update(updateWrapper);
     }
 }
