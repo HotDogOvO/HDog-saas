@@ -10,8 +10,6 @@ import com.hotdog.saas.infra.foundation.file.handler.FileHandlerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -53,8 +51,13 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public InputStream downloadFile(String fileName) {
-        return null;
+    public String downloadFile(String filePath) {
+        try{
+            return fileHandler.download(filePath);
+        } catch (Exception e){
+            log.error("文件下载失败：", e);
+            throw new BusinessException("文件下载失败");
+        }
     }
 
     @Override

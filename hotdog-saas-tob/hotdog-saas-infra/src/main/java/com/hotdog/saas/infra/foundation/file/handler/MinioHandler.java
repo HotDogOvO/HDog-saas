@@ -1,5 +1,6 @@
 package com.hotdog.saas.infra.foundation.file.handler;
 
+import com.hotdog.saas.domain.config.MinioConfig;
 import com.hotdog.saas.domain.constant.Constants;
 import com.hotdog.saas.domain.enums.common.FilePathEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
@@ -12,6 +13,7 @@ import java.io.InputStream;
 import io.minio.BucketExistsArgs;
 import io.minio.CopyObjectArgs;
 import io.minio.CopySource;
+import io.minio.GetObjectArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
@@ -24,9 +26,11 @@ public class MinioHandler extends AbstractFileHandler {
 
     private final MinioClient minioClient;
     private final String minioBucketName;
+    private final String minioUrl;
 
-    public MinioHandler(MinioClient minioClient, String minioBucketName) {
+    public MinioHandler(MinioClient minioClient, String minioBucketName, String minioUrl) {
         this.minioClient = minioClient;
+        this.minioUrl = minioUrl;
         this.minioBucketName = minioBucketName;
         initMinioBucket();
     }
@@ -64,7 +68,12 @@ public class MinioHandler extends AbstractFileHandler {
 
     @Override
     public String download(String filePath) {
-        return "";
+        try {
+            return minioUrl + Constants.SLASH + minioBucketName + Constants.SLASH + filePath;
+        } catch (Exception e) {
+            log.error("minio文件查询失败，原因是：{}", e.getMessage(), e);
+            throw new BusinessException("minio文件查询失败");
+        }
     }
 
     @Override

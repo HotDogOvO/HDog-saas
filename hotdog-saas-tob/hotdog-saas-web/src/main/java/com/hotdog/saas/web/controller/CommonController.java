@@ -1,11 +1,12 @@
 package com.hotdog.saas.web.controller;
 
+import com.hotdog.saas.application.entity.request.common.FileDownloadRequest;
 import com.hotdog.saas.application.entity.request.common.FileUploadFormalRequest;
 import com.hotdog.saas.application.entity.request.common.FileUploadTmpRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
+import com.hotdog.saas.application.entity.response.common.FileDownloadDTO;
 import com.hotdog.saas.application.entity.response.common.FileUploadDTO;
 import com.hotdog.saas.application.facade.CommonFacade;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,11 @@ public class CommonController {
     @PostMapping("/file/upload-formal")
     public BaseResponse<FileUploadDTO> fileUploadFormal(@RequestBody @Valid FileUploadFormalRequest request) {
         return commonFacade.fileUploadFormal(request);
+    }
+
+    @PostMapping("/file/download")
+    public BaseResponse<FileDownloadDTO> fileDownload(@RequestBody @Valid FileDownloadRequest request) {
+        return commonFacade.fileDownload(request);
     }
 
 }
