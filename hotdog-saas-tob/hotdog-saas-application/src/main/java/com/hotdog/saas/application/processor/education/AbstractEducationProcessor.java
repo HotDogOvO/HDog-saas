@@ -10,6 +10,7 @@ import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
 import com.hotdog.saas.application.processor.AbstractBaseProcessor;
 import com.hotdog.saas.application.template.BizProcessorTemplate;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
+import com.hotdog.saas.domain.enums.education.CourseAttachTypeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.foundation.FileService;
 import com.hotdog.saas.domain.foundation.RedisCacheService;
@@ -151,6 +152,11 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
         List<EducationCourseAttach> attachList = educationCourseAttachRepository.findByCourseNo(courseNo);
         if(!CollectionUtils.isEmpty(attachList)){
             List<EducationCourseAttachDTO> educationCourseAttachDTOList = EducationCourseAttachAssembler.INSTANCE.convert2DTOList(attachList);
+            educationCourseAttachDTOList = educationCourseAttachDTOList.stream().peek(attach -> {
+                if(attach.getAttachType().equals(CourseAttachTypeEnum.COVER.getCode())){
+                    attach.setAttachUrl(fileService.downloadFile(attach.getAttachUrl()));
+                }
+            }).toList();
             educationCourseDTO.setAttachList(educationCourseAttachDTOList);
         }
 
