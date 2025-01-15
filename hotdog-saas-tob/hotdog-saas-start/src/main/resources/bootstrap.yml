@@ -77,6 +77,10 @@ spring:
       ack-mode: manual
       poll-timeout: 3000
       missing-topics-fatal: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
 
 minio:
   url: http://124.221.85.208:9000

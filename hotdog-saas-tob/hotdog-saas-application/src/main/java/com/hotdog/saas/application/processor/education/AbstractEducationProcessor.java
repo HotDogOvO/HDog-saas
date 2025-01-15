@@ -158,7 +158,7 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
         if(!CollectionUtils.isEmpty(attachList)){
             List<EducationCourseAttachDTO> educationCourseAttachDTOList = EducationCourseAttachAssembler.INSTANCE.convert2DTOList(attachList);
             // 路径转换
-            educationCourseAttachDTOList = educationCourseAttachDTOList.stream().peek(attach -> attach.setAttachUrl(fileService.downloadFile(attach.getAttachUrl()))).toList();
+            educationCourseAttachDTOList = educationCourseAttachDTOList.stream().peek(attach -> attach.setDownloadAttachUrl(fileService.downloadFile(attach.getAttachUrl()))).toList();
             educationCourseDTO.setAttachList(educationCourseAttachDTOList);
         }
 
@@ -187,6 +187,7 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
 
         return EducationCourseAttach.builder()
                 .courseNo(courseNo)
+                .attachName(fileUpload.getFileName())
                 .attachUrl(fileUpload.getFilePath())
                 .attachType(attachRequest.getAttachType())
                 .operator(operator)
