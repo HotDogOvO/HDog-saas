@@ -7,6 +7,7 @@ import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.model.EducationCourse;
+import com.hotdog.saas.domain.model.EducationCourseType;
 import com.hotdog.saas.domain.model.EducationCourseTypeRelation;
 import com.hotdog.saas.domain.model.page.PageRequest;
 import com.hotdog.saas.domain.model.page.PageResponse;
@@ -15,7 +16,9 @@ import org.apache.commons.compress.utils.Lists;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +49,11 @@ public class EducationCourseListProcessor extends AbstractEducationProcessor<Edu
         educationCourse.setCourseNoList(courseNoList);
 
         PageResponse<List<EducationCourse>> listPageResponse = educationCourseRepository.listPage(educationCourse, pageRequest);
-        List<EducationCourseDTO> list = listPageResponse.getData().stream().map(super::convertEducationCourseDTO).toList();
+
+        Map<Long, String> courseTypeMap = super.getCourseTypeMap(request.getWechatId());
+        List<EducationCourseDTO> list = listPageResponse.getData().stream()
+                .map(x -> super.convertEducationCourseDTO(x, courseTypeMap))
+                .toList();
         PageResponseDTO<EducationCourseDTO> educationCoursePageResponseDTO = EducationCourseAssembler.INSTANCE.convertPage(listPageResponse);
 
         educationCoursePageResponseDTO.setData(list);

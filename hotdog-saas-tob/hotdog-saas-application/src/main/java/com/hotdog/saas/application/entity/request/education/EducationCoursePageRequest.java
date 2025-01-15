@@ -12,7 +12,7 @@ public class EducationCoursePageRequest extends PageRequestParam {
 
     @Schema(description = "微信ID")
     @NotNull(message = "微信ID不能为空")
-    private Integer wechatId;
+    private Long wechatId;
 
     @Schema(description = "课程名")
     private String name;
