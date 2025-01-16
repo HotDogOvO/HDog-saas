@@ -23,6 +23,9 @@ public interface EducationCourseClassAssembler {
 
     EducationCourseClass convert(CreateEducationCourseClassRequest createEducationCourseClassRequest);
 
+    @Mappings({
+            @Mapping(source = "className", target = "name")
+    })
     EducationCourseClass convert(EducationCourseClassPageRequest educationCourseClassPageRequest);
 
     EducationCourseClass convert(UpdateEducationCourseClassRequest updateEducationCourseClassRequest);

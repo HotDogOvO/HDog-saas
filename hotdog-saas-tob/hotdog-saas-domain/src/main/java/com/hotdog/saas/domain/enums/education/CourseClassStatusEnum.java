@@ -58,7 +58,7 @@ public enum CourseClassStatusEnum implements EnumInterface<Integer> {
     }
 
     public static List<CourseClassStatusEnum> cantDeleteCourseStatusList(){
-        return Lists.newArrayList(WAITING_START, STARTING);
+        return Lists.newArrayList(WAITING_START, STARTING, FINISH);
     }
 
 }

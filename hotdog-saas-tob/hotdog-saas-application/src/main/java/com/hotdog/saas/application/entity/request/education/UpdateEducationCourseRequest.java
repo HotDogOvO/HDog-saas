@@ -41,6 +41,9 @@ public class UpdateEducationCourseRequest extends BaseRequestParam {
     @Schema(description = "课程分类ID")
     private Long courseTypeId;
 
+    @Schema(description = "课程状态（0正常 1停用）")
+    private Integer status;
+
     @NotEmpty(message = "课程附件不能为空")
     @Schema(description = "课程附件集合")
     private List<@Valid EducationCourseAttachRequest> attachList;

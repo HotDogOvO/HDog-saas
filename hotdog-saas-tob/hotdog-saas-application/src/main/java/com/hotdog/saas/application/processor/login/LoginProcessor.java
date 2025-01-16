@@ -12,6 +12,7 @@ import com.hotdog.saas.domain.foundation.AuthService;
 import com.hotdog.saas.domain.constant.RedisConstants;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
+import com.hotdog.saas.domain.foundation.FileService;
 import com.hotdog.saas.domain.model.Login;
 import com.hotdog.saas.domain.model.LoginLog;
 import com.hotdog.saas.domain.model.Menu;
@@ -56,7 +57,9 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
 
     private final LoginService loginService;
 
-    public LoginProcessor(LoginRepository loginRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository, MenuRepository menuRepository, RoleMenuRepository roleMenuRepository, PasswordService passwordService, AuthService authService, LoginService loginService) {
+    private final FileService fileService;
+
+    public LoginProcessor(LoginRepository loginRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository, MenuRepository menuRepository, RoleMenuRepository roleMenuRepository, PasswordService passwordService, AuthService authService, LoginService loginService, FileService fileService) {
         this.loginRepository = loginRepository;
         this.roleRepository = roleRepository;
         this.userRoleRepository = userRoleRepository;
@@ -65,6 +68,7 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
         this.passwordService = passwordService;
         this.authService = authService;
         this.loginService = loginService;
+        this.fileService = fileService;
     }
 
     @Override
@@ -121,6 +125,10 @@ public class LoginProcessor extends AbstractLoginProcessor<LoginRequest, BaseRes
     private LoginDTO buildLoginDTO(Login loginUser) {
         LoginDTO loginDTO = LoginAssembler.INSTANCE.convert(loginUser);
         loginDTO.setToken(authService.generateToken(loginUser));
+        if(StringUtils.isNotEmpty(loginDTO.getAvatar())){
+            String avatar = fileService.downloadFile(loginDTO.getAvatar());
+            loginDTO.setAvatar(avatar);
+        }
         return loginDTO;
     }
 

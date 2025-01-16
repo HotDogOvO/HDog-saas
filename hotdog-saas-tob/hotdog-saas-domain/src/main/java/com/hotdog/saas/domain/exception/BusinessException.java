@@ -25,7 +25,8 @@ public class BusinessException extends RuntimeException {
 
     public BusinessException(String message) {
         super(ResultCodeEnum.FAIL.getCode());
-        this.message = ResultCodeEnum.FAIL.getMessage() + Constants.CN_COMMA + message;
+//        this.message = ResultCodeEnum.FAIL.getMessage() + Constants.CN_COMMA + message;
+        this.message = message;
         this.resultCode = ResultCodeEnum.FAIL;
     }
 }

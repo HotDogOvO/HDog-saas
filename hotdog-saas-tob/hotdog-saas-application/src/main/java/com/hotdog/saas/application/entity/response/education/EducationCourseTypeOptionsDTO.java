@@ -15,4 +15,7 @@ public class EducationCourseTypeOptionsDTO {
     @Schema(description = "课程分类名")
     private String name;
 
+    @Schema(description = "租户状态（0正常 1停用）")
+    private Integer status;
+
 }

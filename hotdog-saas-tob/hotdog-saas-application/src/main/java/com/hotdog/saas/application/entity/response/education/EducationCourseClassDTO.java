@@ -30,6 +30,12 @@ public class EducationCourseClassDTO {
     @Schema(description = "上课时间")
     private String classTime;
 
+    @Schema(description = "班级开班日期")
+    private LocalDateTime classStartTime;
+
+    @Schema(description = "班级结束日期")
+    private LocalDateTime classFinishTime;
+
     @Schema(description = "报名截止日期")
     private LocalDateTime registrationDeadline;
 
