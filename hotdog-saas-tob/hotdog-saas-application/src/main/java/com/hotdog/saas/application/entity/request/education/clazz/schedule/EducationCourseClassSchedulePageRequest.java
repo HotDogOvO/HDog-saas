@@ -15,4 +15,10 @@ public class EducationCourseClassSchedulePageRequest extends PageRequestParam {
     @Schema(description = "班级编号")
     private String classNo;
 
+    @Schema(description = "课时名")
+    private String classHoursName;
+
+    @Schema(description = "状态（1：待开班 2：开班中 3：结业 9：取消）")
+    private Integer status;
+
 }
