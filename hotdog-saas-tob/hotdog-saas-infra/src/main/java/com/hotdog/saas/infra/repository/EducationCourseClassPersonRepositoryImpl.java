@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class EducationCourseClassPersonRepositoryImpl extends AbstractBaseRepository implements EducationCourseClassPersonRepository {
@@ -42,6 +43,7 @@ public class EducationCourseClassPersonRepositoryImpl extends AbstractBaseReposi
         LambdaQueryWrapper<EducationCourseClassPersonDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassPersonDO::getClassNo, educationCourseClassPerson.getClassNo());
         queryWrapper.eq(EducationCourseClassPersonDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(educationCourseClassPerson.getType()), EducationCourseClassPersonDO::getType, educationCourseClassPerson.getType());
         queryWrapper.orderByDesc(EducationCourseClassPersonDO::getCreateTime);
 
         Page<EducationCourseClassPersonDO> pageResult = educationCourseClassPersonMapper.selectPage(page, queryWrapper);
