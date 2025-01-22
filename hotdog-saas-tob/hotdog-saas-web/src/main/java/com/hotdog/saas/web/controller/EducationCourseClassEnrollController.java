@@ -35,7 +35,7 @@ public class EducationCourseClassEnrollController {
     }
 
     @Operation(summary = "分配报名班级")
-    @PostMapping("/update")
+    @PostMapping("/assign")
     public BaseResponse<Boolean> assignEducationCourseClassEnroll(@RequestBody @Validated AssignEducationCourseClassEnrollRequest assignEducationCourseClassEnrollRequest) {
         return educationCourseClassEnrollFacade.assignEducationCourseClassEnroll(assignEducationCourseClassEnrollRequest);
     }

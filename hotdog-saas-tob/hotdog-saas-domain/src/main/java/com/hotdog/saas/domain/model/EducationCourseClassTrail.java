@@ -1,5 +1,7 @@
 package com.hotdog.saas.domain.model;
 
+import com.hotdog.saas.domain.enums.education.CourseClassAssignStatusEnum;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -49,6 +51,12 @@ public class EducationCourseClassTrail implements Serializable {
     private Integer status;
 
     /**
+     * 班级分配状态（0：未分配 1：已分配）
+     * @see com.hotdog.saas.domain.enums.education.CourseClassAssignStatusEnum
+     */
+    private Integer assignStatus;
+
+    /**
      * 是否删除（0 正常 1 删除）
      */
     private Integer deleted;
@@ -77,4 +85,10 @@ public class EducationCourseClassTrail implements Serializable {
      * 操作人
      */
     private String operator;
+
+    public boolean isAssign(){
+        CourseClassAssignStatusEnum assignStatusEnum = CourseClassAssignStatusEnum.codeToEnum(this.assignStatus);
+        return assignStatusEnum.equals(CourseClassAssignStatusEnum.ASSIGN);
+    }
+
 }
