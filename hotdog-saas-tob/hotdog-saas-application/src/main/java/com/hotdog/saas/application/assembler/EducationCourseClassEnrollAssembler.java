@@ -20,5 +20,4 @@ public interface EducationCourseClassEnrollAssembler {
     EducationCourseClassEnroll convert(DeleteEducationCourseClassEnrollRequest deleteEducationCourseClassEnrollRequest);
 
     PageResponseDTO<EducationCourseClassEnrollDTO> convertPage(PageResponse<List<EducationCourseClassEnroll>> pageResponse);
-
 }

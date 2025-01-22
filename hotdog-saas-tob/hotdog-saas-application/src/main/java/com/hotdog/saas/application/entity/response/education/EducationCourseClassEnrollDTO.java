@@ -15,6 +15,15 @@ public class EducationCourseClassEnrollDTO {
     @Schema(description = "课程编号")
     private String courseNo;
 
+    @Schema(description = "课程名")
+    private String courseName;
+
+    @Schema(description = "班级编号")
+    private String classNo;
+
+    @Schema(description = "班级名")
+    private String className;
+
     @Schema(description = "人员OpenId")
     private String peopleOpenId;
 

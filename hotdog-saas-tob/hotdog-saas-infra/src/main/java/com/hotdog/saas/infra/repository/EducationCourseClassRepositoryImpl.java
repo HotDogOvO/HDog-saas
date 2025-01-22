@@ -70,6 +70,15 @@ public class EducationCourseClassRepositoryImpl extends AbstractBaseRepository i
     }
 
     @Override
+    public List<EducationCourseClass> findInClassNo(List<String> classNoList) {
+        LambdaQueryWrapper<EducationCourseClassDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(EducationCourseClassDO::getClassNo, classNoList);
+        queryWrapper.eq(EducationCourseClassDO::getDeleted, DeleteEnum.NO.getCode());
+        List<EducationCourseClassDO> educationCourseClassDOList = educationCourseClassMapper.selectList(queryWrapper);
+        return EducationCourseClassConverter.INSTANCE.convert2List(educationCourseClassDOList);
+    }
+
+    @Override
     public List<EducationCourseClass> findByCourseNo(String courseNo) {
         LambdaQueryWrapper<EducationCourseClassDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassDO::getCourseNo, courseNo);

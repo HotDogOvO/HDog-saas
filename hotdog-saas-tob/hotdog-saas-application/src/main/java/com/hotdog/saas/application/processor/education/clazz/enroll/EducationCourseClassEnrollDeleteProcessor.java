@@ -1,7 +1,6 @@
 package com.hotdog.saas.application.processor.education.clazz.enroll;
 
 import com.hotdog.saas.application.entity.request.education.clazz.enroll.DeleteEducationCourseClassEnrollRequest;
-import com.hotdog.saas.application.entity.request.education.clazz.trail.DeleteEducationCourseClassTrailRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
@@ -31,6 +30,10 @@ public class EducationCourseClassEnrollDeleteProcessor extends AbstractEducation
         EducationCourseClassEnroll educationCourseClassEnroll = educationCourseClassEnrollRepository.findById(id);
         if(educationCourseClassEnroll.isPay()) {
             throw new BusinessException("当前报名记录已支付，不能删除");
+        }
+
+        if(educationCourseClassEnroll.isAssign()){
+            throw new BusinessException("当前报名记录已分配班级，不能删除");
         }
 
         Integer modifyFlag = educationCourseClassEnrollRepository.remove(id, request.getOperator());

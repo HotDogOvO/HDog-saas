@@ -42,6 +42,11 @@ public class EducationCourseClassEnrollDO implements Serializable {
     private String courseNo;
 
     /**
+     * 班级编号
+     */
+    private String classNo;
+
+    /**
      * 报名人openId
      */
     private String peopleOpenId;
