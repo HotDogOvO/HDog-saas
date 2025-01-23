@@ -22,6 +22,8 @@ public class Constants {
 
     /** 系统请求method，只开放post */
     public static final String HTTP_POST = "POST";
+    public static final String HTTP_OPTIONS = "OPTIONS";
+    public static final List<String> HTTP_METHOD = Lists.newArrayList(HTTP_POST, HTTP_OPTIONS);
 
     /** 新增用户默认密码 */
     public static final String DEFAULT_PASSWORD = "123456";

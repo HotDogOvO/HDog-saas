@@ -13,7 +13,8 @@ public class FilterConfig {
     public FilterRegistrationBean<PostRequestFilter> postRequestFilter() {
         FilterRegistrationBean<PostRequestFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new PostRequestFilter());
-        registrationBean.addUrlPatterns("/**");
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(1);
         return registrationBean;
     }
 
