@@ -20,4 +20,7 @@ public class EducationCourseClassTrailPageRequest extends PageRequestParam {
     @Schema(description = "班级编号")
     private String classNo;
 
+    @Schema(description = "签到状态")
+    private Integer status;
+
 }

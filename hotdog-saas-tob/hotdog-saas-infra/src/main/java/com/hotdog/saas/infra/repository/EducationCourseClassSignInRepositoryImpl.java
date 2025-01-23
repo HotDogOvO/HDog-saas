@@ -11,10 +11,13 @@ import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.infra.converter.EducationCourseClassSignInConverter;
 import com.hotdog.saas.infra.dao.EducationCourseClassSignInMapper;
 import com.hotdog.saas.infra.entity.EducationCourseClassSignInDO;
+import com.hotdog.saas.infra.entity.EducationCourseClassTrailDO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class EducationCourseClassSignInRepositoryImpl extends AbstractBaseRepository implements EducationCourseClassSignInRepository {
@@ -31,6 +34,10 @@ public class EducationCourseClassSignInRepositoryImpl extends AbstractBaseReposi
         LambdaQueryWrapper<EducationCourseClassSignInDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassSignInDO::getWechatId, educationCourseClassSignIn.getWechatId());
         queryWrapper.eq(EducationCourseClassSignInDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(educationCourseClassSignIn.getStatus()), EducationCourseClassSignInDO::getStatus, educationCourseClassSignIn.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourseClassSignIn.getCourseNo()), EducationCourseClassSignInDO::getCourseNo, educationCourseClassSignIn.getCourseNo());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourseClassSignIn.getClassNo()), EducationCourseClassSignInDO::getClassNo, educationCourseClassSignIn.getClassNo());
+
         queryWrapper.orderByDesc(EducationCourseClassSignInDO::getCreateTime);
 
         Page<EducationCourseClassSignInDO> pageResult = educationCourseClassSignInMapper.selectPage(page, queryWrapper);
