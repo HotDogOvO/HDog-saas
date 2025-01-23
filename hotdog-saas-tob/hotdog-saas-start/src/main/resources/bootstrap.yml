@@ -5,7 +5,7 @@ project:
   secret: 1234567890abcdef
   valid:
     sign: true
-    token: false
+    token: true
   jwt:
     subject: HDOG-SAAS
     secret: Uz9BsvWY9sEelGfgrtuvVwN1LUoto21I6QzsBJosue3PJqXxehABxY3uv1IHvViq
