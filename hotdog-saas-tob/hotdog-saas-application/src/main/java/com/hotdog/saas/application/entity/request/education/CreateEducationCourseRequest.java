@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -45,7 +46,7 @@ public class CreateEducationCourseRequest extends BaseRequestParam {
 
     @NotEmpty(message = "课程附件不能为空")
     @Schema(description = "课程附件集合")
-    private List<EducationCourseAttachRequest> attachList;
+    private List<@Valid EducationCourseAttachRequest> attachList;
 
     @Override
     public void validate() {

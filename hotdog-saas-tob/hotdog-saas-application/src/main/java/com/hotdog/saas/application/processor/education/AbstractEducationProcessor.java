@@ -10,6 +10,7 @@ import com.hotdog.saas.application.entity.response.education.EducationCourseDTO;
 import com.hotdog.saas.application.processor.AbstractBaseProcessor;
 import com.hotdog.saas.application.template.BizProcessorTemplate;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
+import com.hotdog.saas.domain.enums.education.CourseAttachTypeEnum;
 import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.foundation.FileService;
 import com.hotdog.saas.domain.foundation.RedisCacheService;
@@ -24,7 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import io.micrometer.common.util.StringUtils;
 
@@ -136,21 +139,26 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
      * 构建课程DTO
      *
      * @param educationCourse 课程领域对象
+     * @param educationCourseTypeMap 课程分类Map
      * @return
      */
-    protected EducationCourseDTO convertEducationCourseDTO(EducationCourse educationCourse) {
+    protected EducationCourseDTO convertEducationCourseDTO(EducationCourse educationCourse, Map<Long, String> educationCourseTypeMap) {
         EducationCourseDTO educationCourseDTO = EducationCourseAssembler.INSTANCE.convertToDTO(educationCourse);
         // 课程分类
         String courseNo = educationCourse.getCourseNo();
         EducationCourseTypeRelation educationCourseTypeRelation = educationCourseTypeRelationRepository.findByCourseNo(courseNo);
+
+        // 课程分类转换
         if (Objects.nonNull(educationCourseTypeRelation)) {
-            EducationCourseType educationCourseType = educationCourseTypeRepository.findById(educationCourseTypeRelation.getTypeId());
-            educationCourseDTO.setCourseTypeId(educationCourseType.getId());
-            educationCourseDTO.setCourseTypeName(educationCourseType.getName());
+            Long typeId = educationCourseTypeRelation.getTypeId();
+            educationCourseDTO.setCourseTypeId(typeId);
+            educationCourseDTO.setCourseTypeName(educationCourseTypeMap.get(typeId));
         }
         List<EducationCourseAttach> attachList = educationCourseAttachRepository.findByCourseNo(courseNo);
         if(!CollectionUtils.isEmpty(attachList)){
             List<EducationCourseAttachDTO> educationCourseAttachDTOList = EducationCourseAttachAssembler.INSTANCE.convert2DTOList(attachList);
+            // 路径转换
+            educationCourseAttachDTOList = educationCourseAttachDTOList.stream().peek(attach -> attach.setDownloadAttachUrl(fileService.downloadFile(attach.getAttachUrl()))).toList();
             educationCourseDTO.setAttachList(educationCourseAttachDTOList);
         }
 
@@ -179,10 +187,24 @@ public abstract class AbstractEducationProcessor<Req extends BaseRequestParam, R
 
         return EducationCourseAttach.builder()
                 .courseNo(courseNo)
+                .attachName(fileUpload.getFileName())
                 .attachUrl(fileUpload.getFilePath())
                 .attachType(attachRequest.getAttachType())
                 .operator(operator)
                 .build();
+    }
+
+    /**
+     * 获取课程分类Map
+     * <id, name>
+     * @param wechatId 微信ID
+     * @return
+     */
+    protected Map<Long, String> getCourseTypeMap(Long wechatId){
+        EducationCourseType educationCourseType = EducationCourseType.builder().wechatId(wechatId).build();
+
+        return educationCourseTypeRepository.list(educationCourseType).stream()
+                .collect(Collectors.toMap(EducationCourseType::getId, EducationCourseType::getName));
     }
 
 }

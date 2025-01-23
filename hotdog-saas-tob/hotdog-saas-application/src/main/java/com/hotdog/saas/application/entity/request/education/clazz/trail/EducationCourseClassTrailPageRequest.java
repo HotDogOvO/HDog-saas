@@ -14,4 +14,13 @@ public class EducationCourseClassTrailPageRequest extends PageRequestParam {
     @NotNull(message = "微信ID不能为空")
     private Integer wechatId;
 
+    @Schema(description = "课程编号")
+    private String courseNo;
+
+    @Schema(description = "班级编号")
+    private String classNo;
+
+    @Schema(description = "签到状态")
+    private Integer status;
+
 }

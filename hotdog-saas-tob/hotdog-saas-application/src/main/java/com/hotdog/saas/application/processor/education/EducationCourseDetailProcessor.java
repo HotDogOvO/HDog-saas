@@ -8,6 +8,8 @@ import com.hotdog.saas.domain.model.EducationCourse;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,7 +29,9 @@ public class EducationCourseDetailProcessor extends AbstractEducationProcessor<Q
         String courseNo = request.getCourseNo();
         super.existsByCourseNo(courseNo);
         EducationCourse educationCourse = educationCourseRepository.findByCourseNo(courseNo);
-        EducationCourseDTO educationCourseDTO = super.convertEducationCourseDTO(educationCourse);
+
+        Map<Long, String> courseTypeMap = super.getCourseTypeMap(educationCourse.getWechatId());
+        EducationCourseDTO educationCourseDTO = super.convertEducationCourseDTO(educationCourse, courseTypeMap);
         response.setData(educationCourseDTO);
     }
 

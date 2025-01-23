@@ -12,9 +12,11 @@ import com.hotdog.saas.infra.converter.EducationCourseClassTrailConverter;
 import com.hotdog.saas.infra.dao.EducationCourseClassTrailMapper;
 import com.hotdog.saas.infra.entity.EducationCourseClassTrailDO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class EducationCourseClassTrailRepositoryImpl extends AbstractBaseRepository implements EducationCourseClassTrailRepository {
@@ -31,6 +33,9 @@ public class EducationCourseClassTrailRepositoryImpl extends AbstractBaseReposit
         LambdaQueryWrapper<EducationCourseClassTrailDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassTrailDO::getWechatId, educationCourseClassTrail.getWechatId());
         queryWrapper.eq(EducationCourseClassTrailDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(educationCourseClassTrail.getStatus()), EducationCourseClassTrailDO::getStatus, educationCourseClassTrail.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourseClassTrail.getCourseNo()), EducationCourseClassTrailDO::getCourseNo, educationCourseClassTrail.getCourseNo());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourseClassTrail.getClassNo()), EducationCourseClassTrailDO::getClassNo, educationCourseClassTrail.getClassNo());
         queryWrapper.orderByAsc(EducationCourseClassTrailDO::getCreateTime);
 
         Page<EducationCourseClassTrailDO> pageResult = educationCourseClassTrailMapper.selectPage(page, queryWrapper);
@@ -39,6 +44,15 @@ public class EducationCourseClassTrailRepositoryImpl extends AbstractBaseReposit
         PageResponse<List<EducationCourseClassTrail>> listPageResponse = pageConverter(pageResult);
         listPageResponse.setData(list);
         return listPageResponse;
+    }
+
+    @Override
+    public EducationCourseClassTrail findById(Long id) {
+        LambdaQueryWrapper<EducationCourseClassTrailDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EducationCourseClassTrailDO::getId, id);
+        queryWrapper.eq(EducationCourseClassTrailDO::getDeleted, DeleteEnum.NO.getCode());
+        EducationCourseClassTrailDO educationCourseClassTrailDO = educationCourseClassTrailMapper.selectOne(queryWrapper);
+        return EducationCourseClassTrailConverter.INSTANCE.convert(educationCourseClassTrailDO);
     }
 
     @Override

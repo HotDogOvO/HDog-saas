@@ -4,15 +4,13 @@ import com.hotdog.saas.domain.model.common.FileUpload;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
-
 public interface FileService {
 
     FileUpload uploadTmp(MultipartFile multipartFile);
 
     FileUpload uploadFormal(String tmpFilePath);
 
-    InputStream downloadFile(String fileName);
+    String downloadFile(String filePath);
 
     Boolean deleteFile(String filePath);
 

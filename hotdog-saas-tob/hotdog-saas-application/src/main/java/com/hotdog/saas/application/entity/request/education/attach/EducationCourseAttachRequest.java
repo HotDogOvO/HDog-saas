@@ -16,4 +16,8 @@ public class EducationCourseAttachRequest {
     @NotBlank(message = "附件路径不能为空")
     @Schema(description = "附件路径（临时路径）")
     private String attachUrl;
+
+    @NotBlank(message = "附件名不能为空")
+    @Schema(description = "附件名")
+    private String attachName;
 }

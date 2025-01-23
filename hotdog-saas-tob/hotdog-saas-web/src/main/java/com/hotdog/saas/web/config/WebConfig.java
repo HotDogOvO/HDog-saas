@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * web拦截器配置
+ *
  * @author hotdog
  * @date 2024/12/10 17:47
  */
@@ -48,7 +49,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // 匹配所有路径
                 .allowedOriginPatterns("*") // 允许所有来源
-                .allowedMethods("POST") // 允许的方法
+                .allowedMethods("POST", "OPTIONS") // 允许的方法
                 .allowedHeaders("*") // 允许的请求头
                 .allowCredentials(true) // 是否允许发送Cookie
                 .maxAge(3600); // 缓存时间

@@ -3,12 +3,14 @@ package com.hotdog.saas.web.controller;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.CalendarEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.CreateEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.DeleteEducationCourseClassScheduleRequest;
+import com.hotdog.saas.application.entity.request.education.clazz.schedule.EducationCourseClassScheduleOptionsRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.EducationCourseClassSchedulePageRequest;
 import com.hotdog.saas.application.entity.request.education.clazz.schedule.UpdateEducationCourseClassScheduleRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.application.entity.response.PageResponseDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassScheduleCalendarDTO;
 import com.hotdog.saas.application.entity.response.education.EducationCourseClassScheduleDTO;
+import com.hotdog.saas.application.entity.response.education.EducationCourseClassScheduleOptionsDTO;
 import com.hotdog.saas.application.facade.EducationCourseClassScheduleFacade;
 
 import org.springframework.validation.annotation.Validated;
@@ -49,6 +51,12 @@ public class EducationCourseClassScheduleController {
     @PostMapping("/calendar")
     public BaseResponse<List<EducationCourseClassScheduleCalendarDTO>> educationCourseClassScheduleCalendar(@RequestBody @Validated CalendarEducationCourseClassScheduleRequest calendarEducationCourseClassScheduleRequest) {
         return educationCourseClassScheduleFacade.educationCourseClassScheduleCalendar(calendarEducationCourseClassScheduleRequest);
+    }
+
+    @Operation(summary = "查询课程表下拉框")
+    @PostMapping("/options")
+    public BaseResponse<List<EducationCourseClassScheduleOptionsDTO>> educationCourseClassScheduleOptions(@RequestBody @Validated EducationCourseClassScheduleOptionsRequest educationCourseClassScheduleOptionsRequest) {
+        return educationCourseClassScheduleFacade.educationCourseClassScheduleOptions(educationCourseClassScheduleOptionsRequest);
     }
 
     @Operation(summary = "更新课程表")

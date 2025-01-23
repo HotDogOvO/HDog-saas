@@ -14,4 +14,7 @@ public class EducationCourseClassPersonPageRequest extends PageRequestParam {
     @Schema(description = "班级编号")
     private String classNo;
 
+    @Schema(description = "人员类型")
+    private Integer type;
+
 }

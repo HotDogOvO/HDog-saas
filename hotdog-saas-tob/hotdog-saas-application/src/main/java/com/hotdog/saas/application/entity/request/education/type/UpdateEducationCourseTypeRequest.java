@@ -23,6 +23,9 @@ public class UpdateEducationCourseTypeRequest extends BaseRequestParam {
     @Schema(description = "课程类型名称")
     private String name;
 
+    @Schema(description = "课程状态（0正常 1停用）")
+    private Integer status;
+
     @Schema(description = "课程类型备注")
     private String remark;
 

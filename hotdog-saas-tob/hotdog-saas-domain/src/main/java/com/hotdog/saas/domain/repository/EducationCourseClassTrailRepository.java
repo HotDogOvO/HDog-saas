@@ -9,6 +9,8 @@ public interface EducationCourseClassTrailRepository {
 
     PageResponse<List<EducationCourseClassTrail>> listPage(EducationCourseClassTrail educationCourseClassTrail, PageRequest pageRequest);
 
+    EducationCourseClassTrail findById(Long id);
+
     List<EducationCourseClassTrail> findByClassNo(String classNo);
 
     List<EducationCourseClassTrail> findByCourseNo(String courseNo);

@@ -6,6 +6,7 @@ import com.hotdog.saas.domain.exception.BusinessException;
 import com.hotdog.saas.domain.utils.DateUtils;
 import com.hotdog.saas.domain.utils.HttpUtils;
 import com.hotdog.saas.domain.utils.SignUtils;
+import com.hotdog.saas.web.filter.PostRequestWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  * <li>请求类型校验</li>
  * <li>时间戳校验</li>
  * <li>签名校验</li>
+ *
  * @author hotdog
  * @date 2024/12/10 17:48
  */
@@ -44,10 +46,13 @@ public class SignInterceptor implements HandlerInterceptor {
             if (needValidSign) {
                 // 请求方法校验
                 checkMethod(request);
-                // 时间戳校验
-                checkTimestamp(request);
-                // 请求参数校验
-                checkBody(request);
+                // post请求才进行校验，目前只开放Post、Options两种请求
+                if (HttpUtils.validHttpPost(request.getMethod())) {
+                    // 时间戳校验
+                    checkTimestamp(request);
+                    // 请求参数校验
+                    checkBody(request);
+                }
             }
             return true;
         } catch (Exception e) {
@@ -92,6 +97,10 @@ public class SignInterceptor implements HandlerInterceptor {
     }
 
     private String getRequestBody(HttpServletRequest request) throws IOException {
+        if (!(request instanceof PostRequestWrapper)) {
+            request = new PostRequestWrapper(request);
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
             String line;

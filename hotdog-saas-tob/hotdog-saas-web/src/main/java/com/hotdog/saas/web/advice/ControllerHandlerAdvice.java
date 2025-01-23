@@ -2,6 +2,7 @@ package com.hotdog.saas.web.advice;
 
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
+import com.hotdog.saas.domain.exception.AuthException;
 import com.hotdog.saas.domain.exception.BusinessException;
 
 import org.springframework.validation.BindingResult;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Objects;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * 全局异常处理器
+ *
  * @author hotdog
  * @date 2024/12/10 17:47
  */
@@ -25,6 +28,7 @@ public class ControllerHandlerAdvice {
 
     /**
      * 业务异常捕获
+     *
      * @param ex 业务异常
      * @return
      */
@@ -36,7 +40,22 @@ public class ControllerHandlerAdvice {
     }
 
     /**
+     * token异常捕获
+     *
+     * @param ex token
+     * @return
+     */
+    @ExceptionHandler(AuthException.class)
+    public BaseResponse<Object> handleBusinessException(AuthException ex, HttpServletResponse response) {
+        String errorMessage = ex.getMessage();
+        log.error("请求异常, code: {}, message: {}", ex.getResultCode().getCode(), errorMessage, ex);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        return new BaseResponse<>(ex.getResultCode(), errorMessage);
+    }
+
+    /**
      * 请求参数异常捕获
+     *
      * @param ex @Validated抛出的异常
      * @return
      */
@@ -49,6 +68,7 @@ public class ControllerHandlerAdvice {
 
     /**
      * 其他异常
+     *
      * @param ex Exception
      * @return
      */

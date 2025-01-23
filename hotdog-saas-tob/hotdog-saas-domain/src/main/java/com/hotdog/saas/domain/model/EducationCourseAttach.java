@@ -21,6 +21,11 @@ public class EducationCourseAttach {
     private Integer attachType;
 
     /**
+     * 附件名
+     */
+    private String attachName;
+
+    /**
      * 附件路径
      */
     private String attachUrl;

@@ -14,6 +14,8 @@ public interface EducationCourseRepository {
 
     List<EducationCourse> list(EducationCourse educationCourse);
 
+    List<EducationCourse> findInCourseNo(List<String> courseNoList);
+
     EducationCourse findByCourseNo(String courseNo);
 
     Long exists(String courseNo, Long tenantId);

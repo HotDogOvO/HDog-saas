@@ -15,8 +15,14 @@ public class EducationCourseClassTrailDTO {
     @Schema(description = "课程编号")
     private String courseNo;
 
+    @Schema(description = "课程名")
+    private String courseName;
+
     @Schema(description = "班级编号")
     private String classNo;
+
+    @Schema(description = "班级名")
+    private String className;
 
     @Schema(description = "人员OpenId")
     private String peopleOpenId;
@@ -24,8 +30,14 @@ public class EducationCourseClassTrailDTO {
     @Schema(description = "课时ID")
     private Long classScheduleId;
 
+    @Schema(description = "课时名")
+    private String classScheduleName;
+
     @Schema(description = "状态（0：已报名 1：已上课 2：未上课）")
     private Integer status;
+
+    @Schema(description = "班级分配状态（0：未分配 1：已分配）")
+    private Integer assignStatus;
 
     @Schema(description = "创建人")
     private String creator;

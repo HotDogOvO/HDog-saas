@@ -16,6 +16,8 @@ public interface EducationCourseClassRepository {
 
     EducationCourseClass findByClassNo(String classNo);
 
+    List<EducationCourseClass> findInClassNo(List<String> classNoList);
+
     List<EducationCourseClass> findByCourseNo(String courseNo);
 
     List<EducationCourseClass> findBeforeStartTimeAndStatus(LocalDateTime startTime, CourseClassStatusEnum statusEnum);

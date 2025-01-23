@@ -12,10 +12,12 @@ import com.hotdog.saas.infra.converter.EducationCourseTypeConverter;
 import com.hotdog.saas.infra.dao.EducationCourseTypeMapper;
 import com.hotdog.saas.infra.entity.EducationCourseTypeDO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class EducationCourseTypeRepositoryImpl extends AbstractBaseRepository implements EducationCourseTypeRepository {
@@ -42,6 +44,8 @@ public class EducationCourseTypeRepositoryImpl extends AbstractBaseRepository im
         LambdaQueryWrapper<EducationCourseTypeDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseTypeDO::getWechatId, educationCourseType.getWechatId());
         queryWrapper.eq(EducationCourseTypeDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(educationCourseType.getStatus()), EducationCourseTypeDO::getStatus, educationCourseType.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourseType.getName()), EducationCourseTypeDO::getName, educationCourseType.getName());
         queryWrapper.orderByDesc(EducationCourseTypeDO::getCreateTime);
 
         Page<EducationCourseTypeDO> pageResult = educationCourseTypeMapper.selectPage(page, queryWrapper);

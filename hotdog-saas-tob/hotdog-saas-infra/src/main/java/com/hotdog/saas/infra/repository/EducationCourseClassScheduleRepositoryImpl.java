@@ -19,6 +19,9 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+
+import io.micrometer.common.util.StringUtils;
 
 @Repository
 public class EducationCourseClassScheduleRepositoryImpl extends AbstractBaseRepository implements EducationCourseClassScheduleRepository {
@@ -45,6 +48,9 @@ public class EducationCourseClassScheduleRepositoryImpl extends AbstractBaseRepo
         LambdaQueryWrapper<EducationCourseClassScheduleDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassScheduleDO::getClassNo, educationCourseClassSchedule.getClassNo());
         queryWrapper.eq(EducationCourseClassScheduleDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(educationCourseClassSchedule.getStatus()), EducationCourseClassScheduleDO::getStatus, educationCourseClassSchedule.getStatus());
+        queryWrapper.like(StringUtils.isNotEmpty(educationCourseClassSchedule.getClassHoursName()), EducationCourseClassScheduleDO::getClassHoursName, educationCourseClassSchedule.getClassHoursName());
+
         queryWrapper.orderByAsc(EducationCourseClassScheduleDO::getClassBeginTime);
 
         Page<EducationCourseClassScheduleDO> pageResult = educationCourseClassScheduleMapper.selectPage(page, queryWrapper);

@@ -34,4 +34,9 @@ public class MinioConfig {
         return bucketName;
     }
 
+    @Bean
+    public String minioUrl(){
+        return minioUrl;
+    }
+
 }

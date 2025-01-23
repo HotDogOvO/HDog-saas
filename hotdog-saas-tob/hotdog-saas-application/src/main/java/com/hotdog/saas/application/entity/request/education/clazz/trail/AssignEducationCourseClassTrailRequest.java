@@ -27,6 +27,9 @@ public class AssignEducationCourseClassTrailRequest extends BaseRequestParam {
     @Schema(description = "课时ID")
     private Long classScheduleId;
 
+    @Schema(description = "人员ID")
+    private String peopleOpenId;
+
     @Override
     public void validate() {
     }

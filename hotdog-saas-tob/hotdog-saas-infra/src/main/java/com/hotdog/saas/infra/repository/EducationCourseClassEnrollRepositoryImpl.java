@@ -15,6 +15,7 @@ import com.hotdog.saas.infra.entity.EducationCourseClassEnrollDO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class EducationCourseClassEnrollRepositoryImpl extends AbstractBaseRepository implements EducationCourseClassEnrollRepository {
@@ -31,6 +32,9 @@ public class EducationCourseClassEnrollRepositoryImpl extends AbstractBaseReposi
         LambdaQueryWrapper<EducationCourseClassEnrollDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EducationCourseClassEnrollDO::getWechatId, educationCourseClassEnroll.getWechatId());
         queryWrapper.eq(EducationCourseClassEnrollDO::getDeleted, DeleteEnum.NO.getCode());
+        queryWrapper.eq(Objects.nonNull(educationCourseClassEnroll.getStatus()), EducationCourseClassEnrollDO::getStatus, educationCourseClassEnroll.getStatus());
+        queryWrapper.eq(Objects.nonNull(educationCourseClassEnroll.getPayStatus()), EducationCourseClassEnrollDO::getPayStatus, educationCourseClassEnroll.getPayStatus());
+        queryWrapper.eq(Objects.nonNull(educationCourseClassEnroll.getAssignStatus()), EducationCourseClassEnrollDO::getAssignStatus, educationCourseClassEnroll.getAssignStatus());
         queryWrapper.orderByDesc(EducationCourseClassEnrollDO::getCreateTime);
 
         Page<EducationCourseClassEnrollDO> pageResult = educationCourseClassEnrollMapper.selectPage(page, queryWrapper);

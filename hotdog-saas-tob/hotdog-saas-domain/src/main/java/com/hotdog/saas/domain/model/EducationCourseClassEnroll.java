@@ -1,5 +1,6 @@
 package com.hotdog.saas.domain.model;
 
+import com.hotdog.saas.domain.enums.education.CourseClassAssignStatusEnum;
 import com.hotdog.saas.domain.enums.pay.PayStatusEnum;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,11 @@ public class EducationCourseClassEnroll {
      * 课程编号
      */
     private String courseNo;
+
+    /**
+     * 班级编号
+     */
+    private String classNo;
 
     /**
      * 报名人openId
@@ -77,5 +83,10 @@ public class EducationCourseClassEnroll {
     public boolean isPay(){
         PayStatusEnum payStatusEnum = PayStatusEnum.codeToEnum(this.payStatus);
         return PayStatusEnum.paySuccessList().contains(payStatusEnum);
+    }
+
+    public boolean isAssign(){
+        CourseClassAssignStatusEnum assignStatusEnum = CourseClassAssignStatusEnum.codeToEnum(this.assignStatus);
+        return assignStatusEnum.equals(CourseClassAssignStatusEnum.ASSIGN);
     }
 }

@@ -4,6 +4,9 @@ import com.hotdog.saas.application.assembler.EducationCourseClassTrailAssembler;
 import com.hotdog.saas.application.entity.request.education.clazz.trail.AssignEducationCourseClassTrailRequest;
 import com.hotdog.saas.application.entity.response.BaseResponse;
 import com.hotdog.saas.domain.enums.ResultCodeEnum;
+import com.hotdog.saas.domain.enums.education.CourseClassAssignStatusEnum;
+import com.hotdog.saas.domain.enums.education.CourseClassPersonTypeEnum;
+import com.hotdog.saas.domain.model.EducationCourseClassPerson;
 import com.hotdog.saas.domain.model.EducationCourseClassTrail;
 
 import org.springframework.stereotype.Component;
@@ -27,6 +30,20 @@ public class EducationCourseClassTrailAssignProcessor extends AbstractEducationC
         Long id = request.getId();
         super.existsByClassTrailId(id);
         EducationCourseClassTrail educationCourseClassTrail = EducationCourseClassTrailAssembler.INSTANCE.convert(request);
+
+        // 1. 分配班级
+        EducationCourseClassPerson educationCourseClassPerson = EducationCourseClassPerson.builder()
+                .classNo(request.getClassNo())
+                .type(CourseClassPersonTypeEnum.TEMP_STUDENT.getCode())
+                .peopleOpenId(request.getPeopleOpenId())
+                .operator(request.getOperator())
+                .build();
+
+        educationCourseClassPersonRepository.save(educationCourseClassPerson);
+
+        //2. 修改分配状态
+        educationCourseClassTrail.setAssignStatus(CourseClassAssignStatusEnum.ASSIGN.getCode());
+        educationCourseClassTrail.setOperator(request.getOperator());
 
         Integer modifyFlag = educationCourseClassTrailRepository.modify(educationCourseClassTrail);
         response.setData(checkFlag(modifyFlag));
