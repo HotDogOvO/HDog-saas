@@ -23,6 +23,7 @@
 
     <modules>
         <module>hotdog-saas-tob</module>
+        <module>hotdog-saas-toc</module>
     </modules>
 
     <properties>
